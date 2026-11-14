@@ -1,0 +1,370 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách chuyến TRIP-2026-001</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- THÔNG TIN CHUYẾN -->
+<div class="section-head">
+    <div>
+        <h2>
+            TRIP-2026-001
+            <span class="status approved">approved</span>
+        </h2>
+        <p>
+            VSP Express · 15/11/2026 · 07:00 · BK-01 · Phiên bản 1
+        </p>
+    </div>
+
+    <a class="btn secondary" href="trips.html">
+        ← Các chuyến
+    </a>
+</div>
+
+<!-- THỐNG KÊ -->
+<div class="metrics metrics-3">
+
+    <div class="metric">
+        <span>TRONG DANH SÁCH</span>
+        <strong>3</strong>
+        <small>Hành khách</small>
+    </div>
+
+    <div class="metric">
+        <span>ĐÃ LÊN TÀU</span>
+        <strong>2</strong>
+        <small>Theo kết quả ghi nhận</small>
+    </div>
+
+    <div class="metric">
+        <span>XÁC NHẬN THUYỀN TRƯỞNG</span>
+        <strong class="small-strong">Chưa chốt</strong>
+        <small>—</small>
+    </div>
+
+</div>
+
+<!-- DANH SÁCH HÀNH KHÁCH VÀ PHÊ DUYỆT -->
+<div class="two-cols uneven">
+
+    <section class="panel">
+
+        <div class="panel-head">
+            <h3>Danh sách hành khách</h3>
+            <span class="muted">
+                    QR chỉ có hiệu lực cho danh sách được duyệt
+                </span>
+        </div>
+
+        <div class="table-scroll">
+            <table>
+                <thead>
+                <tr>
+                    <th>CBCNV</th>
+                    <th>An ninh</th>
+                    <th>Giấy tờ</th>
+                    <th>Lên tàu</th>
+                    <th>QR</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                <tr>
+                    <td>
+                        <strong>Nguyễn Văn A</strong>
+                        <small class="block">NV001</small>
+                    </td>
+                    <td>
+                        <span class="status approved">Đạt</span>
+                    </td>
+                    <td>
+                        <span class="status approved">Đạt</span>
+                    </td>
+                    <td>
+                        <span class="status approved">Đã lên tàu</span>
+                    </td>
+                    <td>
+                        <a class="textlink" href="boarding_scan.html?token=QR001">Tra cứu</a>
+                        <a class="textlink" href="qr.html?token=QR001" target="_blank">QR</a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <strong>Trần Văn B</strong>
+                        <small class="block">NV002</small>
+                    </td>
+                    <td>
+                        <span class="status approved">Đạt</span>
+                    </td>
+                    <td>
+                        <span class="status approved">Đạt</span>
+                    </td>
+                    <td>
+                        <span class="status approved">Đã lên tàu</span>
+                    </td>
+                    <td>
+                        <a class="textlink" href="boarding_scan.html?token=QR002">Tra cứu</a>
+                        <a class="textlink" href="qr.html?token=QR002" target="_blank">QR</a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <strong>Lê Văn C</strong>
+                        <small class="block">NV003</small>
+                    </td>
+                    <td>
+                        <span class="status approved">Đạt</span>
+                    </td>
+                    <td>
+                        <span class="status pending">Chờ kiểm tra</span>
+                    </td>
+                    <td>—</td>
+                    <td>
+                        <a class="textlink" href="boarding_scan.html?token=QR003">Tra cứu</a>
+                        <a class="textlink" href="qr.html?token=QR003" target="_blank">QR</a>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+        <div class="callout">
+            Trong bản demo, người dùng được phân quyền có thể xem QR tại đây.
+            Khi triển khai thực tế cần giới hạn quyền phát hành, hiển thị
+            và chuyển giao QR theo chính sách dữ liệu nội bộ.
+        </div>
+
+    </section>
+
+    <!-- PHÊ DUYỆT VÀ THÔNG BÁO -->
+    <aside class="panel">
+
+        <h3>Xét duyệt Danh sách chuyến</h3>
+
+        <p>
+            Giám đốc XNVTB&CTL
+            <span class="status approved">Đã duyệt</span>
+        </p>
+
+        <p>
+            Trưởng ban TTĐĐSX
+            <span class="status approved">Đã duyệt</span>
+        </p>
+
+        <hr>
+
+        <h3>Thông báo lịch trình</h3>
+
+        <p class="muted">
+            Tập trung tại cầu cảng lúc 06:30.
+            Chuẩn bị đầy đủ giấy tờ và trang bị bảo hộ theo quy định.
+        </p>
+
+        <form action="#" method="post">
+
+                <textarea
+                        rows="3"
+                        name="notice"
+                        placeholder="Giờ tập trung, thông tin kế hoạch được phép công bố..."
+                >Tập trung tại cầu cảng lúc 06:30. Chuẩn bị đầy đủ giấy tờ và trang bị bảo hộ.</textarea>
+
+            <button type="submit" class="btn secondary full">
+                Cập nhật thông báo
+            </button>
+
+        </form>
+
+        <hr>
+
+        <h3>Thuyền trưởng xác nhận</h3>
+
+        <p class="muted">
+            Đối chiếu kết quả kiểm tra với người thực tế trên tàu,
+            xử lý các trường hợp còn tồn tại trước khi xác nhận.
+        </p>
+
+        <form action="#" method="post"
+              onsubmit="return confirm('Xác nhận chốt kết quả thực tế của chuyến?')">
+
+            <button type="submit" class="btn primary full">
+                Xác nhận số người thực tế
+            </button>
+
+        </form>
+
+    </aside>
+
+</div>
+
+<!-- ĐIỀU CHỈNH DANH SÁCH -->
+<div class="two-cols uneven">
+
+    <section class="panel">
+
+        <h3>Yêu cầu điều chỉnh danh sách</h3>
+
+        <p class="muted">
+            Sau khi đã phê duyệt, việc bổ sung/hủy không sửa trực tiếp
+            danh sách có hiệu lực.
+        </p>
+
+        <form action="#" method="post">
+
+            <div class="form-grid">
+
+                <div>
+                    <label>Thao tác</label>
+
+                    <select name="action" id="changeAction">
+                        <option value="remove">Đề nghị hủy người</option>
+                        <option value="add">Đề nghị bổ sung người</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>CBCNV</label>
+
+                    <select name="employee_id">
+                        <option value="1">NV001 – Nguyễn Văn A</option>
+                        <option value="2">NV002 – Trần Văn B</option>
+                        <option value="3">NV003 – Lê Văn C</option>
+                        <option value="4">NV004 – Phạm Văn D</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <label>Lý do điều chỉnh</label>
+
+            <input
+                    type="text"
+                    name="reason"
+                    placeholder="Nêu lý do và căn cứ"
+                    required
+            >
+
+            <button type="submit" class="btn secondary">
+                Gửi yêu cầu điều chỉnh
+            </button>
+
+        </form>
+
+        <hr>
+
+        <h3>Lịch sử yêu cầu điều chỉnh</h3>
+
+        <div class="table-scroll">
+            <table>
+
+                <thead>
+                <tr>
+                    <th>Yêu cầu</th>
+                    <th>Trạng thái</th>
+                    <th>Phê duyệt</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                <tr>
+                    <td>
+                        Bổ sung Phạm Văn D
+                        <small class="block">
+                            Bổ sung nhân sự phục vụ công tác sản xuất
+                        </small>
+                    </td>
+
+                    <td>
+                        <span class="status pending">Chờ duyệt</span>
+                    </td>
+
+                    <td>
+                        <small>
+                            TTĐĐSX: …
+                            <br>
+                            Giám đốc: …
+                        </small>
+
+                        <form action="#" method="post">
+                            <button
+                                    name="action"
+                                    value="approve"
+                                    class="btn tiny primary"
+                                    type="submit"
+                            >
+                                Chấp thuận
+                            </button>
+
+                            <button
+                                    name="action"
+                                    value="reject"
+                                    class="btn tiny danger"
+                                    type="submit"
+                            >
+                                Từ chối
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Hủy Nguyễn Văn A
+                        <small class="block">
+                            Thay đổi kế hoạch công tác
+                        </small>
+                    </td>
+
+                    <td>
+                        <span class="status approved">Đã xử lý</span>
+                    </td>
+
+                    <td>Đã xử lý</td>
+                </tr>
+
+                </tbody>
+
+            </table>
+        </div>
+
+    </section>
+
+    <!-- KIỂM TRA LÊN TÀU -->
+    <aside class="panel">
+
+        <h3>Kiểm tra lên tàu</h3>
+
+        <p class="muted">
+            Quét QR để mở đúng hồ sơ và kiểm tra theo vai trò.
+            Chỉ người được phân quyền mới có thể xác nhận.
+        </p>
+
+        <a class="btn secondary full" href="boarding.html">
+            Mở màn hình kiểm tra QR →
+        </a>
+
+        <hr>
+
+        <h3>Quy tắc nghiệp vụ</h3>
+
+        <p class="muted">
+            Thông tin hành khách trong Danh sách chuyến chỉ có hiệu lực
+            sau phê duyệt theo thẩm quyền. Không tự động chấp nhận
+            ngoại lệ khẩn cấp hay bỏ qua an toàn.
+        </p>
+
+    </aside>
+
+</div>
+
+</body>
+</html>

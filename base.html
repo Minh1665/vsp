@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>VSP Express · HKDN Demo</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+
+    <div class="brand">
+        <div class="brandmark">⚓</div>
+
+        <div>
+            <strong>VSP EXPRESS</strong>
+            <small>Passenger Management</small>
+        </div>
+    </div>
+
+    <div class="sidebar-label">ĐIỀU HÀNH</div>
+
+    <nav>
+
+        <a href="index.html" class="active">
+            ◫ <span>Tổng quan</span>
+        </a>
+
+        <a href="requests.html">
+            ▤ <span>Đăng ký F001</span>
+        </a>
+
+        <a href="trips.html">
+            ▦ <span>Kế hoạch & danh sách</span>
+        </a>
+
+        <a href="boarding.html">
+            ▣ <span>Kiểm tra QR</span>
+        </a>
+
+        <a href="reports.html">
+            ▥ <span>Thống kê – Báo cáo</span>
+        </a>
+
+        <a href="employees.html">
+            ♧ <span>Hồ sơ CBCNV</span>
+        </a>
+
+    </nav>
+
+    <!-- THÔNG TIN NGƯỜI DÙNG -->
+    <div class="sidebar-footer">
+
+        <div class="avatar" id="userAvatar">D</div>
+
+        <div class="usertext">
+            <strong id="userName">Điều độ viên</strong>
+            <small id="userRole">Điều độ</small>
+        </div>
+
+        <button class="logout" title="Đăng xuất" onclick="logout()">
+            ↪
+        </button>
+
+    </div>
+
+</aside>
+
+
+<!-- MAIN -->
+<main class="main">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+
+        <div>
+            <span class="crumb">
+                HỌC KỲ DOANH NGHIỆP · NHÓM 28
+            </span>
+
+            <h1 id="pageHeading">Quản lý vận chuyển</h1>
+        </div>
+
+        <div class="top-right">
+
+            <span class="demo-pill">
+                ● DỮ LIỆU GIẢ LẬP
+            </span>
+
+            <span class="role-pill" id="rolePill">
+                Điều độ
+            </span>
+
+        </div>
+
+    </header>
+
+
+    <!-- CONTENT -->
+    <div class="content" id="pageContent">
+
+        <div class="alert success" id="systemAlert" style="display:none;">
+        </div>
+
+        <div id="pageBody">
+
+            <!-- Nội dung từng trang được hiển thị tại đây -->
+
+        </div>
+
+    </div>
+
+
+    <!-- FOOTER -->
+    <footer>
+        VSP Express HKDN Demo • Phần mềm thử nghiệm học thuật,
+        không liên kết hoặc được Vietsovpetro phê duyệt
+        • Không nhập dữ liệu thật
+    </footer>
+
+</main>
+
+
+<script>
+
+    // ======================================
+    // THÔNG TIN TÀI KHOẢN DEMO
+    // ======================================
+
+    const demoUsers = {
+
+        dieudo: {
+            fullname: "Nguyễn Văn Điều",
+            role: "Điều độ",
+            permissions: [
+                "index",
+                "requests",
+                "trips"
+            ]
+        },
+
+        ctb: {
+            fullname: "Trần Văn CTB",
+            role: "CTB",
+            permissions: [
+                "index",
+                "requests",
+                "trips",
+                "employees"
+            ]
+        },
+
+        ttdds: {
+            fullname: "Nguyễn Văn TTĐDS",
+            role: "TTĐĐS",
+            permissions: [
+                "index",
+                "requests",
+                "trips",
+                "reports",
+                "employees"
+            ]
+        },
+
+        khktt: {
+            fullname: "Lê Văn KHKTT",
+            role: "KHKTT",
+            permissions: [
+                "index",
+                "requests",
+                "trips",
+                "reports",
+                "employees"
+            ]
+        },
+
+        giamdoc: {
+            fullname: "Giám đốc",
+            role: "Giám đốc",
+            permissions: [
+                "index",
+                "requests",
+                "trips",
+                "reports",
+                "employees"
+            ]
+        },
+
+        baove: {
+            fullname: "Nhân viên bảo vệ",
+            role: "Bảo vệ",
+            permissions: [
+                "index",
+                "trips",
+                "boarding"
+            ]
+        },
+
+        daipho: {
+            fullname: "Đại phó",
+            role: "Đại phó",
+            permissions: [
+                "index",
+                "trips",
+                "boarding",
+                "employees"
+            ]
+        },
+
+        thuyentruong: {
+            fullname: "Thuyền trưởng",
+            role: "Thuyền trưởng",
+            permissions: [
+                "index",
+                "trips",
+                "boarding",
+                "reports",
+                "employees"
+            ]
+        },
+
+        baocao: {
+            fullname: "Nhân viên báo cáo",
+            role: "Báo cáo",
+            permissions: [
+                "index",
+                "reports"
+            ]
+        }
+
+    };
+
+
+    // ======================================
+    // KIỂM TRA ĐĂNG NHẬP
+    // ======================================
+
+    let currentUser = null;
+
+    function loadUser() {
+
+        const username = localStorage.getItem("vsp_username");
+
+        if (!username || !demoUsers[username]) {
+            window.location.href = "login.html";
+            return;
+        }
+
+        currentUser = demoUsers[username];
+
+        document.getElementById("userName").textContent =
+            currentUser.fullname;
+
+        document.getElementById("userRole").textContent =
+            currentUser.role;
+
+        document.getElementById("rolePill").textContent =
+            currentUser.role;
+
+        document.getElementById("userAvatar").textContent =
+            currentUser.fullname.charAt(0);
+
+        updateMenu();
+    }
+
+
+    // ======================================
+    // PHÂN QUYỀN MENU
+    // ======================================
+
+    function updateMenu() {
+
+        const menuItems = document.querySelectorAll(".sidebar nav a");
+
+        menuItems.forEach(item => {
+
+            const file = item.getAttribute("href")
+                .replace(".html", "");
+
+            const allowed = currentUser.permissions.includes(file);
+
+            item.style.display = allowed ? "flex" : "none";
+
+        });
+
+    }
+
+
+    // ======================================
+    // ĐĂNG XUẤT
+    // ======================================
+
+    function logout() {
+
+        if (confirm("Bạn có chắc chắn muốn đăng xuất?")) {
+
+            localStorage.removeItem("vsp_username");
+
+            window.location.href = "login.html";
+
+        }
+
+    }
+
+
+    // ======================================
+    // HIỂN THỊ THÔNG BÁO
+    // ======================================
+
+    function showAlert(message, type = "success") {
+
+        const alertBox = document.getElementById("systemAlert");
+
+        alertBox.textContent = message;
+
+        alertBox.className = "alert " + type;
+
+        alertBox.style.display = "block";
+
+    }
+
+
+    // ======================================
+    // KHỞI TẠO HỆ THỐNG
+    // ======================================
+
+    loadUser();
+
+</script>
+
+</body>
+</html>

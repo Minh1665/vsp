@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tạo đơn F001</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="section-head">
+    <div>
+        <h2>Đơn đăng ký đi ra CTB bằng tàu</h2>
+        <p>
+            Biểu mẫu trực tuyến bám theo thông tin F001.
+            Đơn cần xác nhận CTB và duyệt theo thẩm quyền.
+        </p>
+    </div>
+
+    <a class="btn secondary" href="requests.html">
+        ← Quay lại
+    </a>
+</div>
+
+<form method="post" action="#" class="panel form-panel">
+
+    <input type="hidden" name="csrf" value="">
+
+    <h3>01 / Thông tin chuyến yêu cầu</h3>
+
+    <div class="form-grid">
+        <div>
+            <label>Ngày dự kiến đi biển *</label>
+            <input type="date" name="depart" required>
+        </div>
+
+        <div>
+            <label>CTB đến *</label>
+            <select name="destination" required>
+                <option value="">-- Chọn CTB --</option>
+                <option value="BK-01">BK-01</option>
+                <option value="BK-02">BK-02</option>
+                <option value="BK-03">BK-03</option>
+                <option value="RC-01">RC-01</option>
+                <option value="MSP-01">MSP-01</option>
+            </select>
+        </div>
+    </div>
+
+    <label>Nhiệm vụ công tác *</label>
+    <textarea
+            name="purpose"
+            rows="2"
+            required
+            placeholder="Mô tả nhiệm vụ sản xuất..."
+    ></textarea>
+
+    <label class="check">
+        <input type="checkbox" name="urgent">
+        Yêu cầu khẩn cấp (phải được xử lý theo kênh trực ca/quy trình hiện hành)
+    </label>
+
+    <h3>02 / Lựa chọn CBCNV</h3>
+
+    <p class="muted">
+        Chọn từ cơ sở dữ liệu có sẵn.
+        Hệ thống không coi chứng chỉ hiển thị là thay thế kiểm tra thực tế.
+    </p>
+
+    <div class="employee-grid">
+
+        <!-- Nhân viên mẫu 1 -->
+        <label class="employee-choice">
+            <input type="checkbox" name="employee_ids" value="1">
+            <span>
+                    <strong>Nguyễn Văn A</strong>
+                    <small>NV001 · Bộ phận kỹ thuật · An toàn hết hạn 31/12/2026</small>
+                </span>
+        </label>
+
+        <!-- Nhân viên mẫu 2 -->
+        <label class="employee-choice">
+            <input type="checkbox" name="employee_ids" value="2">
+            <span>
+                    <strong>Trần Văn B</strong>
+                    <small>NV002 · Bộ phận vận hành · An toàn hết hạn 30/06/2027</small>
+                </span>
+        </label>
+
+        <!-- Nhân viên mẫu 3 -->
+        <label class="employee-choice">
+            <input type="checkbox" name="employee_ids" value="3">
+            <span>
+                    <strong>Lê Văn C</strong>
+                    <small>NV003 · Bộ phận sản xuất · An toàn hết hạn 31/03/2027</small>
+                </span>
+        </label>
+
+    </div>
+
+    <div class="callout">
+        Lưu ý: Đơn mới ở trạng thái
+        <strong>Chờ xác nhận CTB</strong>.
+
+        Quy trình demo thực hiện:
+        đại diện CTB xác nhận → Trưởng ban TTĐĐSX xét duyệt.
+
+        Đối với đăng ký cuối tuần/ngày lễ hoặc khẩn cấp,
+        trách nhiệm xử lý theo quy trình nội bộ vẫn giữ nguyên.
+    </div>
+
+    <div class="actions">
+        <button type="submit" class="btn primary">
+            Gửi đơn đăng ký
+        </button>
+    </div>
+
+</form>
+
+</body>
+</html>

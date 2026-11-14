@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tổng quan - VSP Express</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<aside class="sidebar"><div class="brand"><div class="brandmark">⚓</div><div><strong>VSP EXPRESS</strong><small>Passenger Management</small></div></div><div class="sidebar-label">ĐIỀU HÀNH</div><nav>
+    <a href="/" class="active">◫ <span>Tổng quan</span></a>
+    <a href="/requests.html" >▤ <span>Đăng ký F001</span></a>
+    <a href="/trips.html" class="">▦ <span>Kế hoạch &amp; danh sách</span></a>
+
+
+    <a href="/employees">♧ <span>Hồ sơ CBCNV</span></a>
+</nav><div class="sidebar-footer"><div class="avatar">Đ</div><div class="usertext"><strong>Điều độ viên XN Khai thác</strong><small>Điều độ viên đơn vị</small></div><form method="post" action="/logout"><input type="hidden" name="csrf" value="70201f86bdf6a05dc67f11be25967792c2d65beb"><button class="logout" title="Đăng xuất">↪</button></form></div></aside>
+
+<main class="main">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+        <div>
+            <div class="crumb">ĐIỀU HÀNH / TỔNG QUAN</div>
+            <h1>Tổng quan hệ thống</h1>
+        </div>
+
+        <div class="top-right">
+            <span class="demo-pill">HỆ THỐNG QUẢN LÝ</span>
+            <span class="role-pill">Điều độ viên đơn vị</span>
+        </div>
+    </header>
+
+    <!-- CONTENT -->
+    <div class="content">
+
+        <!-- WELCOME -->
+        <div class="lead">
+            <div>
+                <h2>Chào mừng quay lại!</h2>
+                <p>
+                    Dữ liệu tập trung phục vụ vận chuyển CBCNV
+                    từ bờ ra công trình biển bằng tàu VSP Express.
+                </p>
+            </div>
+
+            <span class="chip">⚓ TÀU VSP EXPRESS</span>
+        </div>
+
+        <!-- METRICS -->
+        <div class="metrics">
+
+            <div class="metric">
+                <span>TỔNG ĐƠN ĐĂNG KÝ</span>
+                <strong>25</strong>
+                <small>F001 trong hệ thống</small>
+            </div>
+
+            <div class="metric">
+                <span>ĐƠN CHỜ XỬ LÝ</span>
+                <strong>5</strong>
+                <small>Cần tiếp nhận / xét duyệt</small>
+            </div>
+
+            <div class="metric">
+                <span>DANH SÁCH CHUYẾN</span>
+                <strong>8</strong>
+                <small>Tổng số chuyến đã tạo</small>
+            </div>
+
+            <div class="metric">
+                <span>ĐÃ GHI NHẬN LÊN TÀU</span>
+                <strong>120</strong>
+                <small>Lượt CBCNV trên các chuyến</small>
+            </div>
+
+        </div>
+
+        <!-- RECENT DATA -->
+        <div class="two-cols">
+
+            <!-- REQUESTS -->
+            <section class="panel">
+
+                <div class="panel-head">
+                    <h3>Đơn đăng ký gần đây</h3>
+                    <a href="/requests">Xem tất cả →</a>
+                </div>
+
+                <div class="table-scroll">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Mã đơn</th>
+                            <th>Ngày đi</th>
+                            <th>Trạng thái</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr>
+                            <td><strong>F001-DEMO</strong></td>
+                            <td>15/11/2026</td>
+                            <td>
+                                    <span class="status pending">
+                                        Chờ xử lý
+                                    </span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><strong>F001-002</strong></td>
+                            <td>16/11/2026</td>
+                            <td>
+                                    <span class="status approved">
+                                        Đã duyệt
+                                    </span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><strong>F001-003</strong></td>
+                            <td>17/11/2026</td>
+                            <td>
+                                    <span class="status pending">
+                                        Chờ xử lý
+                                    </span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </section>
+
+            <!-- TRIPS -->
+            <section class="panel">
+
+                <div class="panel-head">
+                    <h3>Chuyến gần đây</h3>
+                    <a href="/trips">Xem tất cả →</a>
+                </div>
+
+                <div class="table-scroll">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Mã chuyến</th>
+                            <th>Ngày đi</th>
+                            <th>Trạng thái</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr>
+                            <td>
+                                <a href="/trips" class="textlink">
+                                    VSP-DEMO
+                                </a>
+                            </td>
+                            <td>15/11/2026</td>
+                            <td>
+                                    <span class="status active">
+                                        Đang thực hiện
+                                    </span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <a href="/trips" class="textlink">
+                                    VSP-002
+                                </a>
+                            </td>
+                            <td>16/11/2026</td>
+                            <td>
+                                    <span class="status pending">
+                                        Chờ khởi hành
+                                    </span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <a href="/trips" class="textlink">
+                                    VSP-003
+                                </a>
+                            </td>
+                            <td>17/11/2026</td>
+                            <td>
+                                    <span class="status completed">
+                                        Hoàn thành
+                                    </span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </section>
+
+        </div>
+
+        <!-- DEMO GUIDE -->
+        <section class="panel help">
+
+            <h3>Hướng dẫn trình diễn quy trình</h3>
+
+            <p class="muted">
+                Hệ thống đã chuẩn bị dữ liệu mẫu để kiểm tra
+                toàn bộ quy trình đăng ký và vận chuyển CBCNV.
+            </p>
+
+            <div class="callout">
+                <strong>Dữ liệu mẫu:</strong>
+                Đơn đăng ký <strong>F001-DEMO</strong> và chuyến
+                <strong>VSP-DEMO</strong> với 5 CBCNV giả định.
+            </div>
+
+            <p>
+                <strong>Kiểm tra lên tàu:</strong>
+                Đăng nhập vai trò <strong>baove</strong> và
+                <strong>daipho</strong> để thực hiện kiểm tra CBCNV.
+            </p>
+
+            <p>
+                <strong>Chốt danh sách:</strong>
+                Sử dụng tài khoản <strong>thuyentruong</strong>
+                để xác nhận số người thực tế trên tàu.
+            </p>
+
+            <p>
+                <strong>Quy trình phê duyệt:</strong>
+                <span class="status approved">dieudo</span>
+                →
+                <span class="status approved">ctb</span>
+                →
+                <span class="status approved">ttdds</span>
+                →
+                <span class="status approved">khktt</span>
+                →
+                <span class="status approved">giamdoc</span>
+            </p>
+
+        </section>
+
+    </div>
+
+    <footer>
+        VSP EXPRESS – Hệ thống quản lý vận chuyển CBCNV
+    </footer>
+
+</main>
+
+</body>
+</html>

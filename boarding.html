@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiểm tra hành khách bằng QR - VSP Express</title>
+
+    <style>
+        .camera {
+            width: 100%;
+            min-height: 260px;
+            background: #f1f3f5;
+            border: 2px dashed #aaa;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .camera span {
+            font-size: 45px;
+        }
+
+        .camera video {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+        }
+
+        .camera p {
+            text-align: center;
+        }
+
+        .panel label {
+            display: block;
+            margin: 15px 0 6px;
+        }
+
+        .panel input,
+        .panel select {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .result {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            background: #eef5ff;
+            display: none;
+        }
+    </style>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="section-head">
+    <div>
+        <h2>Quét QR · Tra cứu hành khách</h2>
+        <p>
+            QR truy xuất hồ sơ theo chuyến; việc quét không phải
+            là xác nhận được phép lên tàu.
+        </p>
+    </div>
+</div>
+
+<div class="two-cols">
+
+    <!-- Khu vực quét QR -->
+    <section class="panel">
+
+        <h3>Quét mã QR</h3>
+
+        <div class="camera" id="camera">
+            <span>▣</span>
+            <p>Camera chưa được bật</p>
+        </div>
+
+        <button
+                class="btn primary full"
+                type="button"
+                id="startCam">
+            Bật camera và quét QR
+        </button>
+
+        <button
+                class="btn secondary full"
+                type="button"
+                id="stopCam"
+                style="display:none; margin-top:10px;">
+            Tắt camera
+        </button>
+
+        <p class="muted">
+            Tùy trình duyệt, tính năng quét tự động dùng
+            BarcodeDetector. Nếu không hỗ trợ, hãy dùng mục
+            tra cứu bên cạnh hoặc mở liên kết QR.
+        </p>
+
+        <div id="scanResult" class="result">
+            <strong>Kết quả quét QR:</strong>
+            <p id="scanText"></p>
+            <p id="scanLink"></p>
+        </div>
+
+    </section>
+
+    <!-- Tra cứu dự phòng -->
+    <section class="panel">
+
+        <h3>Tra cứu dự phòng</h3>
+
+        <form id="searchForm">
+
+            <label for="trip_id">
+                Chọn chuyến đã phê duyệt
+            </label>
+
+            <select name="trip_id" id="trip_id" required>
+                <option value="">-- Chọn chuyến --</option>
+                <option value="1">
+                    VSP-DEMO · 15/11/2026 · Giàn BK-01
+                </option>
+                <option value="2">
+                    VSP-002 · 16/11/2026 · Giàn BK-02
+                </option>
+                <option value="3">
+                    VSP-003 · 17/11/2026 · Giàn BK-03
+                </option>
+            </select>
+
+            <label for="code">
+                Mã CBCNV hoặc tên chính xác
+            </label>
+
+            <input
+                    type="text"
+                    name="code"
+                    id="code"
+                    placeholder="Ví dụ: NV001"
+                    required>
+
+            <button class="btn secondary full" type="submit">
+                Tra cứu hồ sơ →
+            </button>
+
+        </form>
+
+        <div id="searchResult" class="result">
+            <strong>Thông tin tra cứu</strong>
+            <p id="employeeInfo"></p>
+            <a id="detailLink" href="boarding-detail.html">
+                Xem hồ sơ kiểm tra →
+            </a>
+        </div>
+
+        <div class="callout">
+            Với trình diễn trên máy tính, hãy mở một chuyến
+            trong menu <strong>Kế hoạch & danh sách</strong>,
+            chọn <strong>QR</strong> ở từng CBCNV để xem mã QR thật.
+        </div>
+
+    </section>
+
+</div>
+
+<script>
+    const camera = document.getElementById("camera");
+    const startButton = document.getElementById("startCam");
+    const stopButton = document.getElementById("stopCam");
+
+    let stream = null;
+    let scanning = false;
+
+    // Bật camera
+    startButton.addEventListener("click", async function() {
+
+        if (!navigator.mediaDevices ||
+            !navigator.mediaDevices.getUserMedia) {
+
+            alert("Trình duyệt không hỗ trợ truy cập camera.");
+            return;
+        }
+
+        if (!("BarcodeDetector" in window)) {
+            alert(
+                "Trình duyệt chưa hỗ trợ BarcodeDetector. " +
+                "Vui lòng sử dụng mục tra cứu dự phòng."
+            );
+            return;
+        }
+
+        try {
+
+            const detector = new BarcodeDetector({
+                formats: ["qr_code"]
+            });
+
+            stream = await navigator.mediaDevices.getUserMedia({
+                video: {
+                    facingMode: "environment"
+                }
+            });
+
+            camera.innerHTML = "";
+
+            const video = document.createElement("video");
+            video.srcObject = stream;
+            video.setAttribute("playsinline", true);
+
+            camera.appendChild(video);
+
+            await video.play();
+
+            scanning = true;
+
+            startButton.style.display = "none";
+            stopButton.style.display = "block";
+
+            scanQRCode(video, detector);
+
+        } catch (error) {
+
+            alert(
+                "Không thể bật camera. " +
+                "Vui lòng kiểm tra quyền truy cập camera."
+            );
+
+        }
+
+    });
+
+    // Quét QR
+    async function scanQRCode(video, detector) {
+
+        if (!scanning) return;
+
+        try {
+
+            const codes = await detector.detect(video);
+
+            if (codes.length > 0) {
+
+                const qrValue = codes[0].rawValue;
+
+                document.getElementById("scanResult").style.display =
+                    "block";
+
+                document.getElementById("scanText").textContent =
+                    qrValue;
+
+                const linkArea = document.getElementById("scanLink");
+
+                linkArea.textContent = "";
+
+                // Chỉ cho phép mở liên kết HTTP/HTTPS
+                try {
+                    const url = new URL(qrValue);
+
+                    if (url.protocol === "https:" ||
+                        url.protocol === "http:") {
+
+                        const link = document.createElement("a");
+                        link.href = url.href;
+                        link.textContent = "Mở liên kết QR";
+                        link.rel = "noopener noreferrer";
+
+                        linkArea.appendChild(link);
+                    }
+
+                } catch (error) {
+                    // QR không phải URL
+                }
+
+                stopCamera();
+                return;
+            }
+
+        } catch (error) {
+            console.log("Đang quét QR...");
+        }
+
+        if (scanning) {
+            requestAnimationFrame(() => scanQRCode(video, detector));
+        }
+    }
+
+    // Tắt camera
+    function stopCamera() {
+
+        scanning = false;
+
+        if (stream) {
+            stream.getTracks().forEach(track => track.stop());
+            stream = null;
+        }
+
+        camera.innerHTML =
+            "<span>▣</span><p>Camera chưa được bật</p>";
+
+        startButton.style.display = "block";
+        stopButton.style.display = "none";
+    }
+
+    stopButton.addEventListener("click", stopCamera);
+
+    // Dữ liệu CBCNV demo
+    const employees = [
+        {
+            code: "NV001",
+            name: "Nguyễn Văn An",
+            unit: "Phòng Kỹ thuật",
+            trip: "1"
+        },
+        {
+            code: "NV002",
+            name: "Trần Văn Bình",
+            unit: "Phòng Vận hành",
+            trip: "1"
+        },
+        {
+            code: "NV003",
+            name: "Lê Minh Cường",
+            unit: "Phòng Điện",
+            trip: "2"
+        },
+        {
+            code: "NV004",
+            name: "Phạm Quốc Dũng",
+            unit: "Phòng An toàn",
+            trip: "2"
+        }
+    ];
+
+    // Tra cứu CBCNV
+    document.getElementById("searchForm")
+        .addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            const tripId =
+                document.getElementById("trip_id").value;
+
+            const keyword =
+                document.getElementById("code").value
+                    .trim().toLowerCase();
+
+            const employee = employees.find(item =>
+                item.trip === tripId &&
+                (
+                    item.code.toLowerCase() === keyword ||
+                    item.name.toLowerCase() === keyword
+                )
+            );
+
+            const result =
+                document.getElementById("searchResult");
+
+            result.style.display = "block";
+
+            if (employee) {
+
+                document.getElementById("employeeInfo").textContent =
+                    employee.code + " - " +
+                    employee.name + " - " +
+                    employee.unit;
+
+                document.getElementById("detailLink").style.display =
+                    "inline";
+
+            } else {
+
+                document.getElementById("employeeInfo").textContent =
+                    "Không tìm thấy CBCNV trong chuyến đã chọn.";
+
+                document.getElementById("detailLink").style.display =
+                    "none";
+            }
+
+        });
+
+    // Đảm bảo camera được tắt khi rời trang
+    window.addEventListener("pagehide", stopCamera);
+
+</script>
+
+</body>
+</html>

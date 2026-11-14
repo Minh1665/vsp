@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thống kê – Báo cáo</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="section-head">
+    <div>
+        <h2>Đối chiếu kết quả vận chuyển</h2>
+        <p>
+            Dữ liệu demo được tổng hợp từ danh sách chuyến
+            và kết quả kiểm tra thực tế.
+        </p>
+    </div>
+</div>
+
+<div class="metrics metrics-3">
+
+    <div class="metric">
+        <span>TỔNG ĐƠN F001</span>
+        <strong>25</strong>
+    </div>
+
+    <div class="metric">
+        <span>SỐ CHUYẾN</span>
+        <strong>8</strong>
+    </div>
+
+    <div class="metric">
+        <span>CBCNV ĐÃ LÊN TÀU</span>
+        <strong>120</strong>
+    </div>
+
+</div>
+
+<section class="panel">
+
+    <h3>Đối chiếu từng chuyến</h3>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Chuyến</th>
+            <th>Ngày</th>
+            <th>Được xếp</th>
+            <th>Đã lên tàu</th>
+            <th>Chênh lệch</th>
+            <th>Trạng thái</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+            <td><a href="trip-detail.html">VSP-DEMO</a></td>
+            <td>15/11/2026</td>
+            <td>5</td>
+            <td>5</td>
+            <td><strong>0</strong></td>
+            <td>Thuyền trưởng đã chốt</td>
+        </tr>
+
+        <tr>
+            <td><a href="trip-detail.html">VSP-002</a></td>
+            <td>16/11/2026</td>
+            <td>25</td>
+            <td>23</td>
+            <td><strong>2</strong></td>
+            <td>Chưa chốt kết quả</td>
+        </tr>
+
+        <tr>
+            <td><a href="trip-detail.html">VSP-003</a></td>
+            <td>17/11/2026</td>
+            <td>30</td>
+            <td>28</td>
+            <td><strong>2</strong></td>
+            <td>Chưa chốt kết quả</td>
+        </tr>
+
+        <tr>
+            <td><a href="trip-detail.html">VSP-004</a></td>
+            <td>18/11/2026</td>
+            <td>20</td>
+            <td>20</td>
+            <td><strong>0</strong></td>
+            <td>Thuyền trưởng đã chốt</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="callout">
+        Chênh lệch tạm tính = số người có trong Danh sách chuyến
+        hiện hành − số người ghi nhận lên tàu.
+        Khi chưa chốt chuyến, đây không phải kết quả vận chuyển cuối cùng.
+    </div>
+
+</section>
+
+<section class="panel">
+
+    <h3>Nhật ký xử lý gần đây</h3>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Thời điểm</th>
+            <th>Thao tác</th>
+            <th>Chi tiết</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+            <td>14/11/2026 08:30</td>
+            <td>Tạo chuyến</td>
+            <td>Tạo chuyến VSP-DEMO</td>
+        </tr>
+
+        <tr>
+            <td>14/11/2026 09:15</td>
+            <td>Duyệt đơn</td>
+            <td>Đã duyệt đơn F001-DEMO</td>
+        </tr>
+
+        <tr>
+            <td>14/11/2026 10:00</td>
+            <td>Kiểm tra lên tàu</td>
+            <td>Ghi nhận 5 CBCNV lên tàu VSP-DEMO</td>
+        </tr>
+
+        <tr>
+            <td>14/11/2026 10:30</td>
+            <td>Chốt chuyến</td>
+            <td>Thuyền trưởng xác nhận số người thực tế</td>
+        </tr>
+        </tbody>
+    </table>
+
+</section>
+
+</body>
+</html>

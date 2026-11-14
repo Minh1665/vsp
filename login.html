@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập - VSP Express</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="login-layout">
+
+    <div class="login-info">
+        <div class="logo-large">⚓</div>
+
+        <p class="eyebrow">HỆ THỐNG MINH HỌA HKDN</p>
+
+        <h1>
+            Quản lý hành khách<br>
+            <em>VSP Express</em>
+        </h1>
+
+        <p>
+            Đăng ký F001 · Xét duyệt · Danh sách chuyến ·
+            QR lên tàu · Báo cáo
+        </p>
+
+        <div class="fake-label">
+            BẢN DEMO ĐỘC LẬP · DỮ LIỆU HƯ CẤU
+        </div>
+    </div>
+
+    <div class="login-card">
+
+        <h2>Đăng nhập</h2>
+
+        <p class="muted">
+            Chọn tài khoản thử nghiệm để trải nghiệm từng vai trò.
+        </p>
+
+        <form id="loginForm">
+
+            <label for="username">Tên tài khoản</label>
+            <input
+                    id="username"
+                    name="username"
+                    type="text"
+                    required
+                    value="dieudo"
+                    autocomplete="username"
+            >
+
+            <label for="password">Mật khẩu</label>
+            <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    required
+                    value="demo123"
+                    autocomplete="current-password"
+            >
+
+            <button type="submit" class="btn primary full">
+                Đăng nhập →
+            </button>
+
+        </form>
+
+        <div class="hint">
+            <strong>Danh sách tài khoản demo</strong>
+
+            <p>
+                dieudo, ctb, ttdds, khktt, giamdoc,
+                baove, daipho, thuyentruong, baocao
+            </p>
+
+            <p>
+                Tất cả mật khẩu:
+                <code>demo123</code>
+            </p>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const username = document.getElementById("username").value.trim();
+        const password = document.getElementById("password").value;
+
+        const accounts = [
+            "dieudo",
+            "ctb",
+            "ttdds",
+            "khktt",
+            "giamdoc",
+            "baove",
+            "daipho",
+            "thuyentruong",
+            "baocao"
+        ];
+
+        if (accounts.includes(username) && password === "demo123") {
+            alert("Đăng nhập demo thành công! Xin chào " + username);
+
+            // Chuyển đến trang tổng quan
+            window.location.href = "index.html";
+        } else {
+            alert("Tên tài khoản hoặc mật khẩu không đúng!");
+        }
+    });
+</script>
+
+</body>
+</html>

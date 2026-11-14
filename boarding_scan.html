@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiểm tra lên tàu - VSP Express</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="section-head">
+    <div>
+        <h2>Nguyễn Văn An</h2>
+        <p>
+            NV001 · Phòng Kỹ thuật · VSP-DEMO ·
+            15/11/2026 · Giàn BK-01
+        </p>
+    </div>
+
+    <a class="btn secondary" href="boarding.html">
+        ← Quét người tiếp theo
+    </a>
+</div>
+
+<div class="two-cols uneven">
+
+    <!-- Thông tin hành khách -->
+    <section class="panel">
+
+        <div class="person">
+
+            <div class="person-avatar">N</div>
+
+            <div>
+                <h2>Nguyễn Văn An</h2>
+                <p>NV001 · Phòng Kỹ thuật</p>
+            </div>
+
+            <span class="status approved">
+                Có trong DS duyệt
+            </span>
+
+        </div>
+
+        <dl class="details">
+
+            <dt>Giấy tờ</dt>
+            <dd>CCCD – 079123456789</dd>
+
+            <dt>Chứng chỉ an toàn hết hạn</dt>
+            <dd>30/12/2026</dd>
+
+            <dt>Ngày/chuyến/CTB</dt>
+            <dd>15/11/2026 · VSP-DEMO · Giàn BK-01</dd>
+
+        </dl>
+
+        <hr>
+
+        <h3>Trạng thái kiểm tra</h3>
+
+        <div class="check-row">
+            <span>Kiểm tra an ninh</span>
+            <span class="status approved">ok</span>
+        </div>
+
+        <div class="check-row">
+            <span>Kiểm tra giấy tờ/điều kiện</span>
+            <span class="status approved">ok</span>
+        </div>
+
+        <div class="check-row">
+            <span>Đã lên tàu</span>
+            <span class="status pending">Chưa ghi nhận</span>
+        </div>
+
+        <div class="callout">
+            Nhân sự phải đối chiếu trực tiếp người, giấy tờ
+            và điều kiện an toàn. Dữ liệu hệ thống chỉ phục vụ
+            tra cứu; không tự xác thực danh tính.
+        </div>
+
+    </section>
+
+    <!-- Xác nhận theo thẩm quyền -->
+    <aside class="panel">
+
+        <h3>Xác nhận theo thẩm quyền</h3>
+
+        <p class="muted">
+            Đội Bảo vệ vũ trang: ghi nhận kết quả kiểm tra
+            an ninh thực tế.
+        </p>
+
+        <form id="securityForm">
+
+            <button
+                    type="button"
+                    class="btn primary full"
+                    onclick="checkSecurity('ok')">
+                Đạt kiểm tra an ninh
+            </button>
+
+            <button
+                    type="button"
+                    class="btn danger full"
+                    onclick="checkSecurity('fail')">
+                Không đạt an ninh
+            </button>
+
+        </form>
+
+        <hr>
+
+        <h3>Đại phó kiểm tra giấy tờ</h3>
+
+        <p class="muted">
+            Đại phó: đối chiếu giấy tờ, Danh sách chuyến
+            và các điều kiện liên quan.
+        </p>
+
+        <form id="mateForm">
+
+            <button
+                    type="button"
+                    class="btn primary full"
+                    onclick="checkMate('ok')">
+                Giấy tờ/điều kiện đạt
+            </button>
+
+            <button
+                    type="button"
+                    class="btn danger full"
+                    onclick="checkMate('fail')">
+                Không đạt
+            </button>
+
+        </form>
+
+        <hr>
+
+        <h3>Ghi nhận lên tàu</h3>
+
+        <div id="boardingNotice" class="callout">
+            Chỉ được ghi nhận lên tàu khi các kiểm tra
+            bắt buộc đã đạt và hành khách thực tế đã lên tàu.
+        </div>
+
+        <button
+                id="boardButton"
+                class="btn primary full"
+                type="button"
+                onclick="confirmBoarding()"
+                disabled>
+            Ghi nhận thực tế đã lên tàu
+        </button>
+
+        <hr>
+
+        <h3>Mã QR hành khách</h3>
+
+        <div class="qr-img" style="width:160px;height:160px;display:flex;align-items:center;justify-content:center;border:1px solid #ddd;">
+            <img
+                    src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=VSP-DEMO-NV001"
+                    alt="QR hành khách demo"
+                    width="150"
+                    height="150">
+        </div>
+
+        <p class="muted">
+            QR liên kết bản ghi chuyến; mã cũ được vô hiệu hóa
+            khi danh sách thay đổi hợp lệ.
+        </p>
+
+    </aside>
+
+</div>
+
+<script>
+    // Trạng thái kiểm tra demo
+    let guardResult = "";
+    let mateResult = "";
+    let boarded = false;
+
+    // Kiểm tra an ninh
+    function checkSecurity(result) {
+        guardResult = result;
+
+        alert(
+            result === "ok"
+                ? "Đã ghi nhận: Đạt kiểm tra an ninh."
+                : "Đã ghi nhận: Không đạt kiểm tra an ninh."
+        );
+
+        updateBoarding();
+    }
+
+    // Kiểm tra giấy tờ và điều kiện
+    function checkMate(result) {
+        mateResult = result;
+
+        alert(
+            result === "ok"
+                ? "Đã ghi nhận: Giấy tờ/điều kiện đạt."
+                : "Đã ghi nhận: Không đạt điều kiện."
+        );
+
+        updateBoarding();
+    }
+
+    // Cập nhật điều kiện lên tàu
+    function updateBoarding() {
+        const button = document.getElementById("boardButton");
+        const notice = document.getElementById("boardingNotice");
+
+        if (guardResult === "ok" && mateResult === "ok" && !boarded) {
+            button.disabled = false;
+            notice.innerHTML =
+                "Các bước kiểm tra bắt buộc đã đạt. " +
+                "Chỉ xác nhận sau khi hành khách thực tế đã lên tàu.";
+        } else {
+            button.disabled = true;
+            notice.innerHTML =
+                "Chưa đủ điều kiện ghi nhận lên tàu. " +
+                "Cần hoàn thành tất cả kiểm tra bắt buộc.";
+        }
+    }
+
+    // Xác nhận lên tàu
+    function confirmBoarding() {
+        if (guardResult !== "ok" || mateResult !== "ok") {
+            alert("Chưa đủ điều kiện lên tàu!");
+            return;
+        }
+
+        if (boarded) {
+            alert("Hành khách đã được ghi nhận lên tàu.");
+            return;
+        }
+
+        const confirmed = confirm(
+            "Xác nhận hành khách Nguyễn Văn An đã thực tế lên tàu?"
+        );
+
+        if (confirmed) {
+            boarded = true;
+
+            document.getElementById("boardButton").disabled = true;
+
+            document.getElementById("boardingNotice").innerHTML =
+                "Đã ghi nhận hành khách lên tàu thành công.";
+
+            alert("Đã ghi nhận lên tàu thành công!");
+        }
+    }
+</script>
+
+</body>
+</html>

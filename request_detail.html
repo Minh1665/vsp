@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết F001 - VSP Express</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="section-head">
+
+    <div>
+        <h2>F001-DEMO</h2>
+        <p>
+            Người lập: Nguyễn Văn An ·
+            Ngày đi: 15/11/2026 ·
+            CTB đến: Giàn BK-01
+        </p>
+    </div>
+
+    <span class="status submitted" id="requestStatus">
+        submitted
+    </span>
+
+</div>
+
+
+<div class="two-cols uneven">
+
+    <!-- THÔNG TIN YÊU CẦU -->
+    <section class="panel">
+
+        <h3>Thông tin yêu cầu</h3>
+
+        <dl class="details">
+
+            <dt>Nhiệm vụ</dt>
+            <dd>Thực hiện công tác bảo dưỡng thiết bị ngoài giàn.</dd>
+
+            <dt>Khẩn cấp</dt>
+            <dd>Có – phải xác minh trực ca</dd>
+
+            <dt>Xác nhận CTB</dt>
+            <dd id="ctbNote">Chưa có</dd>
+
+            <dt>Ý kiến TTĐĐSX</dt>
+            <dd id="reviewNote">Chưa có</dd>
+
+        </dl>
+
+        <h3>Danh sách CBCNV</h3>
+
+        <table>
+
+            <thead>
+            <tr>
+                <th>Mã</th>
+                <th>Họ tên</th>
+                <th>Chứng chỉ an toàn</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            <tr>
+                <td>NV001</td>
+                <td>Nguyễn Văn An</td>
+                <td>30/12/2026</td>
+            </tr>
+
+            <tr>
+                <td>NV002</td>
+                <td>Trần Văn Bình</td>
+                <td>15/01/2027</td>
+            </tr>
+
+            <tr>
+                <td>NV003</td>
+                <td>Lê Minh Cường</td>
+                <td>20/02/2027</td>
+            </tr>
+
+            <tr>
+                <td>NV004</td>
+                <td>Phạm Quốc Dũng</td>
+                <td>10/03/2027</td>
+            </tr>
+
+            <tr>
+                <td>NV005</td>
+                <td>Hoàng Văn Hải</td>
+                <td>25/04/2027</td>
+            </tr>
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+
+    <!-- XỬ LÝ NGHIỆP VỤ -->
+    <aside class="panel">
+
+        <h3>Xử lý nghiệp vụ</h3>
+
+        <!-- CTB XÁC NHẬN -->
+        <div id="ctbSection">
+
+            <p class="muted">
+                Xác nhận đơn vị chủ quản CTB đồng ý tiếp nhận.
+            </p>
+
+            <form id="ctbForm">
+
+                <label>Ghi chú xác nhận</label>
+
+                <textarea
+                        id="ctbInput"
+                        rows="3"
+                        placeholder="Ý kiến đơn vị tiếp nhận">
+                </textarea>
+
+                <button type="submit" class="btn primary full">
+                    Xác nhận tiếp nhận CTB
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- TTĐĐSX XÉT DUYỆT -->
+        <div id="reviewSection" style="display:none;">
+
+            <p class="muted">
+                Trưởng ban TTĐĐSX hoặc người được ủy quyền
+                xem xét đơn.
+            </p>
+
+            <form id="reviewForm">
+
+                <label>
+                    Lý do / ghi chú khi trả lại hoặc từ chối
+                </label>
+
+                <textarea
+                        id="reviewInput"
+                        rows="3"
+                        placeholder="Nhập ý kiến xử lý">
+                </textarea>
+
+                <div class="button-stack">
+
+                    <button
+                            type="button"
+                            onclick="processRequest('approve')"
+                            class="btn primary">
+                        Phê duyệt
+                    </button>
+
+                    <button
+                            type="button"
+                            onclick="processRequest('return')"
+                            class="btn secondary">
+                        Yêu cầu bổ sung
+                    </button>
+
+                    <button
+                            type="button"
+                            onclick="processRequest('reject')"
+                            class="btn danger">
+                        Từ chối
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+
+        <!-- THÔNG BÁO -->
+        <div id="messageSection" style="display:none;">
+
+            <div class="callout" id="messageText">
+                Hiện không có thao tác xử lý dành cho vai trò
+                của bạn ở trạng thái này.
+            </div>
+
+        </div>
+
+    </aside>
+
+</div>
+
+
+<script>
+
+    // ========================================
+    // DỮ LIỆU ĐƠN F001 DEMO
+    // ========================================
+
+    let request = {
+        code: "F001-DEMO",
+        status: "submitted",
+        ctbNote: "",
+        reviewNote: ""
+    };
+
+
+    // ========================================
+    // TÀI KHOẢN ĐANG ĐĂNG NHẬP
+    // ========================================
+
+    // Có thể đổi thành "ctb" hoặc "ttdds" để thử
+    // các vai trò xử lý khác nhau.
+
+    let currentRole = localStorage.getItem("vsp_username") || "dieudo";
+
+
+    // ========================================
+    // HIỂN THỊ GIAO DIỆN THEO VAI TRÒ
+    // ========================================
+
+    function renderPage() {
+
+        document.getElementById("requestStatus").textContent =
+            request.status;
+
+        document.getElementById("requestStatus").className =
+            "status " + request.status;
+
+        document.getElementById("ctbNote").textContent =
+            request.ctbNote || "Chưa có";
+
+        document.getElementById("reviewNote").textContent =
+            request.reviewNote || "Chưa có";
+
+        const ctbSection =
+            document.getElementById("ctbSection");
+
+        const reviewSection =
+            document.getElementById("reviewSection");
+
+        const messageSection =
+            document.getElementById("messageSection");
+
+        ctbSection.style.display = "none";
+        reviewSection.style.display = "none";
+        messageSection.style.display = "none";
+
+        // CTB tiếp nhận đơn
+        if (
+            currentRole === "ctb" &&
+            request.status === "submitted"
+        ) {
+            ctbSection.style.display = "block";
+        }
+
+        // TTĐĐSX xét duyệt
+        else if (
+            currentRole === "ttdds" &&
+            request.status === "ctb_ok"
+        ) {
+            reviewSection.style.display = "block";
+        }
+
+        // Các vai trò khác
+        else {
+
+            messageSection.style.display = "block";
+
+            let message =
+                "Hiện không có thao tác xử lý dành cho vai trò của bạn ở trạng thái này.";
+
+            if (request.status === "returned") {
+                message +=
+                    " Trong bản demo, có thể lập đơn mới kèm thông tin đã bổ sung.";
+            }
+
+            document.getElementById("messageText").textContent =
+                message;
+        }
+
+    }
+
+
+    // ========================================
+    // CTB XÁC NHẬN TIẾP NHẬN
+    // ========================================
+
+    document.getElementById("ctbForm")
+        .addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            if (currentRole !== "ctb" ||
+                request.status !== "submitted") {
+                alert("Bạn không có quyền thực hiện thao tác này.");
+                return;
+            }
+
+            const note =
+                document.getElementById("ctbInput").value.trim();
+
+            if (!confirm("Xác nhận CTB tiếp nhận đơn F001-DEMO?")) {
+                return;
+            }
+
+            request.ctbNote = note || "CTB đồng ý tiếp nhận.";
+            request.status = "ctb_ok";
+
+            alert("Đã xác nhận tiếp nhận CTB.");
+
+            renderPage();
+
+        });
+
+
+    // ========================================
+    // TTĐĐSX PHÊ DUYỆT / TRẢ LẠI / TỪ CHỐI
+    // ========================================
+
+    function processRequest(action) {
+
+        if (currentRole !== "ttdds" ||
+            request.status !== "ctb_ok") {
+
+            alert("Bạn không có quyền thực hiện thao tác này.");
+            return;
+        }
+
+        const note =
+            document.getElementById("reviewInput").value.trim();
+
+        if (action !== "approve" && !note) {
+
+            alert("Vui lòng nhập lý do xử lý.");
+            return;
+        }
+
+        let message = "";
+
+        if (action === "approve") {
+
+            message = "Xác nhận phê duyệt đơn F001-DEMO?";
+
+        } else if (action === "return") {
+
+            message = "Trả lại đơn để yêu cầu bổ sung thông tin?";
+
+        } else if (action === "reject") {
+
+            message = "Bạn có chắc chắn muốn từ chối đơn này?";
+
+        }
+
+        if (!confirm(message)) return;
+
+        request.reviewNote = note || "Đơn đã được phê duyệt.";
+
+        if (action === "approve") {
+
+            request.status = "approved";
+
+        } else if (action === "return") {
+
+            request.status = "returned";
+
+        } else if (action === "reject") {
+
+            request.status = "rejected";
+
+        }
+
+        alert("Đã cập nhật trạng thái đơn F001-DEMO.");
+
+        renderPage();
+
+    }
+
+
+    // ========================================
+    // KHỞI TẠO
+    // ========================================
+
+    renderPage();
+
+</script>
+
+</body>
+</html>

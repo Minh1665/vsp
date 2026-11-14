@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dự thảo Danh sách chuyến</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="section-head">
+    <div>
+        <h2>Lập danh sách chuyến</h2>
+        <p>
+            Phòng KH-KTT sử dụng các F001 đã được duyệt,
+            phối hợp Ban TTĐĐSX theo quy trình hiện hành.
+        </p>
+    </div>
+</div>
+
+<form method="post" action="#" class="panel form-panel">
+
+    <input type="hidden" name="csrf" value="">
+
+    <!-- THÔNG TIN CHUYẾN -->
+    <div class="form-grid">
+
+        <div>
+            <label>Ngày đi</label>
+            <input
+                    type="date"
+                    name="depart"
+                    value="2026-11-15"
+                    required
+            >
+        </div>
+
+        <div>
+            <label>Giờ dự kiến</label>
+            <input
+                    type="time"
+                    name="departure_time"
+                    value="07:30"
+            >
+        </div>
+
+        <div>
+            <label>CTB đến</label>
+            <select name="destination" required>
+                <option value="BK-01">BK-01</option>
+                <option value="BK-02">BK-02</option>
+                <option value="BK-03">BK-03</option>
+                <option value="RC-01">RC-01</option>
+                <option value="MSP-01">MSP-01</option>
+            </select>
+        </div>
+
+    </div>
+
+    <!-- DANH SÁCH CBCNV -->
+    <h3>CBCNV từ đơn F001 đã duyệt</h3>
+
+    <p class="muted">
+        Chỉ chọn những CBCNV đã có F001 được duyệt đúng ngày và CTB.
+        Dữ liệu đầu vào không tự quyết định xếp ưu tiên.
+    </p>
+
+    <div class="employee-grid">
+
+        <label class="employee-choice">
+            <input
+                    type="checkbox"
+                    name="employee_ids"
+                    value="1"
+            >
+            <span>
+                    <strong>Nguyễn Văn A</strong>
+                    <small>NV001 · 15/11/2026 · BK-01</small>
+                </span>
+        </label>
+
+        <label class="employee-choice">
+            <input
+                    type="checkbox"
+                    name="employee_ids"
+                    value="2"
+            >
+            <span>
+                    <strong>Trần Văn B</strong>
+                    <small>NV002 · 15/11/2026 · BK-01</small>
+                </span>
+        </label>
+
+        <label class="employee-choice">
+            <input
+                    type="checkbox"
+                    name="employee_ids"
+                    value="3"
+            >
+            <span>
+                    <strong>Lê Văn C</strong>
+                    <small>NV003 · 15/11/2026 · BK-01</small>
+                </span>
+        </label>
+
+        <label class="employee-choice">
+            <input
+                    type="checkbox"
+                    name="employee_ids"
+                    value="4"
+            >
+            <span>
+                    <strong>Phạm Văn D</strong>
+                    <small>NV004 · 15/11/2026 · BK-01</small>
+                </span>
+        </label>
+
+    </div>
+
+    <!-- LƯU Ý NGHIỆP VỤ -->
+    <div class="callout">
+        Quy tắc số khách tối thiểu, sức chở và điều kiện thời tiết
+        là căn cứ để con người xem xét, không phải điều kiện
+        tự động hủy hoặc tự phê duyệt chuyến.
+    </div>
+
+    <!-- NÚT GỬI -->
+    <button type="submit" class="btn primary">
+        Tạo bản dự thảo
+    </button>
+
+</form>
+
+</body>
+</html>

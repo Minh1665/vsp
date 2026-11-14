@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý đăng ký F001</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="section-head">
+    <div>
+        <h2>Đơn đăng ký vận chuyển</h2>
+        <p>Theo dõi tiếp nhận, xác nhận CTB và xét duyệt đơn.</p>
+    </div>
+
+    <a class="btn primary" href="request_new.html">
+        + Tạo đơn F001
+    </a>
+</div>
+
+<section class="panel">
+    <div class="table-scroll">
+
+        <table>
+            <thead>
+            <tr>
+                <th>Mã đơn</th>
+                <th>Ngày đi</th>
+                <th>CTB</th>
+                <th>Số CBCNV</th>
+                <th>Yêu cầu</th>
+                <th>Trạng thái</th>
+                <th></th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            <tr>
+                <td><strong>F001-2026-001</strong></td>
+                <td>15/11/2026</td>
+                <td>BK-01</td>
+                <td>3</td>
+                <td>
+                    <span class="status returned">Khẩn</span>
+                </td>
+                <td>
+                    <span class="status pending">Chờ xác nhận CTB</span>
+                </td>
+                <td>
+                    <a class="textlink" href="request_detail.html?id=1">
+                        Chi tiết →
+                    </a>
+                </td>
+            </tr>
+
+            <tr>
+                <td><strong>F001-2026-002</strong></td>
+                <td>16/11/2026</td>
+                <td>BK-02</td>
+                <td>5</td>
+                <td>Thông thường</td>
+                <td>
+                    <span class="status approved">Đã duyệt</span>
+                </td>
+                <td>
+                    <a class="textlink" href="request_detail.html?id=2">
+                        Chi tiết →
+                    </a>
+                </td>
+            </tr>
+
+            <tr>
+                <td><strong>F001-2026-003</strong></td>
+                <td>18/11/2026</td>
+                <td>RC-01</td>
+                <td>2</td>
+                <td>Thông thường</td>
+                <td>
+                    <span class="status returned">Từ chối</span>
+                </td>
+                <td>
+                    <a class="textlink" href="request_detail.html?id=3">
+                        Chi tiết →
+                    </a>
+                </td>
+            </tr>
+
+            <tr>
+                <td><strong>F001-2026-004</strong></td>
+                <td>20/11/2026</td>
+                <td>MSP-01</td>
+                <td>4</td>
+                <td>
+                    <span class="status returned">Khẩn</span>
+                </td>
+                <td>
+                    <span class="status pending">Chờ xác nhận CTB</span>
+                </td>
+                <td>
+                    <a class="textlink" href="request_detail.html?id=4">
+                        Chi tiết →
+                    </a>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+</section>
+
+</body>
+</html>
