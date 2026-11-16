@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hồ sơ CBCNV - VSP Express</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<aside class="sidebar">
+    <div class="brand">
+        <div class="brandmark">⚓</div>
+        <div>
+            <strong>VSP EXPRESS</strong>
+            <small>Passenger Management</small>
+        </div>
+    </div>
+
+    <div class="sidebar-label">ĐIỀU HÀNH</div>
+    <nav>
+        <a href="../index.html">◫ <span>Tổng quan</span></a>
+        <a href="../requests.html">▤ <span>Đăng ký F001</span></a>
+        <a href="../trips.html">▦ <span>Kế hoạch &amp; danh sách</span></a>
+        <a href="./employees.html" class="active">♧ <span>Hồ sơ CBCNV</span></a>
+    </nav>
+
+    <div class="sidebar-footer">
+        <div class="avatar">Đ</div>
+        <div class="usertext">
+            <strong>Điều độ viên XN Khai thác</strong>
+            <small>Điều độ viên đơn vị</small>
+        </div>
+        <form method="post" action="/logout">
+            <input type="hidden" name="csrf" value="70201f86bdf6a05dc67f11be25967792c2d65beb">
+            <button class="logout" title="Đăng xuất">↪</button>
+        </form>
+    </div>
+</aside>
+
+<main class="main">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+        <div>
+            <div class="crumb">ĐIỀU HÀNH / HỒ SƠ CBCNV</div>
+            <h1>Hồ sơ CBCNV</h1>
+        </div>
+
+        <div class="top-right">
+            <span class="demo-pill">HỆ THỐNG QUẢN LÝ</span>
+            <span class="role-pill">Điều độ viên đơn vị</span>
+        </div>
+    </header>
+
+    <!-- CONTENT -->
+    <div class="content">
+
+        <section class="panel">
+            <div class="panel-head">
+                <div>
+                    <h3>Danh mục CBCNV</h3>
+                    <p class="muted">
+                        Dữ liệu mẫu dùng chung, không phải hồ sơ nhân sự của doanh nghiệp.
+                    </p>
+                </div>
+                <span class="chip">Tổng: 7 CBCNV</span>
+            </div>
+
+            <div class="table-scroll">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Mã CBCNV</th>
+                        <th>Họ tên</th>
+                        <th>Đơn vị</th>
+                        <th>Chức danh</th>
+                        <th>Chứng chỉ an toàn</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr>
+                        <td><strong>NV001</strong></td>
+                        <td><strong>Nguyễn Văn An</strong></td>
+                        <td>Phòng Kỹ thuật</td>
+                        <td>Kỹ sư cơ khí</td>
+                        <td><span class="status approved">30/12/2026</span></td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>NV002</strong></td>
+                        <td><strong>Trần Văn Bình</strong></td>
+                        <td>Phòng Vận hành</td>
+                        <td>Kỹ thuật viên</td>
+                        <td><span class="status approved">15/01/2027</span></td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>NV003</strong></td>
+                        <td><strong>Lê Minh Cường</strong></td>
+                        <td>Phòng Điện</td>
+                        <td>Kỹ sư điện</td>
+                        <td><span class="status approved">20/02/2027</span></td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>NV004</strong></td>
+                        <td><strong>Phạm Quốc Dũng</strong></td>
+                        <td>Phòng An toàn</td>
+                        <td>Chuyên viên an toàn</td>
+                        <td><span class="status approved">10/03/2027</span></td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>NV005</strong></td>
+                        <td><strong>Hoàng Văn Hải</strong></td>
+                        <td>Phòng Cơ khí</td>
+                        <td>Thợ máy</td>
+                        <td><span class="status approved">25/04/2027</span></td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>NV006</strong></td>
+                        <td><strong>Đỗ Minh Hoàng</strong></td>
+                        <td>Phòng Kỹ thuật</td>
+                        <td>Kỹ sư xây dựng</td>
+                        <td><span class="status approved">18/05/2027</span></td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>NV007</strong></td>
+                        <td><strong>Vũ Thanh Long</strong></td>
+                        <td>Phòng Vận hành</td>
+                        <td>Kỹ thuật viên</td>
+                        <td><span class="status approved">12/06/2027</span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        VSP EXPRESS – Hệ thống quản lý vận chuyển CBCNV
+    </footer>
+
+</main>
+
+</body>
+</html>

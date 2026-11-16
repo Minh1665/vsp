@@ -1,122 +1,369 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tạo đơn F001</title>
+    <title>Tạo đơn đăng ký vận chuyển - VSP Express</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<div class="section-head">
-    <div>
-        <h2>Đơn đăng ký đi ra CTB bằng tàu</h2>
-        <p>
-            Biểu mẫu trực tuyến bám theo thông tin F001.
-            Đơn cần xác nhận CTB và duyệt theo thẩm quyền.
-        </p>
-    </div>
-
-    <a class="btn secondary" href="requests.html">
-        ← Quay lại
-    </a>
-</div>
-
-<form method="post" action="#" class="panel form-panel">
-
-    <input type="hidden" name="csrf" value="">
-
-    <h3>01 / Thông tin chuyến yêu cầu</h3>
-
-    <div class="form-grid">
+<aside class="sidebar">
+    <div class="brand">
+        <div class="brandmark">⚓</div>
         <div>
-            <label>Ngày dự kiến đi biển *</label>
-            <input type="date" name="depart" required>
-        </div>
-
-        <div>
-            <label>CTB đến *</label>
-            <select name="destination" required>
-                <option value="">-- Chọn CTB --</option>
-                <option value="BK-01">BK-01</option>
-                <option value="BK-02">BK-02</option>
-                <option value="BK-03">BK-03</option>
-                <option value="RC-01">RC-01</option>
-                <option value="MSP-01">MSP-01</option>
-            </select>
+            <strong>VSP EXPRESS</strong>
+            <small>Passenger Management</small>
         </div>
     </div>
 
-    <label>Nhiệm vụ công tác *</label>
-    <textarea
-            name="purpose"
-            rows="2"
-            required
-            placeholder="Mô tả nhiệm vụ sản xuất..."
-    ></textarea>
+    <div class="sidebar-label">ĐIỀU HÀNH</div>
+    <nav>
+        <a href="./index.html">◫ <span>Tổng quan</span></a>
+        <a href="./requests.html" class="active">▤ <span>Đăng ký vận chuyển</span></a>
 
-    <label class="check">
-        <input type="checkbox" name="urgent">
-        Yêu cầu khẩn cấp (phải được xử lý theo kênh trực ca/quy trình hiện hành)
-    </label>
+        <div class="nav-group">
+            <a href="#" class="nav-parent" aria-expanded="false">
+                ▦ <span>Kế hoạch vận chuyển</span>
+                <svg class="nav-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </a>
 
-    <h3>02 / Lựa chọn CBCNV</h3>
+            <div class="submenu">
+                <a href="./trips.html" class="sub-item ">Danh sách đề xuất</a>
+                <a href="./trips_draft.html" class="sub-item">Danh sách dự thảo</a>
+                <a href="./trips_official.html" class="sub-item">Danh sách chính thức</a>
+            </div>
+        </div>
 
-    <p class="muted">
-        Chọn từ cơ sở dữ liệu có sẵn.
-        Hệ thống không coi chứng chỉ hiển thị là thay thế kiểm tra thực tế.
-    </p>
+        <a href="./boarding.html">♧ <span>Kiểm tra lên tàu</span></a>
+    </nav>
 
-    <div class="employee-grid">
+    <div class="sidebar-footer">
+        <div class="avatar">Đ</div>
+        <div class="usertext">
+            <strong>Điều độ viên XN Khai thác</strong>
+            <small>Điều độ viên đơn vị</small>
+        </div>
+        <form method="post" action="/login.html">
+            <input type="hidden" name="csrf" value="70201f86bdf6a05dc67f11be25967792c2d65beb">
+            <button class="logout" title="Đăng xuất">↪</button>
+        </form>
+    </div>
+</aside>
+<main class="main">
 
-        <!-- Nhân viên mẫu 1 -->
-        <label class="employee-choice">
-            <input type="checkbox" name="employee_ids" value="1">
-            <span>
-                    <strong>Nguyễn Văn A</strong>
-                    <small>NV001 · Bộ phận kỹ thuật · An toàn hết hạn 31/12/2026</small>
+    <!-- TOPBAR -->
+    <header class="topbar">
+        <div>
+            <div class="crumb">ĐIỀU HÀNH / ĐĂNG KÝ VẬN CHUYỂN / TẠO MỚI</div>
+            <h1>Đăng ký vận chuyển</h1>
+        </div>
+
+        <div class="top-right">
+            <span class="demo-pill">HỆ THỐNG QUẢN LÝ</span>
+            <span class="role-pill">Điều độ viên đơn vị</span>
+        </div>
+    </header>
+
+    <!-- CONTENT -->
+    <div class="content">
+
+        <!-- TIÊU ĐỀ TRANG -->
+        <div class="section-head">
+            <div class="stats-title">
+                <span class="stats-icon" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                        <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                        <path d="M12 11h4"></path>
+                        <path d="M12 16h4"></path>
+                        <path d="M8 11h.01"></path>
+                        <path d="M8 16h.01"></path>
+                    </svg>
                 </span>
-        </label>
+                <div>
+                    <h2>Tạo đơn đăng ký vận chuyển</h2>
+                    <p>Biểu mẫu trực tuyến bám theo thông tin F001. Đơn cần xác nhận CTB và duyệt theo thẩm quyền.</p>
+                </div>
+            </div>
 
-        <!-- Nhân viên mẫu 2 -->
-        <label class="employee-choice">
-            <input type="checkbox" name="employee_ids" value="2">
-            <span>
-                    <strong>Trần Văn B</strong>
-                    <small>NV002 · Bộ phận vận hành · An toàn hết hạn 30/06/2027</small>
-                </span>
-        </label>
+            <a class="btn secondary" href="requests.html">
+                ← Quay lại
+            </a>
+        </div>
 
-        <!-- Nhân viên mẫu 3 -->
-        <label class="employee-choice">
-            <input type="checkbox" name="employee_ids" value="3">
-            <span>
-                    <strong>Lê Văn C</strong>
-                    <small>NV003 · Bộ phận sản xuất · An toàn hết hạn 31/03/2027</small>
-                </span>
-        </label>
+        <form method="post" action="#">
+            <input type="hidden" name="csrf" value="">
+
+            <!-- PHẦN 01: THÔNG TIN CHUNG -->
+            <section class="panel req-section">
+                <div class="panel-head">
+                    <div class="step-heading">
+                        <span class="step-badge">01</span>
+                        <h3>Thông tin chung</h3>
+                    </div>
+
+                    <button type="button" class="btn btn-draft">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                            <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                            <polyline points="7 3 7 8 15 8"></polyline>
+                        </svg>
+                        Lưu nháp
+                    </button>
+                </div>
+
+                <div class="req-form-grid">
+                    <!-- Hàng 1 -->
+                    <div class="field-group">
+                        <label for="request_code">Mã đơn</label>
+                        <input type="text" id="request_code" name="request_code" value="F001/2026/001" readonly class="input-readonly">
+                    </div>
+
+                    <div class="field-group">
+                        <label for="unit">Đơn vị đăng ký <span class="req">*</span></label>
+                        <select id="unit" name="unit" required>
+                            <option value="XNXL" selected>Xí nghiệp Xây lắp</option>
+                            <option value="XNKT">Xí nghiệp Khai thác Dầu khí</option>
+                            <option value="XNDL">Xí nghiệp Địa vật lý Giếng khoan</option>
+                            <option value="XNVTB">Xí nghiệp Vận tải biển &amp; Công tác lặn</option>
+                        </select>
+                    </div>
+
+                    <div class="field-group">
+                        <label for="depart">Ngày khởi hành <span class="req">*</span></label>
+                        <input type="date" id="depart" name="depart" value="2026-11-11" required>
+                    </div>
+
+                    <!-- Hàng 2 -->
+                    <div class="field-group">
+                        <label for="dest_1">Đến công trình biển – Điểm 1</label>
+                        <select id="dest_1" name="dest_1" required>
+                            <option value="BK-01" selected>BK - 01</option>
+                            <option value="BK-02">BK - 02</option>
+                            <option value="BK-03">BK - 03</option>
+                            <option value="RC-01">RC - 01</option>
+                            <option value="MSP-01">MSP - 01</option>
+                        </select>
+                    </div>
+
+                    <div class="field-group">
+                        <label for="dest_2">Điểm 2 (nếu có)</label>
+                        <select id="dest_2" name="dest_2">
+                            <option value="" selected></option>
+                            <option value="BK-01">BK - 01</option>
+                            <option value="BK-02">BK - 02</option>
+                            <option value="BK-03">BK - 03</option>
+                            <option value="RC-01">RC - 01</option>
+                            <option value="MSP-01">MSP - 01</option>
+                        </select>
+                    </div>
+
+                    <div class="field-group">
+                        <label for="dest_3">Điểm 3 (nếu có)</label>
+                        <select id="dest_3" name="dest_3">
+                            <option value="" selected></option>
+                            <option value="BK-01">BK - 01</option>
+                            <option value="BK-02">BK - 02</option>
+                            <option value="BK-03">BK - 03</option>
+                            <option value="RC-01">RC - 01</option>
+                            <option value="MSP-01">MSP - 01</option>
+                        </select>
+                    </div>
+
+                    <!-- Hàng 3 -->
+                    <div class="field-group">
+                        <label for="vehicle">Phương tiện yêu cầu</label>
+                        <select id="vehicle" name="vehicle">
+                            <option value="ship" selected>Tàu</option>
+                            <option value="helicopter">Trực thăng</option>
+                        </select>
+                    </div>
+
+                    <div class="field-group span-2">
+                        <label for="purpose">Nhiệm vụ công tác <span class="req">*</span></label>
+                        <input type="text" id="purpose" name="purpose" placeholder="..." required>
+                    </div>
+                </div>
+
+                <!-- Nút hành động cuối phần 01 -->
+                <div class="req-form-actions">
+                    <button type="button" class="btn btn-add-emp">
+                        + Thêm CBCNV
+                    </button>
+                    <button type="submit" class="btn btn-submit-req">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
+                        Gửi phê duyệt
+                    </button>
+                </div>
+            </section>
+
+            <!-- PHẦN 02: DANH SÁCH NGƯỜI ĐI -->
+            <section class="panel req-section">
+                <div class="panel-head">
+                    <div class="step-heading">
+                        <span class="step-badge">02</span>
+                        <h3>Danh sách người đi</h3>
+                    </div>
+                </div>
+
+                <div class="table-scroll passenger-table-wrap">
+                    <table class="passenger-table">
+                        <thead>
+                        <tr>
+                            <th class="col-check">
+                                <input type="checkbox" aria-label="Chọn tất cả CBCNV">
+                            </th>
+                            <th>STT</th>
+                            <th class="text-left">Họ và tên</th>
+                            <th>Mã nhân viên</th>
+                            <th>Đơn vị</th>
+                            <th>CCCD/Hộ chiếu</th>
+                            <th>Hạn giấy phép an toàn</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr>
+                            <td class="col-check">
+                                <input type="checkbox" name="employee_ids" value="1" aria-label="Chọn Nguyễn Văn A">
+                            </td>
+                            <td>01</td>
+                            <td class="text-left"><strong>NGUYỄN VĂN A</strong></td>
+                            <td>VSP-123456</td>
+                            <td>VSP - Xây lắp</td>
+                            <td>076395118439</td>
+                            <td>23/12/2027</td>
+                            <td class="row-actions">
+                                <button type="button" class="icon-btn view" title="Xem chi tiết">
+                                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>
+                                </button>
+                                <button type="button" class="icon-btn delete" title="Xóa khỏi danh sách">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="3 6 5 6 21 6"></polyline>
+                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                        <line x1="10" y1="11" x2="10" y2="17"></line>
+                                        <line x1="14" y1="11" x2="14" y2="17"></line>
+                                    </svg>
+                                </button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="col-check">
+                                <input type="checkbox" name="employee_ids" value="2" aria-label="Chọn Phạm Văn B">
+                            </td>
+                            <td>02</td>
+                            <td class="text-left"><strong>PHẠM VĂN B</strong></td>
+                            <td>VSP-123457</td>
+                            <td>VSP - Xây lắp</td>
+                            <td>062418399126</td>
+                            <td>23/12/2027</td>
+                            <td class="row-actions">
+                                <button type="button" class="icon-btn view" title="Xem chi tiết">
+                                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>
+                                </button>
+                                <button type="button" class="icon-btn delete" title="Xóa khỏi danh sách">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="3 6 5 6 21 6"></polyline>
+                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                        <line x1="10" y1="11" x2="10" y2="17"></line>
+                                        <line x1="14" y1="11" x2="14" y2="17"></line>
+                                    </svg>
+                                </button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="col-check">
+                                <input type="checkbox" name="employee_ids" value="3" aria-label="Chọn Trần Đăng C">
+                            </td>
+                            <td>03</td>
+                            <td class="text-left"><strong>TRẦN ĐĂNG C</strong></td>
+                            <td>VSP-123458</td>
+                            <td>VSP - Xây lắp</td>
+                            <td>0526500863101</td>
+                            <td>23/12/2027</td>
+                            <td class="row-actions">
+                                <button type="button" class="icon-btn view" title="Xem chi tiết">
+                                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>
+                                </button>
+                                <button type="button" class="icon-btn delete" title="Xóa khỏi danh sách">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="3 6 5 6 21 6"></polyline>
+                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                        <line x1="10" y1="11" x2="10" y2="17"></line>
+                                        <line x1="14" y1="11" x2="14" y2="17"></line>
+                                    </svg>
+                                </button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="col-check">
+                                <input type="checkbox" name="employee_ids" value="4" aria-label="Chọn Phan Lê D">
+                            </td>
+                            <td>04</td>
+                            <td class="text-left"><strong>PHAN LÊ D</strong></td>
+                            <td>VSP-123459</td>
+                            <td>VSP - Xây lắp</td>
+                            <td>0983514370182</td>
+                            <td>23/12/2027</td>
+                            <td class="row-actions">
+                                <button type="button" class="icon-btn view" title="Xem chi tiết">
+                                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>
+                                </button>
+                                <button type="button" class="icon-btn delete" title="Xóa khỏi danh sách">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="3 6 5 6 21 6"></polyline>
+                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                        <line x1="10" y1="11" x2="10" y2="17"></line>
+                                        <line x1="14" y1="11" x2="14" y2="17"></line>
+                                    </svg>
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </form>
 
     </div>
 
-    <div class="callout">
-        Lưu ý: Đơn mới ở trạng thái
-        <strong>Chờ xác nhận CTB</strong>.
+    <footer>
+        VSP EXPRESS – Hệ thống quản lý vận chuyển CBCNV
+    </footer>
 
-        Quy trình demo thực hiện:
-        đại diện CTB xác nhận → Trưởng ban TTĐĐSX xét duyệt.
-
-        Đối với đăng ký cuối tuần/ngày lễ hoặc khẩn cấp,
-        trách nhiệm xử lý theo quy trình nội bộ vẫn giữ nguyên.
-    </div>
-
-    <div class="actions">
-        <button type="submit" class="btn primary">
-            Gửi đơn đăng ký
-        </button>
-    </div>
-
-</form>
+</main>
 
 </body>
+<script>
+    document.querySelectorAll('.nav-parent').forEach(function (toggle) {
+        toggle.addEventListener('click', function (e) {
+            e.preventDefault();
+            const group = this.closest('.nav-group');
+            const isOpen = group.classList.toggle('open');
+            this.setAttribute('aria-expanded', isOpen);
+        });
+    });
+</script>
 </html>

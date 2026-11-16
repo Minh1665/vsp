@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kế hoạch vận chuyển chính thức - VSP Express</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<aside class="sidebar">
+    <div class="brand">
+        <div class="brandmark">⚓</div>
+        <div>
+            <strong>VSP EXPRESS</strong>
+            <small>Passenger Management</small>
+        </div>
+    </div>
+
+    <div class="sidebar-label">ĐIỀU HÀNH</div>
+    <nav>
+        <a href="./index.html">◫ <span>Tổng quan</span></a>
+        <a href="./requests.html">▤ <span>Đăng ký vận chuyển</span></a>
+
+        <!-- MỤC CHA + SUB-MENU KẾ HOẠCH VẬN CHUYỂN -->
+        <div class="nav-group">
+            <a href="#" class="active nav-parent" aria-expanded="true">
+                ▦ <span>Kế hoạch vận chuyển</span>
+                <svg class="nav-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </a>
+
+            <div class="submenu">
+                <a href="./trips.html" class="sub-item">Danh sách đề xuất</a>
+                <a href="./trips_draft.html" class="sub-item">Danh sách dự thảo</a>
+                <a href="./trips_official.html" class="sub-item active">Danh sách chính thức</a>
+            </div>
+        </div>
+
+        <a href="./boarding.html">♧ <span>Kiểm tra lên tàu</span></a>
+    </nav>
+
+    <div class="sidebar-footer">
+        <div class="avatar">Đ</div>
+        <div class="usertext">
+            <strong>Điều độ viên XN Khai thác</strong>
+            <small>Điều độ viên đơn vị</small>
+        </div>
+        <form method="post" action="/login.html">
+            <input type="hidden" name="csrf" value="70201f86bdf6a05dc67f11be25967792c2d65beb">
+            <button class="logout" title="Đăng xuất">↪</button>
+        </form>
+    </div>
+</aside>
+
+<main class="main">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+        <div>
+            <div class="crumb">ĐIỀU HÀNH / KẾ HOẠCH VẬN CHUYỂN / DANH SÁCH CHÍNH THỨC</div>
+            <h1>Kế hoạch vận chuyển</h1>
+        </div>
+
+        <div class="top-right">
+            <span class="demo-pill">HỆ THỐNG QUẢN LÝ</span>
+            <span class="role-pill">Điều độ viên đơn vị</span>
+        </div>
+    </header>
+
+    <!-- CONTENT -->
+    <div class="content">
+
+        <!-- TIÊU ĐỀ + CÁC NÚT THAO TÁC -->
+        <div class="official-page-header">
+            <div class="official-title-wrap">
+                <span class="sched-title-icon" aria-hidden="true">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                        <polyline points="9 16 11 18 15 14"></polyline>
+                    </svg>
+                </span>
+                <h2>Kế hoạch vận chuyển chính thức</h2>
+            </div>
+
+            <div class="official-header-actions">
+                <button type="button" class="btn-official-tool" onclick="alert('Đang xuất file kế hoạch vận chuyển chính thức DSC/2026/0001...')">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    Xuất file
+                </button>
+
+                <button type="button" class="btn-official-tool" onclick="window.print()">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                        <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                        <rect x="6" y="14" width="12" height="8"></rect>
+                    </svg>
+                    In kế hoạch
+                </button>
+
+                <button type="button" class="btn-official-tool" onclick="alert('Lịch sử phê duyệt:\n- 08/11/2026 14:15: Giám đốc XNVTB&CTL đã phê duyệt\n- 08/11/2026 16:00: Trưởng ban TTĐĐSX ban hành chính thức')">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="9"></circle>
+                        <polyline points="12 7 12 12 15 14"></polyline>
+                    </svg>
+                    Xem lịch sử
+                </button>
+            </div>
+        </div>
+
+        <!-- THẺ THÔNG TIN TỔNG QUAN CHÍNH THỨC -->
+        <section class="panel official-summary-panel">
+            <div class="official-meta-item">
+                <span class="official-meta-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                        <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                        <line x1="9" y1="12" x2="15" y2="12"></line>
+                        <line x1="9" y1="16" x2="13" y2="16"></line>
+                    </svg>
+                </span>
+                <div>
+                    <span class="official-meta-label">Mã danh sách chuyến:</span>
+                    <strong class="official-meta-val primary">DSC/2026/0001</strong>
+                </div>
+            </div>
+
+            <div class="official-meta-item">
+                <span class="official-meta-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                </span>
+                <div>
+                    <span class="official-meta-label">Ngày xuất bến:</span>
+                    <strong class="official-meta-val">11/11/2026</strong>
+                </div>
+            </div>
+
+            <div class="official-meta-item">
+                <span class="official-meta-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M2 21c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1 .6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path>
+                        <path d="M19.38 20A11.6 11.6 0 0 0 21 14l-9-4-9 4c0 2.9.94 5.34 2.81 7.76"></path>
+                        <path d="M19 13V7a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v6"></path>
+                        <path d="M12 10v4"></path>
+                        <path d="M12 2v3"></path>
+                    </svg>
+                </span>
+                <div>
+                    <span class="official-meta-label">Phương án vận chuyển:</span>
+                    <strong class="official-meta-val">Tàu</strong>
+                </div>
+            </div>
+
+            <div class="official-meta-item">
+                <span class="official-meta-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                </span>
+                <div>
+                    <span class="official-meta-label">Tổng số CBCNV:</span>
+                    <strong class="official-meta-val">45 người</strong>
+                </div>
+            </div>
+
+            <div class="official-status-box">
+                <span class="official-status-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="9"></circle>
+                        <polyline points="9 12 11 14 15 10"></polyline>
+                    </svg>
+                </span>
+                <div>
+                    <span class="official-status-label">Trạng thái:</span>
+                    <strong class="official-status-val">Chính thức</strong>
+                </div>
+            </div>
+        </section>
+
+        <!-- THANH TAB CHUYỂN ĐỔI -->
+        <div class="official-tabs" role="tablist">
+            <button type="button" class="official-tab active" role="tab" aria-selected="true" data-tab="tab-departure-plan">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                    <polyline points="9 16 11 18 15 14"></polyline>
+                </svg>
+                Kế hoạch xuất bến
+            </button>
+
+            <button type="button" class="official-tab" role="tab" aria-selected="false" data-tab="tab-trip-roster">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+                Danh sách chuyến
+            </button>
+        </div>
+
+        <!-- TAB 1: KẾ HOẠCH XUẤT BẾN -->
+        <div id="tab-departure-plan" class="official-tab-pane">
+            <div class="official-grid">
+
+                <!-- CỘT TRÁI: LỊCH TRÌNH VẬN CHUYỂN CHI TIẾT -->
+                <section class="panel official-card">
+                    <h3 class="official-card-title">Lịch trình vận chuyển chi tiết</h3>
+
+                    <div class="table-scroll dx-table-wrap">
+                        <table class="dx-table official-schedule-table">
+                            <thead>
+                            <tr>
+                                <th>Thứ tự</th>
+                                <th>CTB</th>
+                                <th>Thời gian trả (dự kiến)</th>
+                                <th>Số lượng CBCNV</th>
+                                <th>Ghi chú</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td><strong>1</strong></td>
+                                <td><strong>BK01</strong></td>
+                                <td>
+                                    <span class="time-inline">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1363df" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <circle cx="12" cy="12" r="9"></circle>
+                                            <polyline points="12 7 12 12 15 14"></polyline>
+                                        </svg>
+                                        09:00 – 09:30
+                                    </span>
+                                </td>
+                                <td><strong>20 người</strong></td>
+                                <td>–</td>
+                            </tr>
+                            <tr>
+                                <td><strong>2</strong></td>
+                                <td><strong>BK02</strong></td>
+                                <td>
+                                    <span class="time-inline">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1363df" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <circle cx="12" cy="12" r="9"></circle>
+                                            <polyline points="12 7 12 12 15 14"></polyline>
+                                        </svg>
+                                        10:15 – 10:45
+                                    </span>
+                                </td>
+                                <td><strong>25 người</strong></td>
+                                <td>–</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- CỘT PHẢI: THÔNG TIN CHUYẾN VẬN CHUYỂN -->
+                <aside class="panel official-card">
+                    <h3 class="official-card-title">Thông tin chuyến vận chuyển</h3>
+
+                    <ul class="official-info-list">
+                        <li>
+                            <span class="info-key">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M2 21c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1 .6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path>
+                                    <path d="M19.38 20A11.6 11.6 0 0 0 21 14l-9-4-9 4c0 2.9.94 5.34 2.81 7.76"></path>
+                                    <path d="M19 13V7a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v6"></path>
+                                    <path d="M12 10v4"></path>
+                                    <path d="M12 2v3"></path>
+                                </svg>
+                                Tàu vận chuyển:
+                            </span>
+                            <strong>Tàu</strong>
+                        </li>
+
+                        <li>
+                            <span class="info-key">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <circle cx="12" cy="5" r="3"></circle>
+                                    <line x1="12" y1="22" x2="12" y2="8"></line>
+                                    <path d="M5 12H2a10 10 0 0 0 20 0h-3"></path>
+                                </svg>
+                                Thời gian xuất bến:
+                            </span>
+                            <strong>07:00, ngày 11/11/2026</strong>
+                        </li>
+
+                        <li>
+                            <span class="info-key">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <circle cx="6" cy="19" r="3"></circle>
+                                    <path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"></path>
+                                    <circle cx="18" cy="5" r="3"></circle>
+                                </svg>
+                                Lộ trình:
+                            </span>
+                            <strong>Bờ → BK01 → BK02</strong>
+                        </li>
+
+                        <li>
+                            <span class="info-key">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                </svg>
+                                Tổng số CBCNV:
+                            </span>
+                            <strong>45 người</strong>
+                        </li>
+                    </ul>
+                </aside>
+
+            </div>
+        </div>
+
+        <!-- TAB 2: DANH SÁCH CHUYẾN (45 CBCNV CHÍNH THỨC) -->
+        <div id="tab-trip-roster" class="official-tab-pane" style="display:none;">
+            <section class="panel official-card">
+                <div class="panel-head">
+                    <h3 class="official-card-title">Danh sách hành khách chính thức (45 CBCNV)</h3>
+                    <span class="muted">Đã được cấp mã QR kiểm tra lên tàu</span>
+                </div>
+
+                <div class="table-scroll dx-table-wrap">
+                    <table class="dx-table">
+                        <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th class="text-left">Họ và tên</th>
+                            <th>Mã nhân viên</th>
+                            <th>Đơn vị công tác</th>
+                            <th>CTB đến</th>
+                            <th>CCCD/Hộ chiếu</th>
+                            <th>Trạng thái QR</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>01</td>
+                            <td class="text-left"><strong>NGUYỄN VĂN A</strong></td>
+                            <td>VSP-123456</td>
+                            <td>VSP - Xây lắp</td>
+                            <td>BK01</td>
+                            <td>076395118439</td>
+                            <td><span class="status approved">Đã cấp QR</span></td>
+                        </tr>
+                        <tr>
+                            <td>02</td>
+                            <td class="text-left"><strong>PHẠM VĂN B</strong></td>
+                            <td>VSP-123457</td>
+                            <td>VSP - Xây lắp</td>
+                            <td>BK01</td>
+                            <td>062418399126</td>
+                            <td><span class="status approved">Đã cấp QR</span></td>
+                        </tr>
+                        <tr>
+                            <td>03</td>
+                            <td class="text-left"><strong>TRẦN ĐĂNG C</strong></td>
+                            <td>VSP-123458</td>
+                            <td>VSP - Xây lắp</td>
+                            <td>BK01</td>
+                            <td>0526500863101</td>
+                            <td><span class="status approved">Đã cấp QR</span></td>
+                        </tr>
+                        <tr>
+                            <td>04</td>
+                            <td class="text-left"><strong>PHAN LÊ D</strong></td>
+                            <td>VSP-123459</td>
+                            <td>VSP - Xây lắp</td>
+                            <td>BK01</td>
+                            <td>0983514370182</td>
+                            <td><span class="status approved">Đã cấp QR</span></td>
+                        </tr>
+                        <tr>
+                            <td>05</td>
+                            <td class="text-left"><strong>HOÀNG VĂN E</strong></td>
+                            <td>VSP-123460</td>
+                            <td>Xưởng Bảo dưỡng</td>
+                            <td>BK02</td>
+                            <td>079201004512</td>
+                            <td><span class="status approved">Đã cấp QR</span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+
+        <!-- KHỐI DƯỚI: TÀI LIỆU VÀ THÔNG TIN LIÊN QUAN -->
+        <section class="panel official-docs-panel">
+            <div class="official-docs-head">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#1363df" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                </svg>
+                <h3>Tài liệu và thông tin liên quan</h3>
+            </div>
+
+            <div class="official-docs-grid">
+                <!-- File Excel -->
+                <a href="#" class="doc-download-card" onclick="event.preventDefault(); alert('Đang tải xuống: Kế hoạch xuất bến DSC/2026/0001.xlsx');">
+                    <span class="file-badge xls" aria-hidden="true">XLS</span>
+                    <div class="doc-file-info">
+                        <strong>Kế hoạch xuất bến DSC/2026/0001.xlsx</strong>
+                        <span>(128 KB)</span>
+                    </div>
+                    <span class="doc-dl-icon" aria-hidden="true">
+                        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                    </span>
+                </a>
+
+                <!-- File PDF -->
+                <a href="#" class="doc-download-card" onclick="event.preventDefault(); alert('Đang tải xuống: Danh sách chuyến DSC/2026/0001.pdf');">
+                    <span class="file-badge pdf" aria-hidden="true">PDF</span>
+                    <div class="doc-file-info">
+                        <strong>Danh sách chuyến DSC/2026/0001.pdf</strong>
+                        <span>(256 KB)</span>
+                    </div>
+                    <span class="doc-dl-icon" aria-hidden="true">
+                        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        VSP EXPRESS – Hệ thống quản lý vận chuyển CBCNV
+    </footer>
+
+</main>
+
+<script>
+    // Mở/đóng sub-menu Kế hoạch vận chuyển
+    document.querySelectorAll('.nav-parent').forEach(function (toggle) {
+        toggle.addEventListener('click', function (e) {
+            e.preventDefault();
+            const group = this.closest('.nav-group');
+            const isOpen = group.classList.toggle('open');
+            this.setAttribute('aria-expanded', isOpen);
+        });
+    });
+
+    // Chuyển đổi giữa 2 tab: Kế hoạch xuất bến / Danh sách chuyến
+    document.querySelectorAll('.official-tab').forEach(function (tab) {
+        tab.addEventListener('click', function () {
+            document.querySelectorAll('.official-tab').forEach(function (t) {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+            });
+            document.querySelectorAll('.official-tab-pane').forEach(function (pane) {
+                pane.style.display = 'none';
+            });
+
+            this.classList.add('active');
+            this.setAttribute('aria-selected', 'true');
+            document.getElementById(this.dataset.tab).style.display = 'block';
+        });
+    });
+</script>
+
+</body>
+</html>

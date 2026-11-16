@@ -1,396 +1,276 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chi tiết F001 - VSP Express</title>
+    <title>Chi tiết đơn đăng ký F001 - VSP Express</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
 
-<div class="section-head">
-
-    <div>
-        <h2>F001-DEMO</h2>
-        <p>
-            Người lập: Nguyễn Văn An ·
-            Ngày đi: 15/11/2026 ·
-            CTB đến: Giàn BK-01
-        </p>
+<aside class="sidebar">
+    <div class="brand">
+        <div class="brandmark">⚓</div>
+        <div>
+            <strong>VSP EXPRESS</strong>
+            <small>Passenger Management</small>
+        </div>
     </div>
 
-    <span class="status submitted" id="requestStatus">
-        submitted
-    </span>
+    <div class="sidebar-label">ĐIỀU HÀNH</div>
+    <nav>
+        <a href="./index.html">◫ <span>Tổng quan</span></a>
+        <a href="./requests.html" class="active">▤ <span>Đăng ký vận chuyển</span></a>
 
-</div>
+        <div class="nav-group">
+            <a href="#" class="nav-parent" aria-expanded="false">
+                ▦ <span>Kế hoạch vận chuyển</span>
+                <svg class="nav-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </a>
 
-
-<div class="two-cols uneven">
-
-    <!-- THÔNG TIN YÊU CẦU -->
-    <section class="panel">
-
-        <h3>Thông tin yêu cầu</h3>
-
-        <dl class="details">
-
-            <dt>Nhiệm vụ</dt>
-            <dd>Thực hiện công tác bảo dưỡng thiết bị ngoài giàn.</dd>
-
-            <dt>Khẩn cấp</dt>
-            <dd>Có – phải xác minh trực ca</dd>
-
-            <dt>Xác nhận CTB</dt>
-            <dd id="ctbNote">Chưa có</dd>
-
-            <dt>Ý kiến TTĐĐSX</dt>
-            <dd id="reviewNote">Chưa có</dd>
-
-        </dl>
-
-        <h3>Danh sách CBCNV</h3>
-
-        <table>
-
-            <thead>
-            <tr>
-                <th>Mã</th>
-                <th>Họ tên</th>
-                <th>Chứng chỉ an toàn</th>
-            </tr>
-            </thead>
-
-            <tbody>
-
-            <tr>
-                <td>NV001</td>
-                <td>Nguyễn Văn An</td>
-                <td>30/12/2026</td>
-            </tr>
-
-            <tr>
-                <td>NV002</td>
-                <td>Trần Văn Bình</td>
-                <td>15/01/2027</td>
-            </tr>
-
-            <tr>
-                <td>NV003</td>
-                <td>Lê Minh Cường</td>
-                <td>20/02/2027</td>
-            </tr>
-
-            <tr>
-                <td>NV004</td>
-                <td>Phạm Quốc Dũng</td>
-                <td>10/03/2027</td>
-            </tr>
-
-            <tr>
-                <td>NV005</td>
-                <td>Hoàng Văn Hải</td>
-                <td>25/04/2027</td>
-            </tr>
-
-            </tbody>
-
-        </table>
-
-    </section>
-
-
-    <!-- XỬ LÝ NGHIỆP VỤ -->
-    <aside class="panel">
-
-        <h3>Xử lý nghiệp vụ</h3>
-
-        <!-- CTB XÁC NHẬN -->
-        <div id="ctbSection">
-
-            <p class="muted">
-                Xác nhận đơn vị chủ quản CTB đồng ý tiếp nhận.
-            </p>
-
-            <form id="ctbForm">
-
-                <label>Ghi chú xác nhận</label>
-
-                <textarea
-                        id="ctbInput"
-                        rows="3"
-                        placeholder="Ý kiến đơn vị tiếp nhận">
-                </textarea>
-
-                <button type="submit" class="btn primary full">
-                    Xác nhận tiếp nhận CTB
-                </button>
-
-            </form>
-
+            <div class="submenu">
+                <a href="./trips.html" class="sub-item">Danh sách đề xuất</a>
+                <a href="./trips_draft.html" class="sub-item">Danh sách dự thảo</a>
+                <a href="./trips_official.html" class="sub-item">Danh sách chính thức</a>
+            </div>
         </div>
 
+        <a href="./boarding.html">♧ <span>Kiểm tra lên tàu</span></a>
+    </nav>
 
-        <!-- TTĐĐSX XÉT DUYỆT -->
-        <div id="reviewSection" style="display:none;">
+    <div class="sidebar-footer">
+        <div class="avatar">Đ</div>
+        <div class="usertext">
+            <strong>Điều độ viên XN Khai thác</strong>
+            <small>Điều độ viên đơn vị</small>
+        </div>
+        <form method="post" action="/login.html">
+            <input type="hidden" name="csrf" value="70201f86bdf6a05dc67f11be25967792c2d65beb">
+            <button class="logout" title="Đăng xuất">↪</button>
+        </form>
+    </div>
+</aside>
+<main class="main">
 
-            <p class="muted">
-                Trưởng ban TTĐĐSX hoặc người được ủy quyền
-                xem xét đơn.
-            </p>
+    <!-- TOPBAR -->
+    <header class="topbar">
+        <div>
+            <div class="crumb">ĐIỀU HÀNH / ĐĂNG KÝ VẬN CHUYỂN / CHI TIẾT</div>
+            <h1>Danh sách đơn đăng ký</h1>
+        </div>
 
-            <form id="reviewForm">
+        <div class="top-right">
+            <span class="demo-pill">HỆ THỐNG QUẢN LÝ</span>
+            <span class="role-pill">Điều độ viên đơn vị</span>
+        </div>
+    </header>
 
-                <label>
-                    Lý do / ghi chú khi trả lại hoặc từ chối
-                </label>
+    <!-- CONTENT -->
+    <div class="content">
 
-                <textarea
-                        id="reviewInput"
-                        rows="3"
-                        placeholder="Nhập ý kiến xử lý">
-                </textarea>
+        <!-- TIÊU ĐỀ QUAY LẠI -->
+        <div class="section-head">
+            <a href="requests.html" class="back-title-link">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                <h2>Danh sách đơn đăng ký</h2>
+            </a>
+        </div>
 
-                <div class="button-stack">
+        <!-- HÀNG TRÊN: 01 THÔNG TIN CHUNG + 03 TIẾN TRÌNH XỬ LÝ ĐƠN -->
+        <div class="two-cols uneven">
 
-                    <button
-                            type="button"
-                            onclick="processRequest('approve')"
-                            class="btn primary">
-                        Phê duyệt
-                    </button>
-
-                    <button
-                            type="button"
-                            onclick="processRequest('return')"
-                            class="btn secondary">
-                        Yêu cầu bổ sung
-                    </button>
-
-                    <button
-                            type="button"
-                            onclick="processRequest('reject')"
-                            class="btn danger">
-                        Từ chối
-                    </button>
-
+            <!-- 01 / THÔNG TIN CHUNG -->
+            <section class="panel">
+                <div class="panel-head">
+                    <div class="step-heading">
+                        <span class="step-badge">01</span>
+                        <h3>Thông tin chung</h3>
+                    </div>
                 </div>
 
-            </form>
+                <div class="detail-info-grid">
+                    <div class="detail-item">
+                        <span class="detail-label">Mã đơn</span>
+                        <strong class="detail-value">F001/2026/001</strong>
+                    </div>
+
+                    <div class="detail-item">
+                        <span class="detail-label">Đơn vị đăng ký <span class="req">*</span></span>
+                        <strong class="detail-value">Xí nghiệp Xây lắp</strong>
+                    </div>
+
+                    <div class="detail-item">
+                        <span class="detail-label">Ngày khởi hành <span class="req">*</span></span>
+                        <strong class="detail-value">11/11/2026</strong>
+                    </div>
+
+                    <div class="detail-item">
+                        <span class="detail-label">Đến công trình biển – Điểm 1</span>
+                        <strong class="detail-value">BK-01</strong>
+                    </div>
+
+                    <div class="detail-item">
+                        <span class="detail-label">Điểm 2 (nếu có)</span>
+                        <strong class="detail-value">-</strong>
+                    </div>
+
+                    <div class="detail-item">
+                        <span class="detail-label">Điểm 3 (nếu có)</span>
+                        <strong class="detail-value">-</strong>
+                    </div>
+
+                    <div class="detail-item">
+                        <span class="detail-label">Phương tiện yêu cầu</span>
+                        <strong class="detail-value">Tàu VSP Express</strong>
+                    </div>
+
+                    <div class="detail-item">
+                        <span class="detail-label">Nhiệm vụ công tác <span class="req">*</span></span>
+                        <strong class="detail-value">Công tác định kỳ</strong>
+                    </div>
+
+                    <div class="detail-item">
+                        <span class="detail-label">Khẩn cấp</span>
+                        <strong class="detail-value">Không</strong>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 03 / TIẾN TRÌNH XỬ LÝ ĐƠN -->
+            <section class="panel">
+                <div class="panel-head">
+                    <div class="step-heading">
+                        <span class="step-badge">03</span>
+                        <h3>Tiến trình xử lý đơn</h3>
+                    </div>
+                </div>
+
+                <ul class="process-timeline">
+                    <li class="timeline-item done">
+                        <span class="timeline-icon" aria-hidden="true">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </span>
+                        <div class="timeline-content">
+                            <strong>Điều độ viên</strong>
+                            <span>Gửi đơn đăng ký: 06/11/2026, 08:10</span>
+                        </div>
+                    </li>
+
+                    <li class="timeline-item done">
+                        <span class="timeline-icon" aria-hidden="true">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </span>
+                        <div class="timeline-content">
+                            <strong>Lãnh đạo CTB</strong>
+                            <span>Xác nhận đăng ký: 07/11/2026, 14:30</span>
+                        </div>
+                    </li>
+
+                    <li class="timeline-item done">
+                        <span class="timeline-icon" aria-hidden="true">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </span>
+                        <div class="timeline-content">
+                            <strong>TTĐĐSX</strong>
+                            <span>Phê duyệt đăng ký: 08/11/2026, 12:00</span>
+                        </div>
+                    </li>
+                </ul>
+            </section>
 
         </div>
 
-
-        <!-- THÔNG BÁO -->
-        <div id="messageSection" style="display:none;">
-
-            <div class="callout" id="messageText">
-                Hiện không có thao tác xử lý dành cho vai trò
-                của bạn ở trạng thái này.
+        <!-- HÀNG DƯỚI: 02 DANH SÁCH NGƯỜI ĐI -->
+        <section class="panel">
+            <div class="panel-head">
+                <div class="step-heading">
+                    <span class="step-badge">02</span>
+                    <h3>Danh sách người đi</h3>
+                </div>
             </div>
 
-        </div>
-
-    </aside>
-
-</div>
-
-
-<script>
-
-    // ========================================
-    // DỮ LIỆU ĐƠN F001 DEMO
-    // ========================================
-
-    let request = {
-        code: "F001-DEMO",
-        status: "submitted",
-        ctbNote: "",
-        reviewNote: ""
-    };
-
-
-    // ========================================
-    // TÀI KHOẢN ĐANG ĐĂNG NHẬP
-    // ========================================
-
-    // Có thể đổi thành "ctb" hoặc "ttdds" để thử
-    // các vai trò xử lý khác nhau.
-
-    let currentRole = localStorage.getItem("vsp_username") || "dieudo";
-
-
-    // ========================================
-    // HIỂN THỊ GIAO DIỆN THEO VAI TRÒ
-    // ========================================
-
-    function renderPage() {
-
-        document.getElementById("requestStatus").textContent =
-            request.status;
-
-        document.getElementById("requestStatus").className =
-            "status " + request.status;
-
-        document.getElementById("ctbNote").textContent =
-            request.ctbNote || "Chưa có";
-
-        document.getElementById("reviewNote").textContent =
-            request.reviewNote || "Chưa có";
-
-        const ctbSection =
-            document.getElementById("ctbSection");
-
-        const reviewSection =
-            document.getElementById("reviewSection");
-
-        const messageSection =
-            document.getElementById("messageSection");
-
-        ctbSection.style.display = "none";
-        reviewSection.style.display = "none";
-        messageSection.style.display = "none";
-
-        // CTB tiếp nhận đơn
-        if (
-            currentRole === "ctb" &&
-            request.status === "submitted"
-        ) {
-            ctbSection.style.display = "block";
-        }
-
-        // TTĐĐSX xét duyệt
-        else if (
-            currentRole === "ttdds" &&
-            request.status === "ctb_ok"
-        ) {
-            reviewSection.style.display = "block";
-        }
-
-        // Các vai trò khác
-        else {
-
-            messageSection.style.display = "block";
-
-            let message =
-                "Hiện không có thao tác xử lý dành cho vai trò của bạn ở trạng thái này.";
-
-            if (request.status === "returned") {
-                message +=
-                    " Trong bản demo, có thể lập đơn mới kèm thông tin đã bổ sung.";
-            }
-
-            document.getElementById("messageText").textContent =
-                message;
-        }
-
-    }
-
-
-    // ========================================
-    // CTB XÁC NHẬN TIẾP NHẬN
-    // ========================================
-
-    document.getElementById("ctbForm")
-        .addEventListener("submit", function(event) {
-
-            event.preventDefault();
-
-            if (currentRole !== "ctb" ||
-                request.status !== "submitted") {
-                alert("Bạn không có quyền thực hiện thao tác này.");
-                return;
-            }
-
-            const note =
-                document.getElementById("ctbInput").value.trim();
-
-            if (!confirm("Xác nhận CTB tiếp nhận đơn F001-DEMO?")) {
-                return;
-            }
-
-            request.ctbNote = note || "CTB đồng ý tiếp nhận.";
-            request.status = "ctb_ok";
-
-            alert("Đã xác nhận tiếp nhận CTB.");
-
-            renderPage();
-
-        });
-
-
-    // ========================================
-    // TTĐĐSX PHÊ DUYỆT / TRẢ LẠI / TỪ CHỐI
-    // ========================================
-
-    function processRequest(action) {
-
-        if (currentRole !== "ttdds" ||
-            request.status !== "ctb_ok") {
-
-            alert("Bạn không có quyền thực hiện thao tác này.");
-            return;
-        }
-
-        const note =
-            document.getElementById("reviewInput").value.trim();
-
-        if (action !== "approve" && !note) {
-
-            alert("Vui lòng nhập lý do xử lý.");
-            return;
-        }
-
-        let message = "";
-
-        if (action === "approve") {
-
-            message = "Xác nhận phê duyệt đơn F001-DEMO?";
-
-        } else if (action === "return") {
-
-            message = "Trả lại đơn để yêu cầu bổ sung thông tin?";
-
-        } else if (action === "reject") {
-
-            message = "Bạn có chắc chắn muốn từ chối đơn này?";
-
-        }
-
-        if (!confirm(message)) return;
-
-        request.reviewNote = note || "Đơn đã được phê duyệt.";
-
-        if (action === "approve") {
-
-            request.status = "approved";
-
-        } else if (action === "return") {
-
-            request.status = "returned";
-
-        } else if (action === "reject") {
-
-            request.status = "rejected";
-
-        }
-
-        alert("Đã cập nhật trạng thái đơn F001-DEMO.");
-
-        renderPage();
-
-    }
-
-
-    // ========================================
-    // KHỞI TẠO
-    // ========================================
-
-    renderPage();
-
-</script>
+            <div class="table-scroll passenger-table-wrap">
+                <table class="passenger-table">
+                    <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th class="text-left">Họ và tên</th>
+                        <th>Mã nhân viên</th>
+                        <th>Đơn vị</th>
+                        <th>CCCD/Hộ chiếu</th>
+                        <th>Hạn giấy phép an toàn</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr>
+                        <td>01</td>
+                        <td class="text-left"><strong>NGUYỄN VĂN A</strong></td>
+                        <td>VSP-123456</td>
+                        <td>VSP - Xây lắp</td>
+                        <td>076395118439</td>
+                        <td>23/12/2027</td>
+                    </tr>
+
+                    <tr>
+                        <td>02</td>
+                        <td class="text-left"><strong>PHẠM VĂN B</strong></td>
+                        <td>VSP-123457</td>
+                        <td>VSP - Xây lắp</td>
+                        <td>062418399126</td>
+                        <td>23/12/2027</td>
+                    </tr>
+
+                    <tr>
+                        <td>03</td>
+                        <td class="text-left"><strong>TRẦN ĐĂNG C</strong></td>
+                        <td>VSP-123458</td>
+                        <td>VSP - Xây lắp</td>
+                        <td>0526500863101</td>
+                        <td>23/12/2027</td>
+                    </tr>
+
+                    <tr>
+                        <td>04</td>
+                        <td class="text-left"><strong>PHAN LÊ D</strong></td>
+                        <td>VSP-123459</td>
+                        <td>VSP - Xây lắp</td>
+                        <td>0983514370182</td>
+                        <td>23/12/2027</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        VSP EXPRESS – Hệ thống quản lý vận chuyển CBCNV
+    </footer>
+
+</main>
 
 </body>
+<script>
+    document.querySelectorAll('.nav-parent').forEach(function (toggle) {
+        toggle.addEventListener('click', function (e) {
+            e.preventDefault();
+            const group = this.closest('.nav-group');
+            const isOpen = group.classList.toggle('open');
+            this.setAttribute('aria-expanded', isOpen);
+        });
+    });
+</script>
 </html>

@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng nhập - VSP Express</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="login-page">
 
 <div class="login-layout">
 
@@ -20,7 +23,7 @@
             <em>VSP Express</em>
         </h1>
 
-        <p>
+        <p class="login-desc">
             Đăng ký F001 · Xét duyệt · Danh sách chuyến ·
             QR lên tàu · Báo cáo
         </p>
@@ -38,29 +41,35 @@
             Chọn tài khoản thử nghiệm để trải nghiệm từng vai trò.
         </p>
 
-        <form id="loginForm">
+        <form id="loginForm" class="login-form">
 
-            <label for="username">Tên tài khoản</label>
-            <input
-                    id="username"
-                    name="username"
-                    type="text"
-                    required
-                    value="dieudo"
-                    autocomplete="username"
-            >
+            <div class="login-field">
+                <label for="username">Tên tài khoản</label>
+                <input
+                        id="username"
+                        name="username"
+                        type="text"
+                        required
+                        value="dieudo"
+                        autocomplete="username"
+                        placeholder="Nhập tên tài khoản..."
+                >
+            </div>
 
-            <label for="password">Mật khẩu</label>
-            <input
-                    id="password"
-                    name="password"
-                    type="password"
-                    required
-                    value="demo123"
-                    autocomplete="current-password"
-            >
+            <div class="login-field">
+                <label for="password">Mật khẩu</label>
+                <input
+                        id="password"
+                        name="password"
+                        type="password"
+                        required
+                        value="demo123"
+                        autocomplete="current-password"
+                        placeholder="Nhập mật khẩu..."
+                >
+            </div>
 
-            <button type="submit" class="btn primary full">
+            <button type="submit" class="btn primary full login-submit-btn">
                 Đăng nhập →
             </button>
 
@@ -69,14 +78,20 @@
         <div class="hint">
             <strong>Danh sách tài khoản demo</strong>
 
-            <p>
-                dieudo, ctb, ttdds, khktt, giamdoc,
-                baove, daipho, thuyentruong, baocao
+            <p class="hint-accounts">
+                <button type="button" class="demo-acc-chip" onclick="fillDemoAccount('dieudo')">dieudo</button>,
+                <button type="button" class="demo-acc-chip" onclick="fillDemoAccount('ctb')">ctb</button>,
+                <button type="button" class="demo-acc-chip" onclick="fillDemoAccount('ttdds')">ttdds</button>,
+                <button type="button" class="demo-acc-chip" onclick="fillDemoAccount('khktt')">khktt</button>,
+                <button type="button" class="demo-acc-chip" onclick="fillDemoAccount('giamdoc')">giamdoc</button>,
+                <button type="button" class="demo-acc-chip" onclick="fillDemoAccount('baove')">baove</button>,
+                <button type="button" class="demo-acc-chip" onclick="fillDemoAccount('daipho')">daipho</button>,
+                <button type="button" class="demo-acc-chip" onclick="fillDemoAccount('thuyentruong')">thuyentruong</button>,
+                <button type="button" class="demo-acc-chip" onclick="fillDemoAccount('baocao')">baocao</button>
             </p>
 
-            <p>
-                Tất cả mật khẩu:
-                <code>demo123</code>
+            <p class="hint-pass">
+                Tất cả mật khẩu: <code>demo123</code>
             </p>
         </div>
 
@@ -85,7 +100,12 @@
 </div>
 
 <script>
-    document.getElementById("loginForm").addEventListener("submit", function(event) {
+    function fillDemoAccount(acc) {
+        document.getElementById("username").value = acc;
+        document.getElementById("password").value = "demo123";
+    }
+
+    document.getElementById("loginForm").addEventListener("submit", function (event) {
         event.preventDefault();
 
         const username = document.getElementById("username").value.trim();
@@ -105,8 +125,6 @@
 
         if (accounts.includes(username) && password === "demo123") {
             alert("Đăng nhập demo thành công! Xin chào " + username);
-
-            // Chuyển đến trang tổng quan
             window.location.href = "index.html";
         } else {
             alert("Tên tài khoản hoặc mật khẩu không đúng!");

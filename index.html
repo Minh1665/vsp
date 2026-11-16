@@ -7,15 +7,50 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<aside class="sidebar"><div class="brand"><div class="brandmark">⚓</div><div><strong>VSP EXPRESS</strong><small>Passenger Management</small></div></div><div class="sidebar-label">ĐIỀU HÀNH</div><nav>
-    <a href="/" class="active">◫ <span>Tổng quan</span></a>
-    <a href="/requests.html" >▤ <span>Đăng ký F001</span></a>
-    <a href="/trips.html" class="">▦ <span>Kế hoạch &amp; danh sách</span></a>
+<aside class="sidebar">
+    <div class="brand">
+        <div class="brandmark">⚓</div>
+        <div>
+            <strong>VSP EXPRESS</strong>
+            <small>Passenger Management</small>
+        </div>
+    </div>
 
+    <div class="sidebar-label">ĐIỀU HÀNH</div>
+    <nav>
+        <a href="./index.html" class="active">◫ <span>Tổng quan</span></a>
+        <a href="./requests.html">▤ <span>Đăng ký vận chuyển</span></a>
 
-    <a href="/employees">♧ <span>Hồ sơ CBCNV</span></a>
-</nav><div class="sidebar-footer"><div class="avatar">Đ</div><div class="usertext"><strong>Điều độ viên XN Khai thác</strong><small>Điều độ viên đơn vị</small></div><form method="post" action="/logout"><input type="hidden" name="csrf" value="70201f86bdf6a05dc67f11be25967792c2d65beb"><button class="logout" title="Đăng xuất">↪</button></form></div></aside>
+        <div class="nav-group">
+            <a href="#" class="nav-parent" aria-expanded="false">
+                ▦ <span>Kế hoạch vận chuyển</span>
+                <svg class="nav-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </a>
 
+            <div class="submenu">
+                <a href="./trips.html" class="sub-item">Danh sách đề xuất</a>
+                <a href="./trips_draft.html" class="sub-item">Danh sách dự thảo</a>
+                <a href="./trips_official.html" class="sub-item">Danh sách chính thức</a>
+            </div>
+        </div>
+
+        <a href="./boarding.html">♧ <span>Kiểm tra lên tàu</span></a>
+    </nav>
+
+    <div class="sidebar-footer">
+        <div class="avatar">Đ</div>
+        <div class="usertext">
+            <strong>Điều độ viên XN Khai thác</strong>
+            <small>Điều độ viên đơn vị</small>
+        </div>
+        <form method="post" action="/login.html">
+            <input type="hidden" name="csrf" value="70201f86bdf6a05dc67f11be25967792c2d65beb">
+            <button class="logout" title="Đăng xuất">↪</button>
+        </form>
+    </div>
+</aside>
 <main class="main">
 
     <!-- TOPBAR -->
@@ -47,160 +82,188 @@
             <span class="chip">⚓ TÀU VSP EXPRESS</span>
         </div>
 
-        <!-- METRICS -->
-        <div class="metrics">
-
-            <div class="metric">
-                <span>TỔNG ĐƠN ĐĂNG KÝ</span>
-                <strong>25</strong>
-                <small>F001 trong hệ thống</small>
+        <!-- PENDING TASKS -->
+        <section class="panel pending-tasks">
+            <div class="panel-head">
+                <div class="stats-title">
+                    <span class="task-head-icon" aria-hidden="true">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="5" y="3" width="14" height="18" rx="2"></rect>
+                            <path d="M9 3v2h6V3"></path>
+                            <path d="M9 10h6"></path>
+                            <path d="M9 14h6"></path>
+                            <path d="M9 18h4"></path>
+                        </svg>
+                    </span>
+                    <h3>Công việc cần xử lý</h3>
+                </div>
             </div>
 
-            <div class="metric">
-                <span>ĐƠN CHỜ XỬ LÝ</span>
-                <strong>5</strong>
-                <small>Cần tiếp nhận / xét duyệt</small>
+            <div class="task-cards">
+                <!-- Thẻ 1: Đơn F001 chờ duyệt -->
+                <div class="task-card blue">
+                    <div class="task-icon" aria-hidden="true">
+                        <svg width="44" height="44" viewBox="0 0 48 48" fill="none">
+                            <path d="M12 8C12 6.89543 12.8954 6 14 6H29L38 15V40C38 41.1046 37.1046 42 36 42H14C12.8954 42 12 41.1046 12 40V8Z" stroke="#0d437a" stroke-width="2.6" stroke-linejoin="round"/>
+                            <path d="M28 6V16H38" stroke="#0d437a" stroke-width="2.6" stroke-linejoin="round"/>
+                            <line x1="17" y1="16" x2="23" y2="16" stroke="#0d437a" stroke-width="2.4" stroke-linecap="round"/>
+                            <line x1="17" y1="21" x2="26" y2="21" stroke="#0d437a" stroke-width="2.4" stroke-linecap="round"/>
+                            <text x="25" y="33" text-anchor="middle" fill="#0d437a" font-size="9.5" font-weight="800" font-family="Inter, Arial, sans-serif">F001</text>
+                        </svg>
+                    </div>
+
+                    <div class="task-info">
+                        <span class="task-label">Đơn F001 chờ duyệt</span>
+                        <strong class="task-count">1</strong>
+                    </div>
+
+                    <a href="./requests.html" class="task-link">
+                        Xem danh sách <span aria-hidden="true">›</span>
+                    </a>
+                </div>
+
+                <!-- Thẻ 2: Danh sách chuyến chờ duyệt -->
+                <div class="task-card peach">
+                    <div class="task-icon" aria-hidden="true">
+                        <svg width="46" height="46" viewBox="0 0 48 48" fill="none">
+                            <rect x="21" y="7" width="6" height="5" rx="1" fill="#0d437a"/>
+                            <path d="M15 13H33L35 20H13L15 13Z" fill="#0d437a"/>
+                            <path d="M10 21H38L34 33C29 31 25 31 24 31C23 31 19 31 14 33L10 21Z" fill="#0d437a"/>
+                            <path d="M8 37C11 35 14 35 16 37C18 39 21 39 24 37C27 35 30 35 32 37C34 39 37 39 40 37" stroke="#0d437a" stroke-width="2.4" stroke-linecap="round"/>
+                            <path d="M12 41C15 39.5 17 39.5 19 41C21 42.5 23 42.5 25 41C27 39.5 29 39.5 31 41C33 42.5 35 42.5 37 41" stroke="#0d437a" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+
+                    <div class="task-info">
+                        <span class="task-label">Danh sách chuyến chờ duyệt</span>
+                        <strong class="task-count">1</strong>
+                    </div>
+
+                    <a href="./trips.html" class="task-link">
+                        Xem danh sách <span aria-hidden="true">›</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+        <!-- TRANSPORT PLAN -->
+        <section class="panel transport-plan">
+            <div class="panel-head">
+                <div class="stats-title">
+                    <span class="stats-icon" aria-hidden="true">📅</span>
+                    <h3>Kế hoạch vận chuyển</h3>
+                </div>
+                <a href="./trips.html">Xem tất cả →</a>
             </div>
 
-            <div class="metric">
-                <span>DANH SÁCH CHUYẾN</span>
-                <strong>8</strong>
-                <small>Tổng số chuyến đã tạo</small>
+            <div class="table-scroll plan-table-wrap">
+                <table class="plan-table">
+                    <thead>
+                    <tr>
+                        <th>Mã chuyến tàu</th>
+                        <th>Ngày đi</th>
+                        <th>CTB đến</th>
+                        <th>Số lượng CBCNV chờ</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr>
+                        <td>
+                            <a href="./trips.html" class="plan-code">DSC/2026/0002</a>
+                        </td>
+                        <td>13/11/2026</td>
+                        <td>BK-03, BK-04</td>
+                        <td>
+                            <strong class="plan-count">53</strong>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <!-- TRANSPORT STATISTICS -->
+        <section class="panel transport-stats">
+            <div class="panel-head">
+                <div class="stats-title">
+                    <span class="stats-icon" aria-hidden="true">◔</span>
+                    <h3>Thống kê vận chuyển</h3>
+                </div>
+
+                <div class="stats-filter">
+                    <span aria-hidden="true">📅</span>
+                    <select aria-label="Chọn tháng thống kê">
+                        <option selected>Tháng 11/2026</option>
+                        <option>Tháng 10/2026</option>
+                        <option>Tháng 09/2026</option>
+                    </select>
+                </div>
             </div>
 
-            <div class="metric">
-                <span>ĐÃ GHI NHẬN LÊN TÀU</span>
-                <strong>120</strong>
-                <small>Lượt CBCNV trên các chuyến</small>
+            <div class="stats-body">
+                <!-- Cột trái: Biểu đồ Donut tĩnh -->
+                <div class="donut-wrap">
+                    <svg class="donut-chart" viewBox="0 0 220 220" role="img" aria-label="Biểu đồ tỷ lệ hành khách lên tàu">
+                        <!-- Các phân đoạn dữ liệu (r=76, chu vi = 477.52) -->
+                        <g transform="rotate(-90 110 110)">
+                            <!-- Đã lên tàu: 40/45 (88,9%) -->
+                            <circle cx="110" cy="110" r="76" fill="none" stroke="#0e529a" stroke-width="36"
+                                    stroke-dasharray="424.46 477.52" stroke-dashoffset="0"></circle>
+                            <!-- Vắng mặt: 2/45 (4,4%) -->
+                            <circle cx="110" cy="110" r="76" fill="none" stroke="#f59e0b" stroke-width="36"
+                                    stroke-dasharray="21.22 477.52" stroke-dashoffset="-424.46"></circle>
+                            <!-- Không đủ điều kiện: 3/45 (6,7%) -->
+                            <circle cx="110" cy="110" r="76" fill="none" stroke="#ef2323" stroke-width="36"
+                                    stroke-dasharray="31.84 477.52" stroke-dashoffset="-445.68"></circle>
+                        </g>
+
+                        <!-- Nhãn phần trăm trên các cung -->
+                        <g class="donut-labels">
+                            <text x="136" y="181.4">88,9%</text>
+                            <text x="69.7" y="45.6">4,4%</text>
+                            <text x="94.2" y="35.7">6,7%</text>
+                        </g>
+
+                        <!-- Chữ ở tâm biểu đồ -->
+                        <text x="110" y="94" text-anchor="middle" class="donut-center-sub">Tổng</text>
+                        <text x="110" y="122" text-anchor="middle" class="donut-center-num">45</text>
+                        <text x="110" y="140" text-anchor="middle" class="donut-center-sub">hành khách</text>
+                    </svg>
+                </div>
+
+                <!-- Cột phải: Chi tiết tình hình vận chuyển -->
+                <div class="stats-summary">
+                    <h4>Tình hình vận chuyển</h4>
+
+                    <div class="stats-meta-row">
+                        <span>Mã chuyến tàu:</span>
+                        <span class="trip-badge">DSC/2026/0001</span>
+                    </div>
+
+                    <div class="stats-meta-row total-row">
+                        <span>Tổng số hành khách (trong danh sách):</span>
+                        <strong>45</strong>
+                    </div>
+
+                    <ul class="stats-legend">
+                        <li>
+                            <span class="legend-dot boarded"></span>
+                            <span class="legend-label">Đã lên tàu (đủ điều kiện):</span>
+                            <strong class="legend-val">40</strong>
+                        </li>
+                        <li>
+                            <span class="legend-dot absent"></span>
+                            <span class="legend-label">Vắng mặt:</span>
+                            <strong class="legend-val">2</strong>
+                        </li>
+                        <li>
+                            <span class="legend-dot ineligible"></span>
+                            <span class="legend-label">Không đủ điều kiện lên tàu:</span>
+                            <strong class="legend-val">3</strong>
+                        </li>
+                    </ul>
+                </div>
             </div>
-
-        </div>
-
-        <!-- RECENT DATA -->
-        <div class="two-cols">
-
-            <!-- REQUESTS -->
-            <section class="panel">
-
-                <div class="panel-head">
-                    <h3>Đơn đăng ký gần đây</h3>
-                    <a href="/requests">Xem tất cả →</a>
-                </div>
-
-                <div class="table-scroll">
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>Mã đơn</th>
-                            <th>Ngày đi</th>
-                            <th>Trạng thái</th>
-                        </tr>
-                        </thead>
-
-                        <tbody>
-                        <tr>
-                            <td><strong>F001-DEMO</strong></td>
-                            <td>15/11/2026</td>
-                            <td>
-                                    <span class="status pending">
-                                        Chờ xử lý
-                                    </span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td><strong>F001-002</strong></td>
-                            <td>16/11/2026</td>
-                            <td>
-                                    <span class="status approved">
-                                        Đã duyệt
-                                    </span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td><strong>F001-003</strong></td>
-                            <td>17/11/2026</td>
-                            <td>
-                                    <span class="status pending">
-                                        Chờ xử lý
-                                    </span>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-            </section>
-
-            <!-- TRIPS -->
-            <section class="panel">
-
-                <div class="panel-head">
-                    <h3>Chuyến gần đây</h3>
-                    <a href="/trips">Xem tất cả →</a>
-                </div>
-
-                <div class="table-scroll">
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>Mã chuyến</th>
-                            <th>Ngày đi</th>
-                            <th>Trạng thái</th>
-                        </tr>
-                        </thead>
-
-                        <tbody>
-                        <tr>
-                            <td>
-                                <a href="/trips" class="textlink">
-                                    VSP-DEMO
-                                </a>
-                            </td>
-                            <td>15/11/2026</td>
-                            <td>
-                                    <span class="status active">
-                                        Đang thực hiện
-                                    </span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <a href="/trips" class="textlink">
-                                    VSP-002
-                                </a>
-                            </td>
-                            <td>16/11/2026</td>
-                            <td>
-                                    <span class="status pending">
-                                        Chờ khởi hành
-                                    </span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <a href="/trips" class="textlink">
-                                    VSP-003
-                                </a>
-                            </td>
-                            <td>17/11/2026</td>
-                            <td>
-                                    <span class="status completed">
-                                        Hoàn thành
-                                    </span>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-            </section>
-
-        </div>
-
+        </section>
         <!-- DEMO GUIDE -->
         <section class="panel help">
 
@@ -253,4 +316,14 @@
 </main>
 
 </body>
+<script>
+    document.querySelectorAll('.nav-parent').forEach(function (toggle) {
+        toggle.addEventListener('click', function (e) {
+            e.preventDefault();
+            const group = this.closest('.nav-group');
+            const isOpen = group.classList.toggle('open');
+            this.setAttribute('aria-expanded', isOpen);
+        });
+    });
+</script>
 </html>

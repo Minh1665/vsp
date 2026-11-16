@@ -1,116 +1,229 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản lý đăng ký F001</title>
+    <title>Quản lý đăng ký F001 - VSP Express</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<div class="section-head">
-    <div>
-        <h2>Đơn đăng ký vận chuyển</h2>
-        <p>Theo dõi tiếp nhận, xác nhận CTB và xét duyệt đơn.</p>
+<aside class="sidebar">
+    <div class="brand">
+        <div class="brandmark">⚓</div>
+        <div>
+            <strong>VSP EXPRESS</strong>
+            <small>Passenger Management</small>
+        </div>
     </div>
 
-    <a class="btn primary" href="request_new.html">
-        + Tạo đơn F001
-    </a>
-</div>
+    <div class="sidebar-label">ĐIỀU HÀNH</div>
+    <nav>
+        <a href="./index.html">◫ <span>Tổng quan</span></a>
+        <a href="./requests.html" class="active">▤ <span>Đăng ký vận chuyển</span></a>
 
-<section class="panel">
-    <div class="table-scroll">
+        <div class="nav-group">
+            <a href="#" class="nav-parent" aria-expanded="false">
+                ▦ <span>Kế hoạch vận chuyển</span>
+                <svg class="nav-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </a>
 
-        <table>
-            <thead>
-            <tr>
-                <th>Mã đơn</th>
-                <th>Ngày đi</th>
-                <th>CTB</th>
-                <th>Số CBCNV</th>
-                <th>Yêu cầu</th>
-                <th>Trạng thái</th>
-                <th></th>
-            </tr>
-            </thead>
+            <div class="submenu">
+                <a href="./trips.html" class="sub-item">Danh sách đề xuất</a>
+                <a href="./trips_draft.html" class="sub-item">Danh sách dự thảo</a>
+                <a href="./trips_official.html" class="sub-item">Danh sách chính thức</a>
+            </div>
+        </div>
 
-            <tbody>
+        <a href="./boarding.html">♧ <span>Kiểm tra lên tàu</span></a>
+    </nav>
 
-            <tr>
-                <td><strong>F001-2026-001</strong></td>
-                <td>15/11/2026</td>
-                <td>BK-01</td>
-                <td>3</td>
-                <td>
-                    <span class="status returned">Khẩn</span>
-                </td>
-                <td>
-                    <span class="status pending">Chờ xác nhận CTB</span>
-                </td>
-                <td>
-                    <a class="textlink" href="request_detail.html?id=1">
-                        Chi tiết →
-                    </a>
-                </td>
-            </tr>
+    <div class="sidebar-footer">
+        <div class="avatar">Đ</div>
+        <div class="usertext">
+            <strong>Điều độ viên XN Khai thác</strong>
+            <small>Điều độ viên đơn vị</small>
+        </div>
+        <form method="post" action="/login.html">
+            <input type="hidden" name="csrf" value="70201f86bdf6a05dc67f11be25967792c2d65beb">
+            <button class="logout" title="Đăng xuất">↪</button>
+        </form>
+    </div>
+</aside>
+<main class="main">
 
-            <tr>
-                <td><strong>F001-2026-002</strong></td>
-                <td>16/11/2026</td>
-                <td>BK-02</td>
-                <td>5</td>
-                <td>Thông thường</td>
-                <td>
-                    <span class="status approved">Đã duyệt</span>
-                </td>
-                <td>
-                    <a class="textlink" href="request_detail.html?id=2">
-                        Chi tiết →
-                    </a>
-                </td>
-            </tr>
+    <!-- TOPBAR -->
+    <header class="topbar">
+        <div>
+            <div class="crumb">ĐIỀU HÀNH / ĐĂNG KÝ F001</div>
+            <h1>Quản lý đăng ký F001</h1>
+        </div>
 
-            <tr>
-                <td><strong>F001-2026-003</strong></td>
-                <td>18/11/2026</td>
-                <td>RC-01</td>
-                <td>2</td>
-                <td>Thông thường</td>
-                <td>
-                    <span class="status returned">Từ chối</span>
-                </td>
-                <td>
-                    <a class="textlink" href="request_detail.html?id=3">
-                        Chi tiết →
-                    </a>
-                </td>
-            </tr>
+        <div class="top-right">
+            <span class="demo-pill">HỆ THỐNG QUẢN LÝ</span>
+            <span class="role-pill">Điều độ viên đơn vị</span>
+        </div>
+    </header>
 
-            <tr>
-                <td><strong>F001-2026-004</strong></td>
-                <td>20/11/2026</td>
-                <td>MSP-01</td>
-                <td>4</td>
-                <td>
-                    <span class="status returned">Khẩn</span>
-                </td>
-                <td>
-                    <span class="status pending">Chờ xác nhận CTB</span>
-                </td>
-                <td>
-                    <a class="textlink" href="request_detail.html?id=4">
-                        Chi tiết →
-                    </a>
-                </td>
-            </tr>
+    <!-- CONTENT -->
+    <div class="content">
 
-            </tbody>
-        </table>
+        <section class="panel">
+
+            <!-- TIÊU ĐỀ KHUNG -->
+            <div class="panel-head">
+                <div class="stats-title">
+                    <span class="stats-icon" aria-hidden="true">▤</span>
+                    <div>
+                        <h3>Đăng ký vận chuyển</h3>
+                        <p class="muted">Theo dõi tiếp nhận, xác nhận CTB và xét duyệt đơn.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- THANH TÌM KIẾM & BỘ LỌC -->
+            <div class="filter-bar">
+                <!-- Ô tìm kiếm -->
+                <div class="search-input-wrap">
+                    <svg class="search-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input type="text" placeholder="Tìm kiếm theo mã đơn, ..." aria-label="Tìm kiếm theo mã đơn">
+                </div>
+
+                <!-- Lọc trạng thái -->
+                <div class="filter-select-wrap">
+                    <select aria-label="Lọc theo trạng thái">
+                        <option value="" selected>Tất cả trạng thái</option>
+                        <option value="pending">Chờ xác nhận CTB</option>
+                        <option value="approved">Đã duyệt</option>
+                        <option value="rejected">Từ chối</option>
+                    </select>
+                </div>
+
+                <!-- Lọc thời gian -->
+                <div class="filter-date-wrap">
+                    <select aria-label="Lọc theo thời gian">
+                        <option value="" selected>Tất cả thời gian</option>
+                        <option value="today">Hôm nay (15/11/2026)</option>
+                        <option value="week">Tuần này</option>
+                        <option value="month">Tháng 11/2026</option>
+                    </select>
+                    <svg class="calendar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                </div>
+
+                <!-- Nút tạo đơn -->
+                <a class="btn primary filter-action-btn" href="request_new.html">
+                    + Tạo đơn đăng ký
+                </a>
+            </div>
+
+            <!-- BẢNG DỮ LIỆU -->
+            <div class="table-scroll">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Mã đơn</th>
+                        <th>Ngày đi</th>
+                        <th>CTB</th>
+                        <th>Số CBCNV</th>
+                        <th>Trạng thái</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    <tr>
+                        <td><strong>F001/2026/001</strong></td>
+                        <td>11/11/2026</td>
+                        <td>BK01</td>
+                        <td>20</td>
+                        <td>
+                            <a class="status approved" href="request_acp.html?id=1">Đã duyệt</a>
+                        </td>
+                        <td>
+                            <a class="textlink" href="request_detail.html?id=1">
+                                Chi tiết →
+                            </a>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>F001/2026/002</strong></td>
+                        <td>11/11/2026</td>
+                        <td>BK02</td>
+                        <td>25</td>
+                        <td>
+                            <a class="status approved" href="request_acp.html?id=2">Đã duyệt</a>
+                        </td>
+                        <td>
+                            <a class="textlink" href="request_detail.html?id=2">
+                                Chi tiết →
+                            </a>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>F001/2026/003</strong></td>
+                        <td>13/11/2026</td>
+                        <td>BK03</td>
+                        <td>17</td>
+                        <td>
+                            <a class="status pending" href="request_acp.html?id=3">Chờ TTĐĐSX phê duyệt</a>
+                        </td>
+                        <td>
+                            <a class="textlink" href="request_detail.html?id=3">
+                                Chi tiết →
+                            </a>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>F001/2026/004</strong></td>
+                        <td>13/11/2026</td>
+                        <td>BK04</td>
+                        <td>36</td>
+                        <td>
+                            <a class="status pending" href="request_acp.html?id=4">Yêu cầu chỉnh sửa</a>
+                        </td>
+                        <td>
+                            <a class="textlink" href="request_detail.html?id=4">
+                                Chi tiết →
+                            </a>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </section>
 
     </div>
-</section>
+
+    <footer>
+        VSP EXPRESS – Hệ thống quản lý vận chuyển CBCNV
+    </footer>
+
+</main>
 
 </body>
+<script>
+    document.querySelectorAll('.nav-parent').forEach(function (toggle) {
+        toggle.addEventListener('click', function (e) {
+            e.preventDefault();
+            const group = this.closest('.nav-group');
+            const isOpen = group.classList.toggle('open');
+            this.setAttribute('aria-expanded', isOpen);
+        });
+    });
+</script>
 </html>

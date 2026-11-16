@@ -1,370 +1,541 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Danh sách chuyến TRIP-2026-001</title>
+    <title>Xem xét danh sách chuyến đề xuất - VSP Express</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<!-- THÔNG TIN CHUYẾN -->
-<div class="section-head">
-    <div>
-        <h2>
-            TRIP-2026-001
-            <span class="status approved">approved</span>
-        </h2>
-        <p>
-            VSP Express · 15/11/2026 · 07:00 · BK-01 · Phiên bản 1
-        </p>
+<aside class="sidebar">
+    <div class="brand">
+        <div class="brandmark">⚓</div>
+        <div>
+            <strong>VSP EXPRESS</strong>
+            <small>Passenger Management</small>
+        </div>
     </div>
 
-    <a class="btn secondary" href="trips.html">
-        ← Các chuyến
-    </a>
-</div>
+    <div class="sidebar-label">ĐIỀU HÀNH</div>
+    <nav>
+        <a href="./index.html">◫ <span>Tổng quan</span></a>
+        <a href="./requests.html">▤ <span>Đăng ký vận chuyển</span></a>
 
-<!-- THỐNG KÊ -->
-<div class="metrics metrics-3">
+        <!-- MỤC CHA + SUB-MENU KẾ HOẠCH VẬN CHUYỂN -->
+        <div class="nav-group">
+            <a href="#" class="active nav-parent" aria-expanded="true">
+                ▦ <span>Kế hoạch vận chuyển</span>
+                <svg class="nav-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </a>
 
-    <div class="metric">
-        <span>TRONG DANH SÁCH</span>
-        <strong>3</strong>
-        <small>Hành khách</small>
-    </div>
-
-    <div class="metric">
-        <span>ĐÃ LÊN TÀU</span>
-        <strong>2</strong>
-        <small>Theo kết quả ghi nhận</small>
-    </div>
-
-    <div class="metric">
-        <span>XÁC NHẬN THUYỀN TRƯỞNG</span>
-        <strong class="small-strong">Chưa chốt</strong>
-        <small>—</small>
-    </div>
-
-</div>
-
-<!-- DANH SÁCH HÀNH KHÁCH VÀ PHÊ DUYỆT -->
-<div class="two-cols uneven">
-
-    <section class="panel">
-
-        <div class="panel-head">
-            <h3>Danh sách hành khách</h3>
-            <span class="muted">
-                    QR chỉ có hiệu lực cho danh sách được duyệt
-                </span>
+            <div class="submenu">
+                <a href="./trips.html" class="sub-item active">Danh sách đề xuất</a>
+                <a href="./trips_draft.html" class="sub-item">Danh sách dự thảo</a>
+                <a href="./trips_official.html" class="sub-item">Danh sách chính thức</a>
+            </div>
         </div>
 
-        <div class="table-scroll">
-            <table>
-                <thead>
-                <tr>
-                    <th>CBCNV</th>
-                    <th>An ninh</th>
-                    <th>Giấy tờ</th>
-                    <th>Lên tàu</th>
-                    <th>QR</th>
-                </tr>
-                </thead>
+        <a href="./boarding.html">♧ <span>Kiểm tra lên tàu</span></a>
+    </nav>
 
-                <tbody>
-
-                <tr>
-                    <td>
-                        <strong>Nguyễn Văn A</strong>
-                        <small class="block">NV001</small>
-                    </td>
-                    <td>
-                        <span class="status approved">Đạt</span>
-                    </td>
-                    <td>
-                        <span class="status approved">Đạt</span>
-                    </td>
-                    <td>
-                        <span class="status approved">Đã lên tàu</span>
-                    </td>
-                    <td>
-                        <a class="textlink" href="boarding_scan.html?token=QR001">Tra cứu</a>
-                        <a class="textlink" href="qr.html?token=QR001" target="_blank">QR</a>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <strong>Trần Văn B</strong>
-                        <small class="block">NV002</small>
-                    </td>
-                    <td>
-                        <span class="status approved">Đạt</span>
-                    </td>
-                    <td>
-                        <span class="status approved">Đạt</span>
-                    </td>
-                    <td>
-                        <span class="status approved">Đã lên tàu</span>
-                    </td>
-                    <td>
-                        <a class="textlink" href="boarding_scan.html?token=QR002">Tra cứu</a>
-                        <a class="textlink" href="qr.html?token=QR002" target="_blank">QR</a>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <strong>Lê Văn C</strong>
-                        <small class="block">NV003</small>
-                    </td>
-                    <td>
-                        <span class="status approved">Đạt</span>
-                    </td>
-                    <td>
-                        <span class="status pending">Chờ kiểm tra</span>
-                    </td>
-                    <td>—</td>
-                    <td>
-                        <a class="textlink" href="boarding_scan.html?token=QR003">Tra cứu</a>
-                        <a class="textlink" href="qr.html?token=QR003" target="_blank">QR</a>
-                    </td>
-                </tr>
-
-                </tbody>
-            </table>
+    <div class="sidebar-footer">
+        <div class="avatar">Đ</div>
+        <div class="usertext">
+            <strong>Điều độ viên XN Khai thác</strong>
+            <small>Điều độ viên đơn vị</small>
         </div>
-
-        <div class="callout">
-            Trong bản demo, người dùng được phân quyền có thể xem QR tại đây.
-            Khi triển khai thực tế cần giới hạn quyền phát hành, hiển thị
-            và chuyển giao QR theo chính sách dữ liệu nội bộ.
-        </div>
-
-    </section>
-
-    <!-- PHÊ DUYỆT VÀ THÔNG BÁO -->
-    <aside class="panel">
-
-        <h3>Xét duyệt Danh sách chuyến</h3>
-
-        <p>
-            Giám đốc XNVTB&CTL
-            <span class="status approved">Đã duyệt</span>
-        </p>
-
-        <p>
-            Trưởng ban TTĐĐSX
-            <span class="status approved">Đã duyệt</span>
-        </p>
-
-        <hr>
-
-        <h3>Thông báo lịch trình</h3>
-
-        <p class="muted">
-            Tập trung tại cầu cảng lúc 06:30.
-            Chuẩn bị đầy đủ giấy tờ và trang bị bảo hộ theo quy định.
-        </p>
-
-        <form action="#" method="post">
-
-                <textarea
-                        rows="3"
-                        name="notice"
-                        placeholder="Giờ tập trung, thông tin kế hoạch được phép công bố..."
-                >Tập trung tại cầu cảng lúc 06:30. Chuẩn bị đầy đủ giấy tờ và trang bị bảo hộ.</textarea>
-
-            <button type="submit" class="btn secondary full">
-                Cập nhật thông báo
-            </button>
-
+        <form method="post" action="/login.html">
+            <input type="hidden" name="csrf" value="70201f86bdf6a05dc67f11be25967792c2d65beb">
+            <button class="logout" title="Đăng xuất">↪</button>
         </form>
+    </div>
+</aside>
 
-        <hr>
+<main class="main">
 
-        <h3>Thuyền trưởng xác nhận</h3>
+    <!-- TOPBAR -->
+    <header class="topbar">
+        <div>
+            <div class="crumb">ĐIỀU HÀNH / KẾ HOẠCH VẬN CHUYỂN / XEM XÉT ĐỀ XUẤT</div>
+            <h1>Kế hoạch vận chuyển</h1>
+        </div>
 
-        <p class="muted">
-            Đối chiếu kết quả kiểm tra với người thực tế trên tàu,
-            xử lý các trường hợp còn tồn tại trước khi xác nhận.
-        </p>
+        <div class="top-right">
+            <span class="demo-pill">HỆ THỐNG QUẢN LÝ</span>
+            <span class="role-pill">Điều độ viên đơn vị</span>
+        </div>
+    </header>
 
-        <form action="#" method="post"
-              onsubmit="return confirm('Xác nhận chốt kết quả thực tế của chuyến?')">
+    <!-- CONTENT -->
+    <div class="content">
 
-            <button type="submit" class="btn primary full">
-                Xác nhận số người thực tế
-            </button>
+        <!-- TIÊU ĐỀ + NÚT QUAY LẠI -->
+        <div class="dx-page-header">
+            <a href="trips.html" class="dx-back-btn" title="Quay lại danh sách đề xuất" aria-label="Quay lại">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+            </a>
+            <h2>Xem xét danh sách chuyến đề xuất</h2>
+        </div>
 
-        </form>
-
-    </aside>
-
-</div>
-
-<!-- ĐIỀU CHỈNH DANH SÁCH -->
-<div class="two-cols uneven">
-
-    <section class="panel">
-
-        <h3>Yêu cầu điều chỉnh danh sách</h3>
-
-        <p class="muted">
-            Sau khi đã phê duyệt, việc bổ sung/hủy không sửa trực tiếp
-            danh sách có hiệu lực.
-        </p>
-
-        <form action="#" method="post">
-
-            <div class="form-grid">
-
-                <div>
-                    <label>Thao tác</label>
-
-                    <select name="action" id="changeAction">
-                        <option value="remove">Đề nghị hủy người</option>
-                        <option value="add">Đề nghị bổ sung người</option>
-                    </select>
+        <!-- THẺ TỔNG QUAN DANH SÁCH ĐỀ XUẤT -->
+        <section class="panel dx-summary-panel">
+            <div class="dx-summary-top">
+                <!-- Mã danh sách -->
+                <div class="dx-meta-item">
+                    <span class="dx-meta-icon" aria-hidden="true">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                        </svg>
+                    </span>
+                    <div>
+                        <span class="dx-meta-label">Mã danh sách đề xuất</span>
+                        <strong class="dx-meta-val primary">DX/2026/0001</strong>
+                    </div>
                 </div>
 
-                <div>
-                    <label>CBCNV</label>
-
-                    <select name="employee_id">
-                        <option value="1">NV001 – Nguyễn Văn A</option>
-                        <option value="2">NV002 – Trần Văn B</option>
-                        <option value="3">NV003 – Lê Văn C</option>
-                        <option value="4">NV004 – Phạm Văn D</option>
-                    </select>
+                <!-- Ngày đi -->
+                <div class="dx-meta-item">
+                    <span class="dx-meta-icon" aria-hidden="true">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                    </span>
+                    <div>
+                        <span class="dx-meta-label">Ngày đi</span>
+                        <strong class="dx-meta-val">11/11/2026</strong>
+                    </div>
                 </div>
 
+                <!-- Tổng số CBCNV -->
+                <div class="dx-meta-item">
+                    <span class="dx-meta-icon" aria-hidden="true">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                    </span>
+                    <div>
+                        <span class="dx-meta-label">Tổng số CBCNV</span>
+                        <strong class="dx-meta-val">45 người</strong>
+                    </div>
+                </div>
+
+                <!-- Trạng thái ngưỡng -->
+                <div class="dx-threshold-box ok">
+                    <span class="dx-threshold-icon" aria-hidden="true">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="9"></circle>
+                            <polyline points="9 12 11 14 15 10"></polyline>
+                        </svg>
+                    </span>
+                    <div>
+                        <strong>Đáp ứng ngưỡng</strong>
+                        <span>(40 – 74 người)</span>
+                    </div>
+                </div>
             </div>
 
-            <label>Lý do điều chỉnh</label>
+            <!-- Thanh danh sách đơn F001 được tổng hợp -->
+            <div class="dx-merged-bar">
+                <span>Các đơn F001 được tổng hợp:</span>
+                <strong>F001/2026/001, F001/2026/002</strong>
+            </div>
+        </section>
 
-            <input
-                    type="text"
-                    name="reason"
-                    placeholder="Nêu lý do và căn cứ"
-                    required
-            >
-
-            <button type="submit" class="btn secondary">
-                Gửi yêu cầu điều chỉnh
+        <!-- THANH CÔNG CỤ THAO TÁC -->
+        <div class="dx-action-toolbar">
+            <button type="button" class="dx-tool-btn outline-blue" onclick="alert('Mở hộp thoại chọn danh sách đề xuất để gộp đơn.')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="4 14 10 14 10 20"></polyline>
+                    <polyline points="20 10 14 10 14 4"></polyline>
+                    <line x1="14" y1="10" x2="21" y2="3"></line>
+                    <line x1="3" y1="21" x2="10" y2="14"></line>
+                </svg>
+                Gộp đơn
             </button>
 
-        </form>
+            <button type="button" class="dx-tool-btn outline-blue" onclick="alert('Mở hộp thoại chọn đơn F001 để tách khỏi danh sách đề xuất.')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <polyline points="9 21 3 21 3 15"></polyline>
+                    <line x1="21" y1="3" x2="14" y2="10"></line>
+                    <line x1="3" y1="21" x2="10" y2="14"></line>
+                </svg>
+                Tách đơn
+            </button>
 
-        <hr>
+            <span class="dx-toolbar-divider" aria-hidden="true"></span>
 
-        <h3>Lịch sử yêu cầu điều chỉnh</h3>
+            <button type="button" class="dx-tool-btn solid-green" onclick="handleApprove()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                Phê duyệt
+            </button>
 
-        <div class="table-scroll">
-            <table>
+            <button type="button" class="dx-tool-btn soft-orange" onclick="handleRequestChange()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                </svg>
+                Yêu cầu điều chỉnh
+            </button>
 
-                <thead>
-                <tr>
-                    <th>Yêu cầu</th>
-                    <th>Trạng thái</th>
-                    <th>Phê duyệt</th>
-                </tr>
-                </thead>
-
-                <tbody>
-
-                <tr>
-                    <td>
-                        Bổ sung Phạm Văn D
-                        <small class="block">
-                            Bổ sung nhân sự phục vụ công tác sản xuất
-                        </small>
-                    </td>
-
-                    <td>
-                        <span class="status pending">Chờ duyệt</span>
-                    </td>
-
-                    <td>
-                        <small>
-                            TTĐĐSX: …
-                            <br>
-                            Giám đốc: …
-                        </small>
-
-                        <form action="#" method="post">
-                            <button
-                                    name="action"
-                                    value="approve"
-                                    class="btn tiny primary"
-                                    type="submit"
-                            >
-                                Chấp thuận
-                            </button>
-
-                            <button
-                                    name="action"
-                                    value="reject"
-                                    class="btn tiny danger"
-                                    type="submit"
-                            >
-                                Từ chối
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        Hủy Nguyễn Văn A
-                        <small class="block">
-                            Thay đổi kế hoạch công tác
-                        </small>
-                    </td>
-
-                    <td>
-                        <span class="status approved">Đã xử lý</span>
-                    </td>
-
-                    <td>Đã xử lý</td>
-                </tr>
-
-                </tbody>
-
-            </table>
+            <button type="button" class="dx-tool-btn export-right" onclick="alert('Đang xuất file danh sách đề xuất DX/2026/0001...')">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                Xuất file
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </button>
         </div>
 
-    </section>
+        <!-- KHU VỰC 2 CỘT: TỔNG HỢP BÊN TRÁI + CHI TIẾT ĐƠN BÊN PHẢI -->
+        <div class="dx-workspace-grid">
 
-    <!-- KIỂM TRA LÊN TÀU -->
-    <aside class="panel">
+            <!-- CỘT TRÁI: TAB TỔNG HỢP THEO ĐƠN VỊ/CTB & DANH SÁCH CBCNV -->
+            <section class="panel dx-left-panel">
+                <div class="dx-tabs" role="tablist">
+                    <button type="button" class="dx-tab active" role="tab" aria-selected="true" data-tab="tab-summary">
+                        Tổng hợp theo đơn vị/CTB
+                    </button>
+                    <button type="button" class="dx-tab" role="tab" aria-selected="false" data-tab="tab-all-emp">
+                        Danh sách CBCNV (45)
+                    </button>
+                </div>
 
-        <h3>Kiểm tra lên tàu</h3>
+                <!-- TAB 1: TỔNG HỢP THEO ĐƠN VỊ / CTB -->
+                <div id="tab-summary" class="dx-tab-pane active">
+                    <div class="table-scroll dx-table-wrap">
+                        <table class="dx-table">
+                            <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th class="text-left">Đơn vị đăng ký</th>
+                                <th>CTB đến</th>
+                                <th>Mã đơn F001</th>
+                                <th>Số lượng (người)</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="dx-selectable-row active" data-f001="F001/2026/001" onclick="selectF001('F001/2026/001', this)">
+                                <td>1</td>
+                                <td class="text-left">Xí nghiệp Xây lắp</td>
+                                <td>BK01</td>
+                                <td>F001/2026/001</td>
+                                <td>20</td>
+                            </tr>
+                            <tr class="dx-selectable-row" data-f001="F001/2026/002" onclick="selectF001('F001/2026/002', this)">
+                                <td>2</td>
+                                <td class="text-left">Xưởng Bảo dưỡng</td>
+                                <td>BK02</td>
+                                <td>F001/2026/002</td>
+                                <td>25</td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr class="dx-total-row">
+                                <td colspan="4" class="dx-total-label">Tổng cộng</td>
+                                <td class="dx-total-val">45</td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
 
-        <p class="muted">
-            Quét QR để mở đúng hồ sơ và kiểm tra theo vai trò.
-            Chỉ người được phân quyền mới có thể xác nhận.
-        </p>
+                <!-- TAB 2: DANH SÁCH CBCNV (45) -->
+                <div id="tab-all-emp" class="dx-tab-pane" style="display:none;">
+                    <div class="table-scroll dx-table-wrap">
+                        <table class="dx-table">
+                            <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th class="text-left">Họ và tên</th>
+                                <th>Mã nhân viên</th>
+                                <th>Đơn vị</th>
+                                <th>CTB đến</th>
+                                <th>Mã đơn F001</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>01</td>
+                                <td class="text-left"><strong>NGUYỄN VĂN A</strong></td>
+                                <td>VSP-123456</td>
+                                <td>VSP - Xây lắp</td>
+                                <td>BK-01</td>
+                                <td>F001/2026/001</td>
+                            </tr>
+                            <tr>
+                                <td>02</td>
+                                <td class="text-left"><strong>PHẠM VĂN B</strong></td>
+                                <td>VSP-123457</td>
+                                <td>VSP - Xây lắp</td>
+                                <td>BK-01</td>
+                                <td>F001/2026/001</td>
+                            </tr>
+                            <tr>
+                                <td>03</td>
+                                <td class="text-left"><strong>TRẦN ĐĂNG C</strong></td>
+                                <td>VSP-123458</td>
+                                <td>VSP - Xây lắp</td>
+                                <td>BK-01</td>
+                                <td>F001/2026/001</td>
+                            </tr>
+                            <tr>
+                                <td>04</td>
+                                <td class="text-left"><strong>PHAN LÊ D</strong></td>
+                                <td>VSP-123459</td>
+                                <td>VSP - Xây lắp</td>
+                                <td>BK-01</td>
+                                <td>F001/2026/001</td>
+                            </tr>
+                            <tr>
+                                <td>05</td>
+                                <td class="text-left"><strong>HOÀNG VĂN E</strong></td>
+                                <td>VSP-123460</td>
+                                <td>Xưởng Bảo dưỡng</td>
+                                <td>BK-02</td>
+                                <td>F001/2026/002</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
 
-        <a class="btn secondary full" href="boarding.html">
-            Mở màn hình kiểm tra QR →
-        </a>
+            <!-- CỘT PHẢI: CHI TIẾT ĐƠN F001 ĐANG CHỌN -->
+            <aside class="panel dx-right-panel">
+                <h3 class="dx-detail-heading" id="detailHeading">Chi tiết đơn F001/2026/001</h3>
 
-        <hr>
+                <ul class="dx-detail-specs">
+                    <li>
+                        <span class="spec-label">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+                                <path d="M9 22v-4h6v4"></path>
+                                <line x1="8" y1="6" x2="8.01" y2="6"></line>
+                                <line x1="16" y1="6" x2="16.01" y2="6"></line>
+                                <line x1="12" y1="6" x2="12.01" y2="6"></line>
+                                <line x1="8" y1="10" x2="8.01" y2="10"></line>
+                                <line x1="16" y1="10" x2="16.01" y2="10"></line>
+                                <line x1="12" y1="10" x2="12.01" y2="10"></line>
+                                <line x1="8" y1="14" x2="8.01" y2="14"></line>
+                                <line x1="16" y1="14" x2="16.01" y2="14"></line>
+                                <line x1="12" y1="14" x2="12.01" y2="14"></line>
+                            </svg>
+                            Đơn vị đăng ký:
+                        </span>
+                        <strong id="detailUnit">Xí nghiệp Xây lắp</strong>
+                    </li>
+                    <li>
+                        <span class="spec-label">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                            CTB đến:
+                        </span>
+                        <strong id="detailCtb">BK-01</strong>
+                    </li>
+                    <li>
+                        <span class="spec-label">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                            Số lượng CBCNV:
+                        </span>
+                        <strong id="detailCount">20 người</strong>
+                    </li>
+                    <li>
+                        <span class="spec-label">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                            Ngày khởi hành:
+                        </span>
+                        <strong id="detailDate">11/11/2026</strong>
+                    </li>
+                </ul>
 
-        <h3>Quy tắc nghiệp vụ</h3>
+                <div class="dx-sublist-head">
+                    <strong id="detailListTitle">Danh sách CBCNV (4)</strong>
+                    <a href="request_detail.html?id=1" id="detailViewAllLink" class="dx-view-all">Xem tất cả</a>
+                </div>
 
-        <p class="muted">
-            Thông tin hành khách trong Danh sách chuyến chỉ có hiệu lực
-            sau phê duyệt theo thẩm quyền. Không tự động chấp nhận
-            ngoại lệ khẩn cấp hay bỏ qua an toàn.
-        </p>
+                <div class="table-scroll dx-table-wrap">
+                    <table class="dx-table compact">
+                        <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th class="text-left">Họ và tên</th>
+                            <th>Mã nhân viên</th>
+                            <th>Đơn vị công tác</th>
+                        </tr>
+                        </thead>
+                        <tbody id="detailEmpBody">
+                        <tr>
+                            <td>1</td>
+                            <td class="text-left">NGUYỄN VĂN A</td>
+                            <td>VSP-123456</td>
+                            <td>VSP - Xây lắp</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td class="text-left">PHẠM VĂN B</td>
+                            <td>VSP-123457</td>
+                            <td>VSP - Xây lắp</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td class="text-left">TRẦN ĐĂNG C</td>
+                            <td>VSP-123458</td>
+                            <td>VSP - Xây lắp</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td class="text-left">PHAN LÊ D</td>
+                            <td>VSP-123459</td>
+                            <td>VSP - Xây lắp</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </aside>
 
-    </aside>
+        </div>
 
-</div>
+    </div>
+
+    <footer>
+        VSP EXPRESS – Hệ thống quản lý vận chuyển CBCNV
+    </footer>
+
+</main>
+
+<script>
+    // Mở/đóng sub-menu Kế hoạch vận chuyển
+    document.querySelectorAll('.nav-parent').forEach(function (toggle) {
+        toggle.addEventListener('click', function (e) {
+            e.preventDefault();
+            const group = this.closest('.nav-group');
+            const isOpen = group.classList.toggle('open');
+            this.setAttribute('aria-expanded', isOpen);
+        });
+    });
+
+    // Chuyển đổi tab bên cột trái
+    document.querySelectorAll('.dx-tab').forEach(function (tab) {
+        tab.addEventListener('click', function () {
+            document.querySelectorAll('.dx-tab').forEach(function (t) {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+            });
+            document.querySelectorAll('.dx-tab-pane').forEach(function (pane) {
+                pane.style.display = 'none';
+            });
+
+            this.classList.add('active');
+            this.setAttribute('aria-selected', 'true');
+            document.getElementById(this.dataset.tab).style.display = 'block';
+        });
+    });
+
+    // Dữ liệu chi tiết từng đơn F001 để xem nhanh bên cột phải
+    const f001Details = {
+        'F001/2026/001': {
+            id: 1,
+            unit: 'Xí nghiệp Xây lắp',
+            ctb: 'BK-01',
+            count: '20 người',
+            date: '11/11/2026',
+            employees: [
+                { name: 'NGUYỄN VĂN A', code: 'VSP-123456', dept: 'VSP - Xây lắp' },
+                { name: 'PHẠM VĂN B', code: 'VSP-123457', dept: 'VSP - Xây lắp' },
+                { name: 'TRẦN ĐĂNG C', code: 'VSP-123458', dept: 'VSP - Xây lắp' },
+                { name: 'PHAN LÊ D', code: 'VSP-123459', dept: 'VSP - Xây lắp' }
+            ]
+        },
+        'F001/2026/002': {
+            id: 2,
+            unit: 'Xưởng Bảo dưỡng',
+            ctb: 'BK-02',
+            count: '25 người',
+            date: '11/11/2026',
+            employees: [
+                { name: 'HOÀNG VĂN E', code: 'VSP-123460', dept: 'Xưởng Bảo dưỡng' },
+                { name: 'ĐẶNG MINH F', code: 'VSP-123461', dept: 'Xưởng Bảo dưỡng' },
+                { name: 'VŨ QUỐC G', code: 'VSP-123462', dept: 'Xưởng Bảo dưỡng' },
+                { name: 'BÙI THANH H', code: 'VSP-123463', dept: 'Xưởng Bảo dưỡng' }
+            ]
+        }
+    };
+
+    function selectF001(code, rowEl) {
+        const data = f001Details[code];
+        if (!data) return;
+
+        document.querySelectorAll('.dx-selectable-row').forEach(function (r) {
+            r.classList.remove('active');
+        });
+        rowEl.classList.add('active');
+
+        document.getElementById('detailHeading').textContent = 'Chi tiết đơn ' + code;
+        document.getElementById('detailUnit').textContent = data.unit;
+        document.getElementById('detailCtb').textContent = data.ctb;
+        document.getElementById('detailCount').textContent = data.count;
+        document.getElementById('detailDate').textContent = data.date;
+        document.getElementById('detailListTitle').textContent = 'Danh sách CBCNV (' + data.employees.length + ')';
+        document.getElementById('detailViewAllLink').href = 'request_detail.html?id=' + data.id;
+
+        const tbody = document.getElementById('detailEmpBody');
+        tbody.innerHTML = data.employees.map(function (emp, index) {
+            return '<tr>' +
+                '<td>' + (index + 1) + '</td>' +
+                '<td class="text-left">' + emp.name + '</td>' +
+                '<td>' + emp.code + '</td>' +
+                '<td>' + emp.dept + '</td>' +
+                '</tr>';
+        }).join('');
+    }
+
+    function handleApprove() {
+        if (confirm('Xác nhận phê duyệt danh sách chuyến đề xuất DX/2026/0001?')) {
+            alert('Đã phê duyệt danh sách đề xuất DX/2026/0001.');
+        }
+    }
+
+    function handleRequestChange() {
+        const reason = prompt('Nhập nội dung yêu cầu điều chỉnh danh sách đề xuất DX/2026/0001:');
+        if (reason && reason.trim()) {
+            alert('Đã gửi yêu cầu điều chỉnh: ' + reason.trim());
+        }
+    }
+</script>
 
 </body>
 </html>

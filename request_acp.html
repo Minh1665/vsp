@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duyệt đơn đăng ký vận chuyển - VSP Express</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<aside class="sidebar">
+    <div class="brand">
+        <div class="brandmark">⚓</div>
+        <div>
+            <strong>VSP EXPRESS</strong>
+            <small>Passenger Management</small>
+        </div>
+    </div>
+
+    <div class="sidebar-label">ĐIỀU HÀNH</div>
+    <nav>
+        <a href="./index.html">◫ <span>Tổng quan</span></a>
+        <a href="./requests.html" class="active">▤ <span>Đăng ký vận chuyển</span></a>
+
+        <div class="nav-group">
+            <a href="#" class="nav-parent" aria-expanded="false">
+                ▦ <span>Kế hoạch vận chuyển</span>
+                <svg class="nav-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </a>
+
+            <div class="submenu">
+                <a href="./trips.html" class="sub-item ">Danh sách đề xuất</a>
+                <a href="./trips_draft.html" class="sub-item">Danh sách dự thảo</a>
+                <a href="./trips_official.html" class="sub-item">Danh sách chính thức</a>
+            </div>
+        </div>
+
+        <a href="./boarding.html">♧ <span>Kiểm tra lên tàu</span></a>
+    </nav>
+
+    <div class="sidebar-footer">
+        <div class="avatar">Đ</div>
+        <div class="usertext">
+            <strong>Điều độ viên XN Khai thác</strong>
+            <small>Điều độ viên đơn vị</small>
+        </div>
+        <form method="post" action="/login.html">
+            <input type="hidden" name="csrf" value="70201f86bdf6a05dc67f11be25967792c2d65beb">
+            <button class="logout" title="Đăng xuất">↪</button>
+        </form>
+    </div>
+</aside>
+<main class="main">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+        <div>
+            <div class="crumb">ĐIỀU HÀNH / Phê duyệt</div>
+            <h1>Phê duyệt đơn đăng ký vận chuyển</h1>
+        </div>
+
+        <div class="top-right">
+            <span class="demo-pill">HỆ THỐNG QUẢN LÝ</span>
+            <span class="role-pill">Điều độ viên đơn vị</span>
+        </div>
+    </header>
+
+    <!-- CONTENT -->
+    <div class="content">
+
+        <!-- TIÊU ĐỀ QUAY LẠI -->
+        <div class="section-head">
+            <a href="requests.html" class="back-title-link">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                <h2>Danh sách đơn đăng ký</h2>
+            </a>
+        </div>
+
+        <!-- HÀNG TRÊN: 01 THÔNG TIN CHUNG + LÝ DO / GHI CHÚ XỬ LÝ -->
+        <div class="two-cols uneven">
+
+            <!-- 01 / THÔNG TIN CHUNG -->
+            <section class="panel">
+                <div class="panel-head">
+                    <div class="step-heading">
+                        <span class="step-badge">01</span>
+                        <h3>Thông tin chung</h3>
+                    </div>
+                </div>
+
+                <div class="detail-info-grid">
+                    <div class="detail-item">
+                        <span class="detail-label">Mã đơn</span>
+                        <strong class="detail-value">F001/2026/001</strong>
+                    </div>
+
+                    <div class="detail-item">
+                        <span class="detail-label">Đơn vị đăng ký <span class="req">*</span></span>
+                        <strong class="detail-value">Xí nghiệp Xây lắp</strong>
+                    </div>
+
+                    <div class="detail-item">
+                        <span class="detail-label">Ngày khởi hành <span class="req">*</span></span>
+                        <strong class="detail-value">11/11/2026</strong>
+                    </div>
+
+                    <div class="detail-item">
+                        <span class="detail-label">Đến công trình biển – Điểm 1</span>
+                        <strong class="detail-value">BK-01</strong>
+                    </div>
+
+                    <div class="detail-item">
+                        <span class="detail-label">Điểm 2 (nếu có)</span>
+                        <strong class="detail-value">-</strong>
+                    </div>
+
+                    <div class="detail-item">
+                        <span class="detail-label">Điểm 3 (nếu có)</span>
+                        <strong class="detail-value">-</strong>
+                    </div>
+
+                    <div class="detail-item">
+                        <span class="detail-label">Phương tiện yêu cầu</span>
+                        <strong class="detail-value">Tàu VSP Express</strong>
+                    </div>
+
+                    <div class="detail-item">
+                        <span class="detail-label">Nhiệm vụ công tác <span class="req">*</span></span>
+                        <strong class="detail-value">Công tác định kỳ</strong>
+                    </div>
+
+                    <div class="detail-item">
+                        <span class="detail-label">Khẩn cấp</span>
+                        <strong class="detail-value">Không</strong>
+                    </div>
+                </div>
+            </section>
+
+            <!-- LÝ DO / GHI CHÚ TRẢ LẠI HOẶC TỪ CHỐI -->
+            <section class="panel review-panel">
+                <form method="post" action="./requests.html">
+                    <label for="review_note" class="review-label">
+                        Lý do/ Ghi chú trả lại hoặc từ chối
+                    </label>
+
+                    <textarea id="review_note" name="review_note" rows="6" class="review-textarea"></textarea>
+
+                    <div class="review-actions">
+                        <button type="submit" name="action" value="approve" class="btn-review approve">
+                            Phê duyệt
+                        </button>
+                        <button type="submit" name="action" value="reject" class="btn-review reject">
+                            Từ chối
+                        </button>
+                        <button type="submit" name="action" value="return" class="btn-review supplement">
+                            Yêu cầu bổ sung
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+        </div>
+
+        <!-- HÀNG DƯỚI: 02 DANH SÁCH NGƯỜI ĐI -->
+        <section class="panel">
+            <div class="panel-head">
+                <div class="step-heading">
+                    <span class="step-badge">02</span>
+                    <h3>Danh sách người đi</h3>
+                </div>
+            </div>
+
+            <div class="table-scroll passenger-table-wrap">
+                <table class="passenger-table">
+                    <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th class="text-left">Họ và tên</th>
+                        <th>Mã nhân viên</th>
+                        <th>Đơn vị</th>
+                        <th>CCCD/Hộ chiếu</th>
+                        <th>Hạn giấy phép an toàn</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr>
+                        <td>01</td>
+                        <td class="text-left"><strong>NGUYỄN VĂN A</strong></td>
+                        <td>VSP-123456</td>
+                        <td>VSP - Xây lắp</td>
+                        <td>076395118439</td>
+                        <td>23/12/2027</td>
+                    </tr>
+
+                    <tr>
+                        <td>02</td>
+                        <td class="text-left"><strong>PHẠM VĂN B</strong></td>
+                        <td>VSP-123457</td>
+                        <td>VSP - Xây lắp</td>
+                        <td>062418399126</td>
+                        <td>23/12/2027</td>
+                    </tr>
+
+                    <tr>
+                        <td>03</td>
+                        <td class="text-left"><strong>TRẦN ĐĂNG C</strong></td>
+                        <td>VSP-123458</td>
+                        <td>VSP - Xây lắp</td>
+                        <td>0526500863101</td>
+                        <td>23/12/2027</td>
+                    </tr>
+
+                    <tr>
+                        <td>04</td>
+                        <td class="text-left"><strong>PHAN LÊ D</strong></td>
+                        <td>VSP-123459</td>
+                        <td>VSP - Xây lắp</td>
+                        <td>0983514370182</td>
+                        <td>23/12/2027</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        VSP EXPRESS – Hệ thống quản lý vận chuyển CBCNV
+    </footer>
+
+</main>
+
+</body>
+<script>
+    document.querySelectorAll('.nav-parent').forEach(function (toggle) {
+        toggle.addEventListener('click', function (e) {
+            e.preventDefault();
+            const group = this.closest('.nav-group');
+            const isOpen = group.classList.toggle('open');
+            this.setAttribute('aria-expanded', isOpen);
+        });
+    });
+</script>
+</html>

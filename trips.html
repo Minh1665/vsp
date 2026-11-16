@@ -1,139 +1,327 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kế hoạch & Danh sách chuyến</title>
+    <title>Kế hoạch vận chuyển - VSP Express</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<!-- TIÊU ĐỀ -->
-<div class="section-head">
-    <div>
-        <h2>Danh sách chuyến VSP Express</h2>
-        <p>
-            Quản lý nhu cầu, dự thảo, phê duyệt,
-            điều chỉnh và thông báo.
-        </p>
+<aside class="sidebar">
+    <div class="brand">
+        <div class="brandmark">⚓</div>
+        <div>
+            <strong>VSP EXPRESS</strong>
+            <small>Passenger Management</small>
+        </div>
     </div>
 
-    <a class="btn primary" href="trip_new.html">
-        + Tạo danh sách chuyến
-    </a>
-</div>
+    <div class="sidebar-label">ĐIỀU HÀNH</div>
+    <nav>
+        <a href="./index.html">◫ <span>Tổng quan</span></a>
+        <a href="./requests.html">▤ <span>Đăng ký vận chuyển</span></a>
 
-<!-- BẢNG DANH SÁCH CHUYẾN -->
-<div class="panel table-scroll">
+        <div class="nav-group">
+            <a href="#" class="nav-parent active" aria-expanded="false">
+                ▦ <span>Kế hoạch vận chuyển</span>
+                <svg class="nav-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </a>
 
-    <table>
-        <thead>
-        <tr>
-            <th>Mã chuyến</th>
-            <th>Ngày</th>
-            <th>CTB</th>
-            <th>Số được xếp</th>
-            <th>Đã lên tàu</th>
-            <th>Trạng thái</th>
-            <th></th>
-        </tr>
-        </thead>
+            <div class="submenu">
+                <a href="./trips.html" class="sub-item active">Danh sách đề xuất</a>
+                <a href="./trips_draft.html" class="sub-item">Danh sách dự thảo</a>
+                <a href="./trips_official.html" class="sub-item">Danh sách chính thức</a>
+            </div>
+        </div>
 
-        <tbody>
+        <a href="./boarding.html">♧ <span>Kiểm tra lên tàu</span></a>
+    </nav>
 
-        <!-- CHUYẾN 1 -->
-        <tr>
-            <td>
-                <strong>TRIP-2026-001</strong>
-            </td>
-            <td>15/11/2026</td>
-            <td>BK-01</td>
-            <td>15</td>
-            <td>12</td>
-            <td>
-                        <span class="status approved">
-                            Đã duyệt
-                        </span>
-            </td>
-            <td>
-                <a class="textlink"
-                   href="trip_detail.html?id=1">
-                    Mở →
-                </a>
-            </td>
-        </tr>
+    <div class="sidebar-footer">
+        <div class="avatar">Đ</div>
+        <div class="usertext">
+            <strong>Điều độ viên XN Khai thác</strong>
+            <small>Điều độ viên đơn vị</small>
+        </div>
+        <form method="post" action="/login.html">
+            <input type="hidden" name="csrf" value="70201f86bdf6a05dc67f11be25967792c2d65beb">
+            <button class="logout" title="Đăng xuất">↪</button>
+        </form>
+    </div>
+</aside>
 
-        <!-- CHUYẾN 2 -->
-        <tr>
-            <td>
-                <strong>TRIP-2026-002</strong>
-            </td>
-            <td>16/11/2026</td>
-            <td>BK-02</td>
-            <td>20</td>
-            <td>0</td>
-            <td>
-                        <span class="status pending">
-                            Chờ phê duyệt
-                        </span>
-            </td>
-            <td>
-                <a class="textlink"
-                   href="trip_detail.html?id=2">
-                    Mở →
-                </a>
-            </td>
-        </tr>
+<main class="main">
 
-        <!-- CHUYẾN 3 -->
-        <tr>
-            <td>
-                <strong>TRIP-2026-003</strong>
-            </td>
-            <td>18/11/2026</td>
-            <td>RC-01</td>
-            <td>12</td>
-            <td>0</td>
-            <td>
-                        <span class="status pending">
-                            Bản dự thảo
-                        </span>
-            </td>
-            <td>
-                <a class="textlink"
-                   href="trip_detail.html?id=3">
-                    Mở →
-                </a>
-            </td>
-        </tr>
+    <!-- TOPBAR -->
+    <header class="topbar">
+        <div>
+            <div class="crumb">ĐIỀU HÀNH / KẾ HOẠCH VẬN CHUYỂN / DANH SÁCH ĐỀ XUẤT</div>
+            <h1>Kế hoạch vận chuyển</h1>
+        </div>
 
-        <!-- CHUYẾN 4 -->
-        <tr>
-            <td>
-                <strong>TRIP-2026-004</strong>
-            </td>
-            <td>20/11/2026</td>
-            <td>MSP-01</td>
-            <td>18</td>
-            <td>0</td>
-            <td>
-                        <span class="status returned">
-                            Đã hủy
-                        </span>
-            </td>
-            <td>
-                <a class="textlink"
-                   href="trip_detail.html?id=4">
-                    Mở →
-                </a>
-            </td>
-        </tr>
+        <div class="top-right">
+            <span class="demo-pill">HỆ THỐNG QUẢN LÝ</span>
+            <span class="role-pill">Điều độ viên đơn vị</span>
+        </div>
+    </header>
 
-        </tbody>
-    </table>
+    <!-- CONTENT -->
+    <div class="content">
 
-</div>
+        <section class="panel">
 
+            <!-- TIÊU ĐỀ KHUNG -->
+            <div class="panel-head">
+                <div class="stats-title">
+                    <span class="stats-icon" aria-hidden="true">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                            <polyline points="9 16 11 18 15 14"></polyline>
+                        </svg>
+                    </span>
+                    <h3>Kế hoạch vận chuyển</h3>
+                </div>
+            </div>
+
+            <!-- 4 THẺ THỐNG KÊ NGƯỠNG -->
+            <div class="plan-kpi-grid">
+                <!-- Thẻ 1: Tổng danh sách -->
+                <div class="plan-kpi-card">
+                    <span class="kpi-circle blue" aria-hidden="true">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                            <polyline points="2 12 12 17 22 12"></polyline>
+                            <polyline points="2 17 12 22 22 17"></polyline>
+                        </svg>
+                    </span>
+                    <div class="kpi-text">
+                        <span>Tổng danh sách</span>
+                        <strong class="num-blue">2</strong>
+                    </div>
+                </div>
+
+                <!-- Thẻ 2: Đủ ngưỡng -->
+                <div class="plan-kpi-card">
+                    <span class="kpi-circle green" aria-hidden="true">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="9"></circle>
+                            <polyline points="9 12 11 14 15 10"></polyline>
+                        </svg>
+                    </span>
+                    <div class="kpi-text">
+                        <span>Đủ ngưỡng<br><small>(40 – 74 người)</small></span>
+                        <strong class="num-green">2</strong>
+                    </div>
+                </div>
+
+                <!-- Thẻ 3: Dưới ngưỡng -->
+                <div class="plan-kpi-card">
+                    <span class="kpi-circle amber" aria-hidden="true">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                            <line x1="12" y1="9" x2="12" y2="13"></line>
+                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                        </svg>
+                    </span>
+                    <div class="kpi-text">
+                        <span>Dưới ngưỡng<br><small>(&lt; 40 người)</small></span>
+                        <strong class="num-amber">0</strong>
+                    </div>
+                </div>
+
+                <!-- Thẻ 4: Vượt ngưỡng -->
+                <div class="plan-kpi-card">
+                    <span class="kpi-circle red" aria-hidden="true">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                    </span>
+                    <div class="kpi-text">
+                        <span>Vượt ngưỡng<br><small>(&gt; 74 người)</small></span>
+                        <strong class="num-red">0</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- THANH TÌM KIẾM & LỌC -->
+            <div class="filter-bar plan-filter-bar">
+                <div class="search-input-wrap">
+                    <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input type="text" placeholder="Tìm kiếm theo mã DX, mã F001..." aria-label="Tìm kiếm theo mã DX, mã F001">
+                </div>
+
+                <div class="inline-filter-group">
+                    <span class="inline-filter-label">Ngày đi:</span>
+                    <div class="date-range-pill">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1363df" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                        <select aria-label="Chọn khoảng ngày đi">
+                            <option selected>01/06/2026 – 30/06/2026</option>
+                            <option>01/11/2026 – 30/11/2026</option>
+                            <option>Tất cả thời gian</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="inline-filter-group">
+                    <span class="inline-filter-label">Trạng thái:</span>
+                    <div class="filter-select-wrap">
+                        <select aria-label="Lọc theo trạng thái">
+                            <option value="" selected>Tất cả</option>
+                            <option value="pending">Chờ phê duyệt</option>
+                            <option value="approved">Đã phê duyệt</option>
+                            <option value="rejected">Từ chối</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="button" class="btn-export-outline">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    Xuất file
+                </button>
+            </div>
+
+            <!-- BẢNG DANH SÁCH ĐỀ XUẤT -->
+            <div class="table-scroll passenger-table-wrap">
+                <table class="passenger-table plan-dx-table">
+                    <thead>
+                    <tr>
+                        <th>Mã danh sách đề xuất <span class="sort-arrows">↕</span></th>
+                        <th>Đơn F001 liên quan</th>
+                        <th>Ngày đi <span class="sort-arrows">↕</span></th>
+                        <th>Số lượng CBCNV <span class="sort-arrows">↕</span></th>
+                        <th>Trạng thái</th>
+                        <th>Thao tác</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <!-- Dòng 1 -->
+                    <tr>
+                        <td>
+                            <a href="trip_detail.html?id=1" class="dx-code-link">DX/2026/0001</a>
+                        </td>
+                        <td>F001/2026/001, F001/2026/002</td>
+                        <td>11/11/2026</td>
+                        <td>
+                            <span class="cap-badge ok">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <circle cx="12" cy="12" r="9"></circle>
+                                    <polyline points="9 12 11 14 15 10"></polyline>
+                                </svg>
+                                45 người
+                            </span>
+                        </td>
+                        <td>
+                            <span class="status pending">Chờ phê duyệt</span>
+                        </td>
+                        <td>
+                            <a href="trip_detail.html?id=1" class="btn-review-pill">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                                Xem xét
+                            </a>
+                            <a href="schedule.html?id=1" class="btn-review-pill">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                                Lập lịch trình chuyến đi
+                            </a>
+
+                        </td>
+                    </tr>
+
+                    <!-- Dòng 2 -->
+                    <tr>
+                        <td>
+                            <a href="trip_detail.html?id=2" class="dx-code-link">DX/2026/0002</a>
+                        </td>
+                        <td>F001/2026/003, F001/2026/004</td>
+                        <td>13/11/2026</td>
+                        <td>
+                            <span class="cap-badge ok">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <circle cx="12" cy="12" r="9"></circle>
+                                    <polyline points="9 12 11 14 15 10"></polyline>
+                                </svg>
+                                53 người
+                            </span>
+                        </td>
+                        <td>
+                            <span class="status pending">Chờ phê duyệt</span>
+                        </td>
+                        <td>
+                            <a href="trip_detail.html?id=2" class="btn-review-pill">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                                Xem xét
+                            </a>
+                            <a href="schedule.html?id=2" class="btn-review-pill">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                                Lập lịch trình chuyến đi
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- PHÂN TRANG -->
+            <div class="table-pagination">
+                <span class="page-info">Hiển thị 1 – 2 / 2 danh sách</span>
+                <div class="page-controls">
+                    <button type="button" class="page-btn" disabled aria-label="Trang trước">‹</button>
+                    <button type="button" class="page-btn active">1</button>
+                    <button type="button" class="page-btn" disabled aria-label="Trang sau">›</button>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+
+    <footer>
+        VSP EXPRESS – Hệ thống quản lý vận chuyển CBCNV
+    </footer>
+
+</main>
 </body>
+<script>
+    document.querySelectorAll('.nav-parent').forEach(function (toggle) {
+        toggle.addEventListener('click', function (e) {
+            e.preventDefault();
+            const group = this.closest('.nav-group');
+            const isOpen = group.classList.toggle('open');
+            this.setAttribute('aria-expanded', isOpen);
+        });
+    });
+</script>
 </html>

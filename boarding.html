@@ -3,390 +3,658 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kiểm tra hành khách bằng QR - VSP Express</title>
-
-    <style>
-        .camera {
-            width: 100%;
-            min-height: 260px;
-            background: #f1f3f5;
-            border: 2px dashed #aaa;
-            border-radius: 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            margin-bottom: 15px;
-        }
-
-        .camera span {
-            font-size: 45px;
-        }
-
-        .camera video {
-            width: 100%;
-            height: 260px;
-            object-fit: cover;
-        }
-
-        .camera p {
-            text-align: center;
-        }
-
-        .panel label {
-            display: block;
-            margin: 15px 0 6px;
-        }
-
-        .panel input,
-        .panel select {
-            width: 100%;
-            padding: 10px;
-            box-sizing: border-box;
-        }
-
-        .result {
-            margin-top: 15px;
-            padding: 15px;
-            border-radius: 8px;
-            background: #eef5ff;
-            display: none;
-        }
-    </style>
+    <title>Kiểm tra lên tàu - VSP Express</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
 
-<div class="section-head">
-    <div>
-        <h2>Quét QR · Tra cứu hành khách</h2>
-        <p>
-            QR truy xuất hồ sơ theo chuyến; việc quét không phải
-            là xác nhận được phép lên tàu.
-        </p>
+<aside class="sidebar">
+    <div class="brand">
+        <div class="brandmark">⚓</div>
+        <div>
+            <strong>VSP EXPRESS</strong>
+            <small>Passenger Management</small>
+        </div>
     </div>
-</div>
 
-<div class="two-cols">
+    <div class="sidebar-label">ĐIỀU HÀNH</div>
+    <nav>
+        <a href="./index.html">◫ <span>Tổng quan</span></a>
+        <a href="./requests.html">▤ <span>Đăng ký vận chuyển</span></a>
 
-    <!-- Khu vực quét QR -->
-    <section class="panel">
+        <!-- MỤC CHA + SUB-MENU KẾ HOẠCH VẬN CHUYỂN -->
+        <div class="nav-group">
+            <a href="#" class="nav-parent" aria-expanded="false">
+                ▦ <span>Kế hoạch vận chuyển</span>
+                <svg class="nav-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </a>
 
-        <h3>Quét mã QR</h3>
-
-        <div class="camera" id="camera">
-            <span>▣</span>
-            <p>Camera chưa được bật</p>
+            <div class="submenu">
+                <a href="./trips.html" class="sub-item">Danh sách đề xuất</a>
+                <a href="./trips_draft.html" class="sub-item">Danh sách dự thảo</a>
+                <a href="./trips_official.html" class="sub-item">Danh sách chính thức</a>
+            </div>
         </div>
 
-        <button
-                class="btn primary full"
-                type="button"
-                id="startCam">
-            Bật camera và quét QR
-        </button>
+        <a href="./boarding.html" class="active">♧ <span>Kiểm tra lên tàu</span></a>
+    </nav>
 
-        <button
-                class="btn secondary full"
-                type="button"
-                id="stopCam"
-                style="display:none; margin-top:10px;">
-            Tắt camera
-        </button>
+    <div class="sidebar-footer">
+        <div class="avatar">Đ</div>
+        <div class="usertext">
+            <strong>Điều độ viên XN Khai thác</strong>
+            <small>Điều độ viên đơn vị</small>
+        </div>
+        <form method="post" action="/login.html">
+            <input type="hidden" name="csrf" value="70201f86bdf6a05dc67f11be25967792c2d65beb">
+            <button class="logout" title="Đăng xuất">↪</button>
+        </form>
+    </div>
+</aside>
 
-        <p class="muted">
-            Tùy trình duyệt, tính năng quét tự động dùng
-            BarcodeDetector. Nếu không hỗ trợ, hãy dùng mục
-            tra cứu bên cạnh hoặc mở liên kết QR.
-        </p>
+<main class="main">
 
-        <div id="scanResult" class="result">
-            <strong>Kết quả quét QR:</strong>
-            <p id="scanText"></p>
-            <p id="scanLink"></p>
+    <!-- TOPBAR -->
+    <header class="topbar">
+        <div>
+            <div class="crumb">ĐIỀU HÀNH / KIỂM TRA LÊN TÀU</div>
+            <h1>Kiểm tra lên tàu</h1>
         </div>
 
-    </section>
+        <div class="top-right">
+            <span class="demo-pill">HỆ THỐNG QUẢN LÝ</span>
+            <span class="role-pill">Điều độ viên đơn vị</span>
+        </div>
+    </header>
 
-    <!-- Tra cứu dự phòng -->
-    <section class="panel">
+    <!-- CONTENT -->
+    <div class="content">
 
-        <h3>Tra cứu dự phòng</h3>
+        <!-- TIÊU ĐỀ TRANG -->
+        <div class="board-page-header">
+            <span class="sched-title-icon" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+            </span>
+            <h2>Kiểm tra lên tàu</h2>
+        </div>
 
-        <form id="searchForm">
-
-            <label for="trip_id">
-                Chọn chuyến đã phê duyệt
-            </label>
-
-            <select name="trip_id" id="trip_id" required>
-                <option value="">-- Chọn chuyến --</option>
-                <option value="1">
-                    VSP-DEMO · 15/11/2026 · Giàn BK-01
-                </option>
-                <option value="2">
-                    VSP-002 · 16/11/2026 · Giàn BK-02
-                </option>
-                <option value="3">
-                    VSP-003 · 17/11/2026 · Giàn BK-03
-                </option>
-            </select>
-
-            <label for="code">
-                Mã CBCNV hoặc tên chính xác
-            </label>
-
-            <input
-                    type="text"
-                    name="code"
-                    id="code"
-                    placeholder="Ví dụ: NV001"
-                    required>
-
-            <button class="btn secondary full" type="submit">
-                Tra cứu hồ sơ →
+        <!-- 3 TAB VAI TRÒ KIỂM TRA -->
+        <div class="board-role-tabs" role="tablist">
+            <button type="button" class="board-role-tab active" role="tab" aria-selected="true" data-tab="tab-security">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    <polyline points="9 12 11 14 15 10"></polyline>
+                </svg>
+                <span>Kiểm tra an ninh</span>
             </button>
 
-        </form>
+            <button type="button" class="board-role-tab" role="tab" aria-selected="false" data-tab="tab-documents">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                    <circle cx="8" cy="11" r="2.2"></circle>
+                    <path d="M5.5 16c.5-1.5 1.8-2.2 2.5-2.2s2 .7 2.5 2.2"></path>
+                    <line x1="14" y1="9" x2="19" y2="9"></line>
+                    <line x1="14" y1="13" x2="19" y2="13"></line>
+                    <line x1="14" y1="16" x2="17" y2="16"></line>
+                </svg>
+                <span>Kiểm tra giấy tờ</span>
+            </button>
 
-        <div id="searchResult" class="result">
-            <strong>Thông tin tra cứu</strong>
-            <p id="employeeInfo"></p>
-            <a id="detailLink" href="boarding-detail.html">
-                Xem hồ sơ kiểm tra →
-            </a>
+            <button type="button" class="board-role-tab " role="tab" aria-selected="false" data-tab="tab-captain">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M3 11l9-5 9 5-9 4-9-4z"></path>
+                    <path d="M6 12.5v3.5c0 1.7 2.7 3 6 3s6-1.3 6-3v-3.5"></path>
+                    <circle cx="12" cy="10" r="1"></circle>
+                </svg>
+                <span>Xác nhận của thuyền trưởng</span>
+            </button>
         </div>
 
-        <div class="callout">
-            Với trình diễn trên máy tính, hãy mở một chuyến
-            trong menu <strong>Kế hoạch & danh sách</strong>,
-            chọn <strong>QR</strong> ở từng CBCNV để xem mã QR thật.
+        <!-- TAB 1: KIỂM TRA AN NINH -->
+        <div id="tab-security" class="board-tab-pane">
+            <div class="board-workspace">
+                <section class="panel board-qr-panel">
+                    <div class="board-card-head">
+                        <span class="board-card-icon" aria-hidden="true">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="3" width="7" height="7"></rect>
+                                <rect x="3" y="14" width="7" height="7"></rect>
+                                <path d="M14 14h3v3h-3z"></path>
+                                <path d="M17 17h4v4h-4z"></path>
+                            </svg>
+                        </span>
+                        <h3>Quét mã QR</h3>
+                    </div>
+
+                    <div class="qr-scanner-frame">
+                        <span class="qr-corner tl" aria-hidden="true"></span>
+                        <span class="qr-corner tr" aria-hidden="true"></span>
+                        <span class="qr-corner bl" aria-hidden="true"></span>
+                        <span class="qr-corner br" aria-hidden="true"></span>
+                        <svg class="qr-graphic" viewBox="0 0 120 120" width="176" height="176" role="img" aria-label="Mã QR hành khách">
+                            <rect width="120" height="120" fill="#ffffff"/>
+                            <path d="M10 10h30v30H10z M15 15v20h20V15z M20 20h10v10H20z" fill="#0f172a"/>
+                            <path d="M80 10h30v30H80z M85 15v20h20V15z M90 20h10v10H90z" fill="#0f172a"/>
+                            <path d="M10 80h30v30H10z M15 85v20h20V85z M20 90h10v10H20z" fill="#0f172a"/>
+                            <g fill="#0f172a">
+                                <rect x="46" y="10" width="6" height="6"/>
+                                <rect x="58" y="10" width="6" height="12"/>
+                                <rect x="70" y="16" width="6" height="6"/>
+                                <rect x="46" y="22" width="12" height="6"/>
+                                <rect x="64" y="28" width="12" height="6"/>
+                                <rect x="10" y="46" width="12" height="6"/>
+                                <rect x="28" y="46" width="6" height="12"/>
+                                <rect x="40" y="46" width="12" height="6"/>
+                                <rect x="58" y="46" width="6" height="12"/>
+                                <rect x="70" y="46" width="12" height="6"/>
+                                <rect x="88" y="46" width="6" height="12"/>
+                                <rect x="100" y="46" width="10" height="6"/>
+                                <rect x="46" y="82" width="6" height="12"/>
+                                <rect x="58" y="88" width="12" height="6"/>
+                                <rect x="76" y="82" width="12" height="12"/>
+                                <rect x="94" y="82" width="6" height="6"/>
+                                <rect x="46" y="100" width="12" height="10"/>
+                                <rect x="76" y="104" width="12" height="6"/>
+                                <rect x="94" y="100" width="16" height="10"/>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <div class="qr-search-box">
+                        <svg class="qr-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        <input type="text" class="qr-lookup-input" placeholder="Nhập mã NV / Số căn cước hoặc quét QR...">
+                    </div>
+                </section>
+
+                <div class="board-right-stack">
+                    <div class="board-top-cards">
+                        <section class="panel board-card">
+                            <div class="board-card-head">
+                                <span class="board-card-icon" aria-hidden="true">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                                        <circle cx="8" cy="11" r="2.2"></circle>
+                                        <path d="M5.5 16c.5-1.5 1.8-2.2 2.5-2.2s2 .7 2.5 2.2"></path>
+                                        <line x1="14" y1="9" x2="19" y2="9"></line>
+                                        <line x1="14" y1="13" x2="19" y2="13"></line>
+                                    </svg>
+                                </span>
+                                <h3>Hồ sơ hành khách</h3>
+                            </div>
+                            <div class="passenger-profile-body">
+                                <div class="passenger-avatar-box">
+                                    <svg viewBox="0 0 120 132" width="106" height="116" role="img" aria-label="Ảnh hành khách Nguyễn Văn A">
+                                        <rect width="120" height="132" rx="10" fill="#d3e0ec"/>
+                                        <path d="M22 132c2-22 16-32 38-32s36 10 38 32H22z" fill="#1b3554"/>
+                                        <rect x="51" y="83" width="18" height="19" rx="7" fill="#e0ab8b"/>
+                                        <path d="M41 58c0-13 8-22 19-22s19 9 19 22v11c0 12-8 21-19 21s-19-9-19-21V58z" fill="#ebb898"/>
+                                        <circle cx="53" cy="63" r="1.8" fill="#1e293b"/>
+                                        <circle cx="67" cy="63" r="1.8" fill="#1e293b"/>
+                                        <path d="M37 49c0-15 10-26 23-26s23 11 23 26H37z" fill="#173a64"/>
+                                        <rect x="33" y="47" width="54" height="5" rx="2.5" fill="#0f294a"/>
+                                    </svg>
+                                </div>
+                                <div class="passenger-meta-list">
+                                    <p>Họ tên: <strong class="js-pax-name">NGUYỄN VĂN A</strong></p>
+                                    <p>Mã nhân viên: <strong class="js-pax-code">VSP-123456</strong></p>
+                                    <p>Đơn vị: <strong class="js-pax-unit">Xí nghiệp Xây lắp</strong></p>
+                                    <div class="pax-ctb-highlight js-pax-ctb">CTB đến: BK-01</div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="panel board-card">
+                            <div class="board-card-head">
+                                <span class="board-card-icon" aria-hidden="true">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M2 21c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1 .6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path>
+                                        <path d="M19.38 20A11.6 11.6 0 0 0 21 14l-9-4-9 4c0 2.9.94 5.34 2.81 7.76"></path>
+                                        <path d="M19 13V7a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v6"></path>
+                                    </svg>
+                                </span>
+                                <h3>Thông tin chuyến</h3>
+                            </div>
+                            <ul class="trip-pill-list">
+                                <li><span>Mã chuyến:</span><strong class="info-chip-pill">DSC/2026/0001</strong></li>
+                                <li><span>Ngày đi:</span><strong class="info-chip-pill">11/11/2026</strong></li>
+                                <li><span>Số lượng:</span><strong class="info-chip-pill">45</strong></li>
+                                <li><span>CTB đến:</span><strong class="info-chip-pill">BK-01, BK-02</strong></li>
+                            </ul>
+                        </section>
+                    </div>
+
+                    <section class="panel board-card">
+                        <div class="board-card-head">
+                            <span class="board-card-icon" aria-hidden="true">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                                    <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                                    <polyline points="9 14 11 16 15 12"></polyline>
+                                </svg>
+                            </span>
+                            <h3>Danh mục Cấm &amp; Kiểm tra</h3>
+                        </div>
+
+                        <div class="security-checklist">
+                            <label class="sec-check-item"><input type="checkbox" value="alcohol"><span>Rượu bia &amp; Chất có cồn</span></label>
+                            <label class="sec-check-item"><input type="checkbox" value="drugs"><span>Ma túy</span></label>
+                            <label class="sec-check-item"><input type="checkbox" value="weapons"><span>Vũ khí &amp; Chất nổ</span></label>
+                            <label class="sec-check-item"><input type="checkbox" value="baggage"><span>Soi chiếu hành lý</span></label>
+                        </div>
+
+                        <div class="sec-decision-bar">
+                            <button type="button" class="btn-sec-pass" onclick="submitCheckDecision('AN NINH', true, 'secRejectReason')">✓ An ninh: ĐẠT</button>
+                            <button type="button" class="btn-sec-fail" onclick="submitCheckDecision('AN NINH', false, 'secRejectReason')">✕ An ninh: KHÔNG ĐẠT</button>
+                            <input type="text" id="secRejectReason" class="sec-reason-input" placeholder="Lý do">
+                        </div>
+                    </section>
+                </div>
+            </div>
         </div>
 
-    </section>
+        <!-- TAB 2: KIỂM TRA GIẤY TỜ -->
+        <div id="tab-documents" class="board-tab-pane" style="display:none;">
+            <div class="board-workspace">
+                <section class="panel board-qr-panel">
+                    <div class="board-card-head">
+                        <span class="board-card-icon" aria-hidden="true">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="3" width="7" height="7"></rect>
+                                <rect x="3" y="14" width="7" height="7"></rect>
+                                <path d="M14 14h3v3h-3z"></path>
+                                <path d="M17 17h4v4h-4z"></path>
+                            </svg>
+                        </span>
+                        <h3>Quét mã QR</h3>
+                    </div>
 
-</div>
+                    <div class="qr-scanner-frame">
+                        <span class="qr-corner tl" aria-hidden="true"></span>
+                        <span class="qr-corner tr" aria-hidden="true"></span>
+                        <span class="qr-corner bl" aria-hidden="true"></span>
+                        <span class="qr-corner br" aria-hidden="true"></span>
+                        <svg class="qr-graphic" viewBox="0 0 120 120" width="176" height="176" role="img" aria-label="Mã QR hành khách">
+                            <rect width="120" height="120" fill="#ffffff"/>
+                            <path d="M10 10h30v30H10z M15 15v20h20V15z M20 20h10v10H20z" fill="#0f172a"/>
+                            <path d="M80 10h30v30H80z M85 15v20h20V15z M90 20h10v10H90z" fill="#0f172a"/>
+                            <path d="M10 80h30v30H10z M15 85v20h20V85z M20 90h10v10H20z" fill="#0f172a"/>
+                            <g fill="#0f172a">
+                                <rect x="46" y="10" width="6" height="6"/>
+                                <rect x="58" y="10" width="6" height="12"/>
+                                <rect x="70" y="16" width="6" height="6"/>
+                                <rect x="46" y="22" width="12" height="6"/>
+                                <rect x="64" y="28" width="12" height="6"/>
+                                <rect x="10" y="46" width="12" height="6"/>
+                                <rect x="28" y="46" width="6" height="12"/>
+                                <rect x="40" y="46" width="12" height="6"/>
+                                <rect x="58" y="46" width="6" height="12"/>
+                                <rect x="70" y="46" width="12" height="6"/>
+                                <rect x="88" y="46" width="6" height="12"/>
+                                <rect x="100" y="46" width="10" height="6"/>
+                                <rect x="46" y="82" width="6" height="12"/>
+                                <rect x="58" y="88" width="12" height="6"/>
+                                <rect x="76" y="82" width="12" height="12"/>
+                                <rect x="94" y="82" width="6" height="6"/>
+                                <rect x="46" y="100" width="12" height="10"/>
+                                <rect x="76" y="104" width="12" height="6"/>
+                                <rect x="94" y="100" width="16" height="10"/>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <div class="qr-search-box">
+                        <svg class="qr-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        <input type="text" class="qr-lookup-input" placeholder="Nhập mã NV / Số căn cước hoặc quét QR...">
+                    </div>
+                </section>
+
+                <div class="board-right-stack">
+                    <div class="board-top-cards">
+                        <section class="panel board-card">
+                            <div class="board-card-head">
+                                <span class="board-card-icon" aria-hidden="true">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                                        <circle cx="8" cy="11" r="2.2"></circle>
+                                        <path d="M5.5 16c.5-1.5 1.8-2.2 2.5-2.2s2 .7 2.5 2.2"></path>
+                                        <line x1="14" y1="9" x2="19" y2="9"></line>
+                                        <line x1="14" y1="13" x2="19" y2="13"></line>
+                                    </svg>
+                                </span>
+                                <h3>Hồ sơ hành khách</h3>
+                            </div>
+                            <div class="passenger-profile-body">
+                                <div class="passenger-avatar-box">
+                                    <svg viewBox="0 0 120 132" width="106" height="116" role="img" aria-label="Ảnh hành khách Nguyễn Văn A">
+                                        <rect width="120" height="132" rx="10" fill="#d3e0ec"/>
+                                        <path d="M22 132c2-22 16-32 38-32s36 10 38 32H22z" fill="#1b3554"/>
+                                        <rect x="51" y="83" width="18" height="19" rx="7" fill="#e0ab8b"/>
+                                        <path d="M41 58c0-13 8-22 19-22s19 9 19 22v11c0 12-8 21-19 21s-19-9-19-21V58z" fill="#ebb898"/>
+                                        <circle cx="53" cy="63" r="1.8" fill="#1e293b"/>
+                                        <circle cx="67" cy="63" r="1.8" fill="#1e293b"/>
+                                        <path d="M37 49c0-15 10-26 23-26s23 11 23 26H37z" fill="#173a64"/>
+                                        <rect x="33" y="47" width="54" height="5" rx="2.5" fill="#0f294a"/>
+                                    </svg>
+                                </div>
+                                <div class="passenger-meta-list">
+                                    <p>Họ tên: <strong class="js-pax-name">NGUYỄN VĂN A</strong></p>
+                                    <p>Mã nhân viên: <strong class="js-pax-code">VSP-123456</strong></p>
+                                    <p>Đơn vị: <strong class="js-pax-unit">Xí nghiệp Xây lắp</strong></p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="panel board-card">
+                            <div class="board-card-head">
+                                <span class="board-card-icon" aria-hidden="true">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M2 21c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1 .6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path>
+                                        <path d="M19.38 20A11.6 11.6 0 0 0 21 14l-9-4-9 4c0 2.9.94 5.34 2.81 7.76"></path>
+                                        <path d="M19 13V7a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v6"></path>
+                                    </svg>
+                                </span>
+                                <h3>Thông tin chuyến</h3>
+                            </div>
+                            <ul class="trip-pill-list">
+                                <li><span>Mã chuyến:</span><strong class="info-chip-pill">DSC/2026/0001</strong></li>
+                                <li><span>Ngày đi:</span><strong class="info-chip-pill">11/11/2026</strong></li>
+                                <li><span>Số lượng:</span><strong class="info-chip-pill">45</strong></li>
+                                <li><span>CTB đến:</span><strong class="info-chip-pill">BK-01, BK-02</strong></li>
+                            </ul>
+                        </section>
+                    </div>
+
+                    <section class="panel board-card">
+                        <div class="board-card-head">
+                            <span class="board-card-icon" aria-hidden="true">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                                    <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                                    <polyline points="9 14 11 16 15 12"></polyline>
+                                </svg>
+                            </span>
+                            <h3>Danh mục Kiểm tra giấy tờ</h3>
+                        </div>
+
+                        <div class="security-checklist">
+                            <label class="sec-check-item">
+                                <input type="checkbox" value="staff_card">
+                                <svg class="sec-item-icon blue" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                                    <circle cx="8" cy="11" r="2.2"></circle>
+                                    <path d="M5.5 16c.5-1.5 1.8-2.2 2.5-2.2s2 .7 2.5 2.2"></path>
+                                    <line x1="14" y1="9" x2="19" y2="9"></line>
+                                    <line x1="14" y1="13" x2="19" y2="13"></line>
+                                </svg>
+                                <span>Thẻ nhân viên/Giấy chứng nhận CBCNV</span>
+                            </label>
+
+                            <label class="sec-check-item">
+                                <input type="checkbox" value="safety_book">
+                                <svg class="sec-item-icon blue" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                                </svg>
+                                <span>Sổ an toàn (do TTAT&amp;BVMT cấp)</span>
+                            </label>
+                        </div>
+
+                        <div class="sec-decision-bar">
+                            <button type="button" class="btn-sec-pass" onclick="submitCheckDecision('GIẤY TỜ', true, 'docRejectReason')">✓ Giấy tờ: ĐẠT</button>
+                            <button type="button" class="btn-sec-fail" onclick="submitCheckDecision('GIẤY TỜ', false, 'docRejectReason')">✕ Giấy tờ: KHÔNG ĐẠT</button>
+                            <input type="text" id="docRejectReason" class="sec-reason-input" placeholder="Lý do">
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: XÁC NHẬN CỦA THUYỀN TRƯỞNG -->
+        <div id="tab-captain" class="board-tab-pane" style="display: none">
+
+            <!-- HÀNG TRÊN: THÔNG TIN CHUYẾN + TỔNG HỢP TÌNH TRẠNG VẬN CHUYỂN -->
+            <div class="captain-top-grid">
+
+                <!-- CỘT TRÁI: THÔNG TIN CHUYẾN -->
+                <section class="panel board-card">
+                    <div class="board-card-head">
+                        <span class="board-card-icon" aria-hidden="true">
+                            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M2 21c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1 .6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path>
+                                <path d="M19.38 20A11.6 11.6 0 0 0 21 14l-9-4-9 4c0 2.9.94 5.34 2.81 7.76"></path>
+                                <path d="M19 13V7a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v6"></path>
+                                <path d="M12 10v4"></path>
+                                <path d="M12 2v3"></path>
+                            </svg>
+                        </span>
+                        <h3>Thông tin chuyến</h3>
+                    </div>
+
+                    <ul class="captain-trip-list">
+                        <li>
+                            <span class="cap-row-icon" aria-hidden="true"></span>
+                            <span class="cap-row-label">Mã chuyến:</span>
+                            <strong class="info-chip-pill">DSC/2026/0001</strong>
+                        </li>
+                        <li>
+                            <span class="cap-row-icon" aria-hidden="true">
+                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                                </svg>
+                            </span>
+                            <span class="cap-row-label">Ngày đi:</span>
+                            <strong class="info-chip-pill">11/11/2026</strong>
+                        </li>
+                        <li>
+                            <span class="cap-row-icon" aria-hidden="true">
+                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                </svg>
+                            </span>
+                            <span class="cap-row-label">Số lượng:</span>
+                            <strong class="info-chip-pill">45</strong>
+                        </li>
+                        <li>
+                            <span class="cap-row-icon" aria-hidden="true">
+                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                            </span>
+                            <span class="cap-row-label">CTB đến:</span>
+                            <strong class="info-chip-pill">BK-01, BK-02</strong>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- CỘT PHẢI: TỔNG HỢP TÌNH TRẠNG VẬN CHUYỂN -->
+                <section class="panel board-card">
+                    <div class="board-card-head">
+                        <span class="board-card-icon" aria-hidden="true">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <rect x="3" y="13" width="4" height="8" rx="1"></rect>
+                                <rect x="10" y="8" width="4" height="13" rx="1"></rect>
+                                <rect x="17" y="4" width="4" height="17" rx="1"></rect>
+                            </svg>
+                        </span>
+                        <h3>Tổng hợp tình trạng vận chuyển</h3>
+                    </div>
+
+                    <div class="captain-stats-grid">
+                        <!-- Thẻ 1: Tổng số hành khách -->
+                        <div class="cap-stat-card blue">
+                            <span class="cap-stat-icon" aria-hidden="true">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                </svg>
+                            </span>
+                            <span class="cap-stat-label">Tổng số hành khách<br>(trong danh sách)</span>
+                            <strong class="cap-stat-num">45</strong>
+                        </div>
+
+                        <!-- Thẻ 2: Đã lên tàu -->
+                        <div class="cap-stat-card green">
+                            <span class="cap-stat-icon" aria-hidden="true">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="9"></circle>
+                                    <polyline points="9 12 11 14 15 10"></polyline>
+                                </svg>
+                            </span>
+                            <span class="cap-stat-label">Đã lên tàu<br>(đủ điều kiện)</span>
+                            <strong class="cap-stat-num">40</strong>
+                        </div>
+
+                        <!-- Thẻ 3: Vắng mặt -->
+                        <div class="cap-stat-card amber">
+                            <span class="cap-stat-icon" aria-hidden="true">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                            </span>
+                            <span class="cap-stat-label">Vắng mặt</span>
+                            <strong class="cap-stat-num">2</strong>
+                            <button type="button" class="btn-cap-review" onclick="reviewCaptainList('absent')">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                                Xem xét
+                            </button>
+                        </div>
+
+                        <!-- Thẻ 4: Không đủ điều kiện lên tàu -->
+                        <div class="cap-stat-card red">
+                            <span class="cap-stat-icon" aria-hidden="true">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="9"></circle>
+                                    <line x1="15" y1="9" x2="9" y2="15"></line>
+                                    <line x1="9" y1="9" x2="15" y2="15"></line>
+                                </svg>
+                            </span>
+                            <span class="cap-stat-label">Không đủ điều kiện<br>lên tàu</span>
+                            <strong class="cap-stat-num">3</strong>
+                            <button type="button" class="btn-cap-review" onclick="reviewCaptainList('ineligible')">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                                Xem xét
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- HÀNG DƯỚI: KHUNG XÁC NHẬN & TỔ CHỨC XUẤT BẾN -->
+            <section class="panel captain-action-panel">
+                <button type="button" class="btn-captain-confirm" onclick="confirmDeparture()">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="9"></circle>
+                        <polyline points="9 12 11 14 15 10"></polyline>
+                    </svg>
+                    <span>Xác nhận &amp; Tổ chức xuất bến</span>
+                </button>
+            </section>
+
+        </div>
+
+    </div>
+
+    <footer>
+        VSP EXPRESS – Hệ thống quản lý vận chuyển CBCNV
+    </footer>
+
+</main>
 
 <script>
-    const camera = document.getElementById("camera");
-    const startButton = document.getElementById("startCam");
-    const stopButton = document.getElementById("stopCam");
-
-    let stream = null;
-    let scanning = false;
-
-    // Bật camera
-    startButton.addEventListener("click", async function() {
-
-        if (!navigator.mediaDevices ||
-            !navigator.mediaDevices.getUserMedia) {
-
-            alert("Trình duyệt không hỗ trợ truy cập camera.");
-            return;
-        }
-
-        if (!("BarcodeDetector" in window)) {
-            alert(
-                "Trình duyệt chưa hỗ trợ BarcodeDetector. " +
-                "Vui lòng sử dụng mục tra cứu dự phòng."
-            );
-            return;
-        }
-
-        try {
-
-            const detector = new BarcodeDetector({
-                formats: ["qr_code"]
-            });
-
-            stream = await navigator.mediaDevices.getUserMedia({
-                video: {
-                    facingMode: "environment"
-                }
-            });
-
-            camera.innerHTML = "";
-
-            const video = document.createElement("video");
-            video.srcObject = stream;
-            video.setAttribute("playsinline", true);
-
-            camera.appendChild(video);
-
-            await video.play();
-
-            scanning = true;
-
-            startButton.style.display = "none";
-            stopButton.style.display = "block";
-
-            scanQRCode(video, detector);
-
-        } catch (error) {
-
-            alert(
-                "Không thể bật camera. " +
-                "Vui lòng kiểm tra quyền truy cập camera."
-            );
-
-        }
-
+    // Mở/đóng sub-menu Kế hoạch vận chuyển
+    document.querySelectorAll('.nav-parent').forEach(function (toggle) {
+        toggle.addEventListener('click', function (e) {
+            e.preventDefault();
+            const group = this.closest('.nav-group');
+            const isOpen = group.classList.toggle('open');
+            this.setAttribute('aria-expanded', isOpen);
+        });
     });
 
-    // Quét QR
-    async function scanQRCode(video, detector) {
+    // Chuyển đổi giữa 3 tab kiểm tra
+    document.querySelectorAll('.board-role-tab').forEach(function (tab) {
+        tab.addEventListener('click', function () {
+            document.querySelectorAll('.board-role-tab').forEach(function (t) {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+            });
+            document.querySelectorAll('.board-tab-pane').forEach(function (pane) {
+                pane.style.display = 'none';
+            });
 
-        if (!scanning) return;
-
-        try {
-
-            const codes = await detector.detect(video);
-
-            if (codes.length > 0) {
-
-                const qrValue = codes[0].rawValue;
-
-                document.getElementById("scanResult").style.display =
-                    "block";
-
-                document.getElementById("scanText").textContent =
-                    qrValue;
-
-                const linkArea = document.getElementById("scanLink");
-
-                linkArea.textContent = "";
-
-                // Chỉ cho phép mở liên kết HTTP/HTTPS
-                try {
-                    const url = new URL(qrValue);
-
-                    if (url.protocol === "https:" ||
-                        url.protocol === "http:") {
-
-                        const link = document.createElement("a");
-                        link.href = url.href;
-                        link.textContent = "Mở liên kết QR";
-                        link.rel = "noopener noreferrer";
-
-                        linkArea.appendChild(link);
-                    }
-
-                } catch (error) {
-                    // QR không phải URL
-                }
-
-                stopCamera();
-                return;
-            }
-
-        } catch (error) {
-            console.log("Đang quét QR...");
-        }
-
-        if (scanning) {
-            requestAnimationFrame(() => scanQRCode(video, detector));
-        }
-    }
-
-    // Tắt camera
-    function stopCamera() {
-
-        scanning = false;
-
-        if (stream) {
-            stream.getTracks().forEach(track => track.stop());
-            stream = null;
-        }
-
-        camera.innerHTML =
-            "<span>▣</span><p>Camera chưa được bật</p>";
-
-        startButton.style.display = "block";
-        stopButton.style.display = "none";
-    }
-
-    stopButton.addEventListener("click", stopCamera);
-
-    // Dữ liệu CBCNV demo
-    const employees = [
-        {
-            code: "NV001",
-            name: "Nguyễn Văn An",
-            unit: "Phòng Kỹ thuật",
-            trip: "1"
-        },
-        {
-            code: "NV002",
-            name: "Trần Văn Bình",
-            unit: "Phòng Vận hành",
-            trip: "1"
-        },
-        {
-            code: "NV003",
-            name: "Lê Minh Cường",
-            unit: "Phòng Điện",
-            trip: "2"
-        },
-        {
-            code: "NV004",
-            name: "Phạm Quốc Dũng",
-            unit: "Phòng An toàn",
-            trip: "2"
-        }
-    ];
-
-    // Tra cứu CBCNV
-    document.getElementById("searchForm")
-        .addEventListener("submit", function(event) {
-
-            event.preventDefault();
-
-            const tripId =
-                document.getElementById("trip_id").value;
-
-            const keyword =
-                document.getElementById("code").value
-                    .trim().toLowerCase();
-
-            const employee = employees.find(item =>
-                item.trip === tripId &&
-                (
-                    item.code.toLowerCase() === keyword ||
-                    item.name.toLowerCase() === keyword
-                )
-            );
-
-            const result =
-                document.getElementById("searchResult");
-
-            result.style.display = "block";
-
-            if (employee) {
-
-                document.getElementById("employeeInfo").textContent =
-                    employee.code + " - " +
-                    employee.name + " - " +
-                    employee.unit;
-
-                document.getElementById("detailLink").style.display =
-                    "inline";
-
-            } else {
-
-                document.getElementById("employeeInfo").textContent =
-                    "Không tìm thấy CBCNV trong chuyến đã chọn.";
-
-                document.getElementById("detailLink").style.display =
-                    "none";
-            }
-
+            this.classList.add('active');
+            this.setAttribute('aria-selected', 'true');
+            document.getElementById(this.dataset.tab).style.display = 'block';
         });
+    });
 
-    // Đảm bảo camera được tắt khi rời trang
-    window.addEventListener("pagehide", stopCamera);
+    function submitCheckDecision(category, isPassed, reasonInputId) {
+        const paxName = document.querySelector('.js-pax-name').textContent;
+        const reasonInput = document.getElementById(reasonInputId);
 
+        if (isPassed) {
+            alert('Xác nhận ' + category + ': ĐẠT cho hành khách ' + paxName + '.');
+            reasonInput.value = '';
+            return;
+        }
+
+        if (!reasonInput.value.trim()) {
+            alert('Vui lòng nhập lý do trước khi chọn ' + category + ': KHÔNG ĐẠT.');
+            reasonInput.focus();
+            return;
+        }
+
+        alert('Đã ghi nhận ' + category + ': KHÔNG ĐẠT cho ' + paxName + '.\nLý do: ' + reasonInput.value.trim());
+    }
+
+    function reviewCaptainList(type) {
+        if (type === 'absent') {
+            alert('Danh sách vắng mặt (2 người):\n1. VSP-123480 - Lê Hoàng Nam (XN Khai thác)\n2. VSP-123492 - Đỗ Văn Tuấn (XN Xây lắp)');
+            return;
+        }
+        alert('Danh sách không đủ điều kiện lên tàu (3 người):\n1. VSP-123461 - Nguyễn Minh Trí (Sổ an toàn hết hạn)\n2. VSP-123475 - Phạm Quốc Bảo (Chưa có thẻ ra vào cảng)\n3. VSP-123488 - Trần Văn Hùng (Không đạt kiểm tra an ninh)');
+    }
+
+    function confirmDeparture() {
+        if (confirm('Thuyền trưởng xác nhận quân số thực tế lên tàu (40/45 người) và tổ chức xuất bến chuyến DSC/2026/0001?')) {
+            alert('Đã xác nhận & phát lệnh tổ chức xuất bến chuyến DSC/2026/0001 thành công!');
+        }
+    }
 </script>
 
 </body>
